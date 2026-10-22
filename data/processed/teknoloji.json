@@ -1,0 +1,59 @@
+{
+  "temel_metalurji": {
+    "isim": "Temel Metalurji",
+    "aciklama": "Demir ve bakırı daha verimli işleyerek dayanıklı plakalar ve mekanik parçalar üretmeni sağlar.",
+    "gereksinimler": [],
+    "arastirma_maliyeti": {
+      "demir": 5,
+      "bakir": 2
+    },
+    "arastirma_suresi": 3,
+    "enerji_tuketimi": 10,
+    "acilan_tarifler": ["titanyum_plaka", "paslanmaz_boru", "tamir_anahtari"],
+    "acilan_istasyonlar": ["pres_makinesi"]
+  },
+
+  "temel_botanik": {
+    "isim": "Temel Botanik ve Filtreleme",
+    "aciklama": "Gezegenin toprağını arındırmayı ve zehirli suları filtrelemeyi öğrenirsin.",
+    "gereksinimler": [],
+    "arastirma_maliyeti": {
+      "karbon": 3,
+      "silisyum": 2
+    },
+    "arastirma_suresi": 4,
+    "enerji_tuketimi": 5,
+    "acilan_tarifler": ["su_filtresi", "kimyasal_gubre"],
+    "acilan_istasyonlar": ["kimya_masasi"]
+  },
+
+  "gelismis_elektronik": {
+    "isim": "Gelişmiş Elektronik",
+    "aciklama": "Güneş panelleri ve yüksek kapasiteli bataryalar için gereken hassas devre tasarımlarını içerir.",
+    "gereksinimler": ["temel_metalurji"],
+    "arastirma_maliyeti": {
+      "silisyum": 5,
+      "bakir": 4,
+      "aluminyum": 2
+    },
+    "arastirma_suresi": 6,
+    "enerji_tuketimi": 20,
+    "acilan_tarifler": ["elektronik_devre", "standart_batarya", "gunes_paneli"],
+    "acilan_istasyonlar": ["elektronik_atolyesi"]
+  },
+
+  "kapali_ekosistem": {
+    "isim": "Kapalı Ekosistem Tarımı",
+    "aciklama": "Kendi oksijenini üreten ve bitkileri dış ortamdan koruyan gelişmiş sera sistemleri.",
+    "gereksinimler": ["temel_botanik", "gelismis_elektronik"],
+    "arastirma_maliyeti": {
+      "aluminyum": 5,
+      "kuvars": 3,
+      "fosfat": 2
+    },
+    "arastirma_suresi": 8,
+    "enerji_tuketimi": 30,
+    "acilan_tarifler": ["hidroponik_sera", "atmosfer_katalizoru"],
+    "acilan_istasyonlar": ["tarim_atolyesi"]
+  }
+}

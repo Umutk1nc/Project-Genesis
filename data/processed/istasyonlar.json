@@ -1,0 +1,125 @@
+{
+  "basit_atolye": {
+    "isim": "Basit Çalışma Tezgahı",
+    "aciklama": "Hurda parçalarından yapılmış derme çatma bir tezgah. Temel aletleri üretmeni sağlar.",
+    "seviye": 1,
+    "baslangic_durumu": "acik",
+    "kurulum_maliyeti": {},
+    "kurulum_suresi": 0
+  },
+
+  "kimya_masasi": {
+    "isim": "Kimya ve Analiz Masası",
+    "aciklama": "Gemiden arta kalan kırık camlar ve tüpler. Filtre, yakıt ve gübre üretimi için tamir edilmesi şart.",
+    "seviye": 1,
+    "baslangic_durumu": "hasarli",
+    "kurulum_maliyeti": {
+      "demir": 3,
+      "silisyum": 2
+    },
+    "kurulum_suresi": 2
+  },
+
+  "montaj_atolyesi": {
+    "isim": "Mekanik Montaj Atölyesi",
+    "aciklama": "Elektrikli aletler ve karmaşık modüllerin birleştirildiği endüstriyel tezgah.",
+    "seviye": 2,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "demir": 8,
+      "bakir": 4,
+      "aluminyum": 2
+    },
+    "kurulum_suresi": 4
+  },
+
+  "pres_makinesi": {
+    "isim": "Ağır Pres Makinesi",
+    "aciklama": "Metal cevherlerini ezerek dayanıklı plakalara ve borulara dönüştürür.",
+    "seviye": 2,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "demir": 10,
+      "nikel": 3
+    },
+    "kurulum_suresi": 5
+  },
+
+  "elektronik_atolyesi": {
+    "isim": "Elektronik ve Lehim Atölyesi",
+    "aciklama": "Hassas devreler, bataryalar ve güneş panelleri üretmek için tozsuz ortam sağlar.",
+    "seviye": 2,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "aluminyum": 5,
+      "bakir": 6,
+      "silisyum": 4
+    },
+    "kurulum_suresi": 4
+  },
+
+  "cam_firini": {
+    "isim": "Yüksek Isı Cam Fırını",
+    "aciklama": "Kuvars ve silisyumu eriterek basınca dayanıklı camlar üretir.",
+    "seviye": 2,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "kirectasi": 8,
+      "demir": 4,
+      "karbon": 3
+    },
+    "kurulum_suresi": 5
+  },
+
+  "insaat_atolyesi": {
+    "isim": "Ağır İnşaat ve Yapı İstasyonu",
+    "aciklama": "Üssü genişletmek için gereken devasa beton duvarları ve zeminleri hazırlar.",
+    "seviye": 2,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "demir": 10,
+      "aluminyum": 5,
+      "bakir": 2
+    },
+    "kurulum_suresi": 6
+  },
+
+  "tarim_atolyesi": {
+    "isim": "Biyolojik Tarım İstasyonu",
+    "aciklama": "Gezegenin toprağını arındırır ve tohumların büyümesi için hidroponik sistemler kurar.",
+    "seviye": 2,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "aluminyum": 4,
+      "bakir": 3,
+      "karbon": 2
+    },
+    "kurulum_suresi": 4
+  },
+
+  "gelismis_atolye": {
+    "isim": "Gelişmiş Teknoloji Üretim Bandı",
+    "aciklama": "Lazer kesiciler ve reaktör çekirdekleri gibi oyun sonu teknolojilerini üretir.",
+    "seviye": 3,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "titanyum": 8,
+      "krom": 4,
+      "lityum": 3
+    },
+    "kurulum_suresi": 8
+  },
+
+  "gemi_atolyesi": {
+    "isim": "Uzay Gemisi Onarım İskelesi",
+    "aciklama": "Gezegenden kaçmanı sağlayacak devasa motor ve gövde parçalarını inşa ettiğin iskele.",
+    "seviye": 3,
+    "baslangic_durumu": "kilitli",
+    "kurulum_maliyeti": {
+      "titanyum": 15,
+      "aluminyum": 10,
+      "uranyum": 2
+    },
+    "kurulum_suresi": 12
+  }
+}

@@ -1,0 +1,26 @@
+{
+    "saglik": {
+        "mevcut": 85,
+        "maksimum": 100
+    },
+    "oksijen": {
+        "mevcut": 85,
+        "maksimum": 100
+    },
+    "tokluk": {
+        "mevcut": 100,
+        "maksimum": 100
+    },
+    "su": {
+        "mevcut": 43,
+        "maksimum": 100
+    },
+    "enerji": {
+        "mevcut": 97,
+        "maksimum": 100
+    },
+    "moral": {
+        "mevcut": 83,
+        "maksimum": 100
+    }
+}

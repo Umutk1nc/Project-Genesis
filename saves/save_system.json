@@ -1,0 +1,377 @@
+{
+  "_yorum": "=== KAYIT SİSTEMİ v2.0 === Tüm değerler oyun başlangıcındaki varsayılan durumdur.",
+
+  "meta": {
+    "_yorum": "Kayıt dosyası kimlik bilgileri. Versiyon uyumsuzluğu kontrolü için kullanılır.",
+    "save_version": "2.0.0",
+    "kolon_adi": "İsimsiz Koloni",
+    "toplam_gun": 1,
+    "olusturulma_zamani": "2025-01-01T00:00:00Z",
+    "son_kayit_zamani": "2025-01-01T00:00:00Z"
+  },
+
+  "zaman": {
+    "_yorum": "Gun 1'den başlar. Periyot: sabah | ogle | aksam | gece. Saat 0-23 arası.",
+    "gun": 1,
+    "saat": 8,
+    "periyot": "sabah",
+    "gun_suresi_saat": 24
+  },
+
+  "oyuncu": {
+    "_yorum": "Tüm stat'lar 0-maks arasındadır. aktif_efektler dizisi her tur işlenir.",
+
+    "saglik":       { "mevcut": 100, "kayip": 10 },
+    "oksijen":      { "mevcut": 100, "kayip": 10 },
+    "tokluk":       { "mevcut": 100, "kayip": 10 },
+    "su":           { "mevcut": 100, "kayip": 10 },
+    "moral":        { "mevcut": 100, "kayip": 10 },
+    "enerji":       { "mevcut": 100, "kayip": 10 },
+
+    "konum": "merkez_us",
+
+    "aktif_efektler": [
+      {
+        "_yorum": "Her tur 'etki' uygulanır. kalan_tur 0 olunca efekt silinir. kalan_tur: -1 = kalıcı.",
+        "id": "radyasyon_zehirlenmesi",
+        "yogunluk": 1,
+        "etki": { "saglik": -2, "moral": -1 },
+        "kalan_tur": 5
+      }
+    ]
+  },
+
+  "envanter": {
+    "_yorum": "Tüm kaynaklar burada tutulur. Kod, 'madenler' ve 'aletler' anahtarlarıyla erişir.",
+
+    "madenler": {
+      "_yorum": "Anahtar adları madenler.json ile birebir eşleşmelidir.",
+      "demir":      0,
+      "bakir":      0,
+      "aluminyum":  0,
+      "titanyum":   0,
+      "nikel":      0,
+      "krom":       0,
+      "lityum":     0,
+      "karbon":     0,
+      "uranyum":    0,
+      "hidrojen":   0,
+      "silisyum":   0,
+      "kuvars":     0,
+      "kirectasi":  0,
+      "kukurt":     0,
+      "fosfat":     0,
+      "azot":       0
+    },
+
+    "aletler": {
+      "_yorum": "miktar: envanterdeki adet. dayaniklilik: 0 olunca alet bozulur, null = eskimez.",
+      "tas_kazma":               { "miktar": 1, "dayaniklilik": 100 },
+      "elektrikli_matkap":       { "miktar": 0, "dayaniklilik": 100 },
+      "lazer_kesici":            { "miktar": 0, "dayaniklilik": 100 },
+      "tamir_anahtari":          { "miktar": 1, "dayaniklilik": null }
+    },
+
+    "yapim_parcalari": {
+      "_yorum": "uretim.json > 'parca' kategorisinden üretilen ara ürünler.",
+      "bakir_kablo":      { "miktar": 0 },
+      "elektronik_devre": { "miktar": 0 },
+      "titanyum_plaka":   { "miktar": 0 },
+      "paslanmaz_boru":   { "miktar": 0 }
+    },
+
+    "yapi_modulleri": {
+      "_yorum": "uretim.json > 'yapi' kategorisinden üretilen, envantera alınan yapı parçaları.",
+      "beton_duvar":      { "miktar": 0 },
+      "basinc_kapisi":    { "miktar": 0 },
+      "gozlem_cami":      { "miktar": 0 },
+      "yalitimli_zemin":  { "miktar": 0 }
+    },
+
+    "enerji_modulleri": {
+      "_yorum": "uretim.json > 'enerji' kategorisinden üretilen modüller. Kurulmadan önce envanterdedir.",
+      "standart_batarya":          { "miktar": 0 },
+      "gunes_paneli":              { "miktar": 0 },
+      "yakit_hucresi":             { "miktar": 0 },
+      "uranyum_reaktor_cekirdegi": { "miktar": 0 }
+    },
+
+    "yasam_destek_modulleri": {
+      "_yorum": "uretim.json > 'yasam_destek' kategorisinden üretilen, envantera alınan modüller.",
+      "su_filtresi":          { "miktar": 0 },
+      "atmosfer_katalizoru":  { "miktar": 0 },
+      "hidroponik_sera":      { "miktar": 0 },
+      "kimyasal_gubre":       { "miktar": 0 }
+    },
+
+    "gemi_parcalari": {
+      "_yorum": "uretim.json > 'gemi' kategorisi. Bunlar üretilip gemi_atolyesine teslim edilir.",
+      "gemi_govde_kaplamasi": { "miktar": 0 },
+      "itici_motor_parcasi":  { "miktar": 0 }
+    },
+
+    "besinler": {
+      "_yorum": "miktar: hasat edilen birim. bozulma_kalan: bu tur sayısı sonra bozulur. null = henüz yok.",
+      "roka":        { "miktar": 0, "bozulma_kalan": null },
+      "tere":        { "miktar": 0, "bozulma_kalan": null },
+      "marul":       { "miktar": 0, "bozulma_kalan": null },
+      "ispanak":     { "miktar": 0, "bozulma_kalan": null },
+      "yesil_sogan": { "miktar": 0, "bozulma_kalan": null },
+      "domates":     { "miktar": 0, "bozulma_kalan": null },
+      "salatalik":   { "miktar": 0, "bozulma_kalan": null },
+      "biber":       { "miktar": 0, "bozulma_kalan": null },
+      "patates":     { "miktar": 0, "bozulma_kalan": null },
+      "sogan":       { "miktar": 0, "bozulma_kalan": null },
+      "misir":       { "miktar": 0, "bozulma_kalan": null },
+      "bugday":      { "miktar": 0, "bozulma_kalan": null },
+      "pirinc":      { "miktar": 0, "bozulma_kalan": null },
+      "mercimek":    { "miktar": 0, "bozulma_kalan": null },
+      "nohut":       { "miktar": 0, "bozulma_kalan": null },
+      "fasulye":     { "miktar": 0, "bozulma_kalan": null },
+      "bezelye":     { "miktar": 0, "bozulma_kalan": null },
+      "aycicegi":    { "miktar": 0, "bozulma_kalan": null }
+    }
+  },
+
+  "us": {
+    "_yorum": "Üs'ün fiziksel durumu. Her tur güncellenir.",
+
+    "sicaklik": 22,
+
+    "basinc": {
+      "_yorum": "Değer 1.0 = normal. 0.5 altı tehlikeli. degisim_hizi her tur eklenir.",
+      "mevcut": 1.0,
+      "degisim_hizi": -0.01,
+      "durum": "stabil"
+    },
+
+    "atmosfer": {
+      "_yorum": "Yüzdeler toplamı 100 olmalıdır. co2 > 5 olursa oyuncu zarar görür.",
+      "oksijen_yuzde":  21.0,
+      "co2_yuzde":      0.04,
+      "azot_yuzde":     78.96
+    },
+
+    "enerji": {
+      "_yorum": "uretim_hizi - tuketim_hizi = net akış. Her tur mevcut güncellenir.",
+      "kapasite":      500,
+      "mevcut":        400,
+      "uretim_hizi":   0,
+      "tuketim_hizi":  10,
+      "kurulu_moduller": []
+    },
+
+    "oksijen_deposu": {
+      "kapasite":      500,
+      "mevcut":        400,
+      "uretim_hizi":   0,
+      "tuketim_hizi":  20,
+      "kurulu_moduller": []
+    },
+
+    "su_deposu": {
+      "kapasite":      200,
+      "mevcut":        50,
+      "uretim_hizi":   0,
+      "tuketim_hizi":  5,
+      "kurulu_moduller": []
+    }
+  },
+
+  "istasyonlar": {
+    "_yorum": "Anahtar adları istasyonlar.json ile birebir eşleşmelidir. aktif_is null ise boşta demektir.",
+
+    "basit_atolye": {
+      "acik":   true,
+      "seviye": 1,
+      "miktar": 1,
+      "aktif_is": null
+    },
+    "kimya_masasi": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 1,
+      "aktif_is": null
+    },
+    "montaj_atolyesi": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    },
+    "pres_makinesi": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    },
+    "elektronik_atolyesi": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    },
+    "cam_firini": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    },
+    "insaat_atolyesi": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    },
+    "tarim_atolyesi": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    },
+    "gelismis_atolye": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    },
+    "gemi_atolyesi": {
+      "acik":   false,
+      "seviye": 1,
+      "miktar": 0,
+      "aktif_is": null
+    }
+  },
+
+  "aktif_uretimler": {
+    "_yorum": "Kuyruktaki üretim görevleri. Her eleman bir iş emridir. ID benzersiz olmalı.",
+    "_yorum2": "Durum: bekliyor | devam_ediyor | tamamlandi. tamamlandi olanlar bir sonraki turda temizlenir.",
+    "kuyruk": [
+      {
+        "is_id":          "uretim_001",
+        "istasyon":       "basit_atolye",
+        "urun_kategori":  "alet",
+        "urun_id":        "tas_kazma",
+        "miktar":         1,
+        "kalan_tur":      1,
+        "durum":          "bekliyor"
+      }
+    ]
+  },
+
+  "teknoloji": {
+    "_yorum": "tamamlanan: araştırma bitti. arastiriliyor: aktif araştırma, sadece 1 olabilir. kilitli: henüz başlanmadı.",
+
+    "tamamlanan":   [],
+
+    "arastiriliyor": null,
+
+    "arastirma_ornegi_SIL": {
+      "_yorum": "Bu alan null veya aşağıdaki şablonda olabilir.",
+      "id":          "temel_metalurji",
+      "kalan_tur":   3,
+      "harcanan_malzemeler": { "demir": 5, "bakir": 2 }
+    }
+  },
+
+  "tarim": {
+    "_yorum": "Her parsel bağımsız bir tarım alanıdır. bitki null ise parsel boştur.",
+
+    "parseller": [
+      {
+        "parsel_id":      "parsel_1",
+        "alan_m2":        100,
+        "toprak_kalitesi": 70,
+        "sulama_sistemi": false,
+        "bitki": null
+      },
+      {
+        "parsel_id":      "parsel_2",
+        "alan_m2":        50,
+        "toprak_kalitesi": 60,
+        "sulama_sistemi": false,
+        "bitki": null
+      },
+      {
+        "parsel_id":      "parsel_3",
+        "alan_m2":        80,
+        "toprak_kalitesi": 65,
+        "sulama_sistemi": false,
+        "bitki": null
+      },
+      {
+        "parsel_id":      "parsel_4",
+        "alan_m2":        60,
+        "toprak_kalitesi": 55,
+        "sulama_sistemi": false,
+        "bitki": null
+      }
+    ],
+
+    "bitki_ornegi_SIL": {
+      "_yorum": "Parsel > bitki alanı bu şablona göre doldurulur.",
+      "bitki_id":         "domates",
+      "ekim_gunu":        1,
+      "buyume_ilerlemesi": 0,
+      "su_seviyesi":      80,
+      "saglik":           100,
+      "durum":            "saglikli",
+      "gubre_uygulandı":  false,
+      "hasat_hazir":      false,
+      "aktif_risk":       null
+    }
+  },
+
+  "aktif_olaylar": {
+    "_yorum": "Dünya veya üs olayları. kalan_tur 0 olunca event silinir ve sonuc_efektleri uygulanır.",
+    "olaylar": []
+  },
+
+  "olay_ornegi_SIL": {
+    "olay_id":          "toz_firtinasi_001",
+    "sablon_id":        "toz_firtinasi",
+    "baslangic_gunu":   3,
+    "kalan_tur":        2,
+    "anlık_efektler":   { "gunes_paneli_verim": -0.5 },
+    "sonuc_efektleri":  {}
+  },
+
+  "aktif_aktiviteler": {
+    "_yorum": "Oyuncunun o tur içinde başlattığı manuel görevler. kalan_tur 0 olunca tamamlanır.",
+    "gorevler": []
+  },
+
+  "aktivite_ornegi_SIL": {
+    "aktivite_id":   "kef_001",
+    "tur":           "kesfet",
+    "hedef_bolge":   "kuzey_alan",
+    "kalan_tur":     2,
+    "enerji_maliyeti_tur": 10,
+    "odul":          { "demir": 5, "bakir": 2 }
+  },
+
+  "dunya": {
+    "_yorum": "Keşfedilen bölgeler ve her bölgenin madencilik durumu. Bölge eklenince buraya eklenir.",
+    "kesfedilen_bolgeler": ["merkez_us"],
+    "bolgeler": {
+      "merkez_us": {
+        "kesfedildi":   true,
+        "maden_durumlari": {
+          "demir":     { "rezerv": 200, "erişilebilir": true },
+          "silisyum":  { "rezerv": 100, "erişilebilir": true }
+        }
+      }
+    }
+  },
+
+  "log": {
+    "_yorum": "Oyun günlüğü. Her gün en fazla 20 girdi tutulur, eskiler silinir.",
+    "girdiler": [
+      {
+        "gun":    1,
+        "saat":   8,
+        "mesaj":  "Gemiden hayatta kalan tek kişisin. Hayatta kalman gerekiyor."
+      }
+    ]
+  }
+}

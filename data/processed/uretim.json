@@ -1,0 +1,151 @@
+{
+  "alet": {
+    "tas_kazma": {
+      "gerekli_malzemeler": { "demir": 2 },
+      "gerekli_istasyon": "basit_atolye",
+      "sure": 1,
+      "enerji_tuketimi": 5
+    },
+    "elektrikli_matkap": {
+      "gerekli_malzemeler": { "demir": 4, "bakir": 2, "lityum": 1 },
+      "gerekli_istasyon": "montaj_atolyesi",
+      "sure": 3,
+      "enerji_tuketimi": 15
+    },
+    "lazer_kesici": {
+      "gerekli_malzemeler": { "kuvars": 3, "bakir": 2, "lityum": 2 },
+      "gerekli_istasyon": "gelismis_atolye",
+      "sure": 4,
+      "enerji_tuketimi": 25
+    },
+    "tamir_anahtari": {
+      "gerekli_malzemeler": { "demir": 2, "aluminyum": 1 },
+      "gerekli_istasyon": "basit_atolye",
+      "sure": 1,
+      "enerji_tuketimi": 5
+    }
+  },
+
+  "parca": {
+    "bakir_kablo": {
+      "gerekli_malzemeler": { "bakir": 2 },
+      "gerekli_istasyon": "basit_atolye",
+      "sure": 1,
+      "enerji_tuketimi": 2
+    },
+    "elektronik_devre": {
+      "gerekli_malzemeler": { "silisyum": 2, "bakir": 2 },
+      "gerekli_istasyon": "elektronik_atolyesi",
+      "sure": 2,
+      "enerji_tuketimi": 8
+    },
+    "titanyum_plaka": {
+      "gerekli_malzemeler": { "titanyum": 3, "nikel": 1 },
+      "gerekli_istasyon": "pres_makinesi",
+      "sure": 3,
+      "enerji_tuketimi": 15
+    },
+    "paslanmaz_boru": {
+      "gerekli_malzemeler": { "demir": 2, "krom": 1 },
+      "gerekli_istasyon": "pres_makinesi",
+      "sure": 2,
+      "enerji_tuketimi": 10
+    }
+  },
+
+  "yapi": {
+    "beton_duvar": {
+      "gerekli_malzemeler": { "kirectasi": 5, "demir": 1 },
+      "gerekli_istasyon": "insaat_atolyesi",
+      "sure": 4,
+      "enerji_tuketimi": 20
+    },
+    "basinc_kapisi": {
+      "gerekli_malzemeler": { "titanyum": 4, "aluminyum": 2, "krom": 1 },
+      "gerekli_istasyon": "insaat_atolyesi",
+      "sure": 6,
+      "enerji_tuketimi": 35
+    },
+    "gozlem_cami": {
+      "gerekli_malzemeler": { "kuvars": 4, "silisyum": 2 },
+      "gerekli_istasyon": "cam_firini",
+      "sure": 3,
+      "enerji_tuketimi": 12
+    },
+    "yalitimli_zemin": {
+      "gerekli_malzemeler": { "kirectasi": 3, "karbon": 2 },
+      "gerekli_istasyon": "insaat_atolyesi",
+      "sure": 2,
+      "enerji_tuketimi": 10
+    }
+  },
+
+  "enerji": {
+    "standart_batarya": {
+      "gerekli_malzemeler": { "lityum": 2, "bakir": 1, "aluminyum": 1 },
+      "gerekli_istasyon": "elektronik_atolyesi",
+      "sure": 3,
+      "enerji_tuketimi": 10
+    },
+    "gunes_paneli": {
+      "gerekli_malzemeler": { "silisyum": 4, "bakir": 2, "aluminyum": 2 },
+      "gerekli_istasyon": "elektronik_atolyesi",
+      "sure": 5,
+      "enerji_tuketimi": 20
+    },
+    "yakit_hucresi": {
+      "gerekli_malzemeler": { "hidrojen": 3, "karbon": 2 },
+      "gerekli_istasyon": "kimya_masasi",
+      "sure": 2,
+      "enerji_tuketimi": 5
+    },
+    "uranyum_reaktor_cekirdegi": {
+      "gerekli_malzemeler": { "uranyum": 2, "krom": 2, "nikel": 2 },
+      "gerekli_istasyon": "gelismis_atolye",
+      "sure": 8,
+      "enerji_tuketimi": 50
+    }
+  },
+
+  "yasam_destek": {
+    "su_filtresi": {
+      "gerekli_malzemeler": { "karbon": 3, "krom": 1, "aluminyum": 1 },
+      "gerekli_istasyon": "kimya_masasi",
+      "sure": 2,
+      "enerji_tuketimi": 8
+    },
+    "atmosfer_katalizoru": {
+      "gerekli_malzemeler": { "azot": 3, "bakir": 1, "karbon": 2 },
+      "gerekli_istasyon": "kimya_masasi",
+      "sure": 3,
+      "enerji_tuketimi": 15
+    },
+    "hidroponik_sera": {
+      "gerekli_malzemeler": { "aluminyum": 4, "bakir": 2, "silisyum": 2 },
+      "gerekli_istasyon": "montaj_atolyesi",
+      "sure": 5,
+      "enerji_tuketimi": 25
+    },
+    "kimyasal_gubre": {
+      "gerekli_malzemeler": { "fosfat": 3, "kukurt": 1 },
+      "gerekli_istasyon": "kimya_masasi",
+      "sure": 1,
+      "enerji_tuketimi": 5
+    }
+  },
+
+  "gemi": {
+    "gemi_govde_kaplamasi": {
+      "gerekli_malzemeler": { "titanyum": 5, "nikel": 3, "krom": 2 },
+      "gerekli_istasyon": "gemi_atolyesi",
+      "sure": 10,
+      "enerji_tuketimi": 60
+    },
+    "itici_motor_parcasi": {
+      "gerekli_malzemeler": { "aluminyum": 5, "bakir": 4, "hidrojen": 2 },
+      "gerekli_istasyon": "gemi_atolyesi",
+      "sure": 8,
+      "enerji_tuketimi": 45
+    }
+  }
+}

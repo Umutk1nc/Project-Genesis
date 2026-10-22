@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Uretim Tarifi Kural Kitabi",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "gerekli_malzemeler": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z_]+$": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "gerekli_istasyon": {
+      "type": "string"
+    },
+    "sure": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "enerji_tuketimi": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": ["gerekli_malzemeler", "gerekli_istasyon", "sure", "enerji_tuketimi"]
+}

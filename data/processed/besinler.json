@@ -1,0 +1,255 @@
+{
+   "roka": {
+    "tur": "yaprakli",
+    "buyume_gunu": 20,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "orta",
+    "tokluk": 1,
+    "enerji": 1,
+    "moral": 2,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["solma","kuf"],
+    "name":"Roka"
+
+  },
+
+    "tere": {
+    "tur": "yaprakli",
+    "buyume_gunu":15,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "orta",
+    "tokluk": 1,
+    "enerji": 1,
+    "moral": 1,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuf"],
+    "name":"Tere"
+  },
+    
+    "marul": {
+    "tur": "yaprakli",
+    "buyume_gunu":30,
+    "su_ihtiyaci": "yuksek",
+    "isik_ihtiyaci": "orta",
+    "tokluk": 2,
+    "enerji": 1,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["curume"],
+    "name":"Marul"
+  },
+
+    "ispanak": {
+    "tur": "yaprakli",
+    "buyume_gunu":35,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "orta",
+    "tokluk": 2,
+    "enerji": 3,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuf"],
+    "name":"Ispanak"
+  },
+
+    "yesil_sogan": {
+    "tur": "yaprakli",
+    "buyume_gunu": 25,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "dusuk",
+    "tokluk": 2,
+    "enerji": 1,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuruma"],
+    "name":"Yeşil Soğan"
+  },
+
+    "domates": {
+    "tur": "sebze",
+    "buyume_gunu":70,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 2,
+    "enerji": 2,
+    "moral": 5,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["curume","yumusama"],
+    "name":"Domates"
+  },
+    
+    "salatalik": {
+    "tur": "sebze",
+    "buyume_gunu":55,
+    "su_ihtiyaci": "yuksek",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 3,
+    "enerji": 2,
+    "moral": 4,
+    "su":1,
+    "bozulma_hizi": "hizli",
+    "riskler": ["kuruma","yumusama"],
+    "name":"Salatalık"
+  },
+
+    "biber": {
+    "tur": "sebze",
+    "buyume_gunu":80,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 2,
+    "enerji": 2,
+    "moral": 6,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuruma","solma"],
+    "name":"Biber"
+  },
+
+    "patates": {
+    "tur": "kok_sebze",
+    "buyume_gunu": 90,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "dusuk",
+    "tokluk": 5,
+    "enerji": 4,
+    "moral": 5,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["filizlenme","curume"],
+    "name":"Patates"
+  },
+
+    "sogan": {
+    "tur": "kok_sebze",
+    "buyume_gunu":85,
+    "su_ihtiyaci": "dusuk",
+    "isik_ihtiyaci": "orta",
+    "tokluk": 3,
+    "enerji": 3,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["filizlenme","curume"],
+    "name":"Soğan"
+  },
+    
+    "misir": {
+    "tur": "tahil",
+    "buyume_gunu":120,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 5,
+    "enerji": 4,
+    "moral": 6,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["kuruma"],
+    "name":"Mısır"
+  },
+
+    "bugday": {
+    "tur": "tahil",
+    "buyume_gunu":140,
+    "su_ihtiyaci": "dusuk",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 7,
+    "enerji": 6,
+    "moral": 6,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["hasere"],
+    "name":"Buğday"
+    
+  },
+    
+    "pirinc": {
+    "tur": "tahil",
+    "buyume_gunu": 150,
+    "su_ihtiyaci": "cok_yuksek",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 9,
+    "enerji": 7,
+    "moral": 5,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["nem","kuf"],
+    "name":"Pirinç"
+  },
+
+    "mercimek": {
+    "tur": "bakliyat",
+    "buyume_gunu":110,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 7,
+    "enerji": 8,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kurtlanma"],
+    "name":"Mercimek"
+  },
+    
+    "nohut": {
+    "tur": "bakliyat",
+    "buyume_gunu":120,
+    "su_ihtiyaci": "dusuk",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 8,
+    "enerji": 9,
+    "moral": 4,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["sertlesme"],
+    "name":"Nohut"
+  },
+
+    "fasulye": {
+    "tur": "bakliyat",
+    "buyume_gunu":100,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 7,
+    "enerji": 8,
+    "moral": 2,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuf"],
+    "name":"Fasulye"
+  },
+  
+    "bezelye": {
+    "tur": "bakliyat",
+    "buyume_gunu":70,
+    "su_ihtiyaci": "orta",
+    "isik_ihtiyaci": "orta",
+    "tokluk": 4,
+    "enerji": 5,
+    "moral": 4,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["burkulma"],
+    "name":"Bezelye"
+  },
+
+    "aycicegi": {
+    "tur": "yagli_tohum",
+    "buyume_gunu":120,
+    "su_ihtiyaci": "dusuk",
+    "isik_ihtiyaci": "cok_yuksek",
+    "tokluk": 4,
+    "enerji": 8,
+    "moral": 4,
+    "su":1,
+    "bozulma_hizi": "cok_yavas",
+    "riskler": ["yag_oksidasyonu"],
+    "name":"Ay Çiçeği"
+  }
+}
