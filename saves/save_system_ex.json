@@ -129,28 +129,42 @@
     },
     "tarim":
     {
-        "alan_sayisi":4,
+        "alan_sayisi":3,
         "alanlar":
-        {
-        "alan_id":0,
-        "ekilen_bitkiler":["domates","salatalik"],
-        "ekilme_sayisi":[1,31],
-        "ekilme_saati":[1,1],
-        "bitki_durumu":[20,80],
-        "tarla_sicaklik":25,
-        "su_seviyesi":10,
-        "tarla_verimi":90
-        }
-
-
-
-
-
-
-
+        [
+            {
+                "alan_id":0,
+                "ekilen_bitkiler":["domates","salatalik"],
+                "ekilme_sayisi":[1,31],
+                "ekilme_saati":[1,1],
+                "bitki_durumu":[20,80],
+                "tarla_sicaklik":25,
+                "su_seviyesi":10,
+                "tarla_verimi":90,
+                "bos_alan":10
+            },
+            {
+                "alan_id":1,
+                "ekilen_bitkiler":["roka","marul"],
+                "ekilme_sayisi":[5,10],
+                "ekilme_saati":[2,3],
+                "bitki_durumu":[50,60],
+                "tarla_sicaklik":22,
+                "su_seviyesi":15,
+                "tarla_verimi":85,
+                "bos_alan":5
+            },
+            {
+                "alan_id":2,
+                "ekilen_bitkiler":["biber","patates"],
+                "ekilme_sayisi":[3,7],
+                "ekilme_saati":[4,5],
+                "bitki_durumu":[30,70],
+                "tarla_sicaklik":28,
+                "su_seviyesi":12,
+                "tarla_verimi":88,
+                "bos_alan":10
+            }
+        ]
     }
-    
-
-    
-
 }

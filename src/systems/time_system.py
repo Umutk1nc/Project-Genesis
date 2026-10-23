@@ -1,6 +1,5 @@
 from pathlib import Path
 import json
-import su_sistemi,oksijen_sistemi
 systems = Path(__file__).parent
 project = systems.parent.parent
 SAVE_PATH = project / "saves" / "save_system.json"
@@ -35,5 +34,3 @@ save["oyuncu"]["moral"]["mevcut"]=-save["oyuncu"]["moral"]["kayip"]
 save["oyuncu"]["enerji"]["mevcut"]=-save["oyuncu"]["enerji"]["kayip"]
 
 #tarim güncellemesi olacak
-su_sistemi()
-oksijen_sistemi()
