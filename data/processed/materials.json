@@ -1,0 +1,112 @@
+{
+  "metal": {
+    "demir": {
+      "nadirlik": "yaygin",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "En yaygın yapı metali. Üssün iskeletinden el aletlerine kadar her şeyde kullanılır. Yüzeyde bol miktarda bulunur."
+    },
+    "bakir": {
+      "nadirlik": "yaygin",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "İletkenliği yüksek, işlemesi kolay bir metal. Kablolar ve elektronik sistemlerin temel hammaddesi."
+    },
+    "aluminyum": {
+      "nadirlik": "orta",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Hafif ve dayanıklı. Taşıma sistemleri, tanklar ve gemi gövdelerinde tercih edilir. Orta derinliklerde çıkar."
+    },
+    "titanyum": {
+      "nadirlik": "nadir",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Olağanüstü mukavemet-ağırlık oranına sahip nadir metal. Basınç kapıları ve ileri teknoloji ekipmanlarda zorunludur. Derin katmanlarda bulunur."
+    },
+    "nikel": {
+      "nadirlik": "orta",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Korozyona dirençli alaşım metali. Titanyum ve demirle birleştiğinde dayanıklılığı büyük ölçüde artırır."
+    },
+    "krom": {
+      "nadirlik": "nadir",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Yüzey kaplama ve korozyon önleme için kullanılır. Radyasyona maruz kalan ekipmanlarda koruyucu katman oluşturur."
+    }
+  },
+
+  "enerji_elementi": {
+    "lityum": {
+      "nadirlik": "nadir",
+      "ham": false,
+      "riskler": ["yanicilik"],
+      "aciklama": "Enerji yoğunluğu yüksek element. İşlenmemiş halde kararsızdır; hasar gören lityum hücresi yangın çıkarabilir. Batarya sistemlerinin vazgeçilmezi."
+    },
+    "karbon": {
+      "nadirlik": "orta",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Çok yönlü element. Filtre sistemlerinde safsızlıkları tutar, yakıt olarak kullanılır, kimyasal reaksiyonların katalizörüdür."
+    },
+    "uranyum": {
+      "nadirlik": "cok_nadir",
+      "ham": false,
+      "riskler": ["radyasyon"],
+      "aciklama": "Son derece yoğun enerji kaynağı. İşlenmemiş halde ölümcül radyasyon yayar. Sadece özel ekipmanla taşınabilir. Nükleer reaktörün çekirdeği."
+    },
+    "hidrojen": {
+      "nadirlik": "orta",
+      "ham": false,
+      "riskler": ["patlama"],
+      "aciklama": "Evrenin en hafif elementi. Yakıt hücrelerinde verimli enerji üretir ancak sıkıştırılmış halde patlama riski taşır. Depolama altyapısı zorunludur."
+    }
+  },
+
+  "yapi_maddesi": {
+    "silisyum": {
+      "nadirlik": "yaygin",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Cam ve güneş panellerinin temel bileşeni. Elektronik devrelerde de kritik rol oynar. Kum ve kayaçlardan kolayca elde edilir."
+    },
+    "kuvars": {
+      "nadirlik": "orta",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Optik saflıkta cam üretimi için gereklidir. Gözlem modülleri ve lazer sistemlerinde silisyumun yerini tutamaz."
+    },
+    "kirectasi": {
+      "nadirlik": "yaygin",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Beton ve yapı malzemelerinin hammaddesi. Üs genişletme operasyonlarında büyük miktarda tüketilir. Yüzey katmanlarında bol bulunur."
+    }
+  },
+
+  "kimyasal": {
+    "kukurt": {
+      "nadirlik": "orta",
+      "ham": true,
+      "riskler": ["zehirli_gaz"],
+      "aciklama": "Gübre üretiminde ve kimyasal işlemlerde kullanılır. Yanması durumunda zehirli SO₂ gazı açığa çıkar; kapalı alanlarda havalandırma zorunludur."
+    },
+    "fosfor": {
+      "nadirlik": "orta",
+      "ham": true,
+      "riskler": [],
+      "aciklama": "Bitki büyümesi için vazgeçilmez mineral. Kapalı tarım sistemlerinde toprağı besler. Uzun süreli koloniler için stratejik rezerv tutulmalıdır."
+    }
+  },
+
+  "gaz": {
+    "azot": {
+      "nadirlik": "yaygin",
+      "ham": false,
+      "riskler": ["bogulma"],
+      "aciklama": "Atmosferin büyük çoğunluğunu oluşturan inert gaz. Tarım sistemlerinde gübre olarak kullanılır. Sıkıştırılmış halde oksijen sistemleriyle karıştırılır; saf azot solunduğunda ölümcüldür."
+    }
+  }
+}

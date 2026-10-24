@@ -1,0 +1,290 @@
+{
+   "roka": {
+    "tur": "yaprakli",
+    "buyume_gunu": 20,
+    "su_ihtiyaci": 2,
+    "isik_ihtiyaci": "orta",
+    "tokluk": 1,
+    "enerji": 1,
+    "moral": 2,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["solma","kuf"],
+    "name":"Roka",
+    "aciklama":"Hızlı büyür, az yer kaplar. İlk tarla kurulduğunda koloni beslenmesine en çabuk katkıyı o sağlar. Besin değeri düşük ama morali tutar."
+
+  },
+
+    "tere": {
+    "tur": "yaprakli",
+    "buyume_gunu":15,
+    "su_ihtiyaci": 2,
+    "isik_ihtiyaci": "orta",
+    "tokluk": 1,
+    "enerji": 1,
+    "moral": 1,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuf"],
+    "name":"Tere",
+    "sapma":5,
+    "aciklama": "Kolonideki en hızlı büyüyen bitki. Küf riskine karşı düzenli havalandırma şart. Acil açlık durumlarında ilk yetişen besin kaynağı."
+  },
+    
+    "marul": {
+    "tur": "yaprakli",
+    "buyume_gunu":30,
+    "su_ihtiyaci": 4,
+    "isik_ihtiyaci": "orta",
+    "tokluk": 2,
+    "enerji": 1,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["curume"],
+    "name":"Marul",
+    "sapma":10,
+    "aciklama": "Su tüketimi yüksek ama moral katkısı belirgin. Uzun süre aynı besini yiyen kolonistlerin ruh halini dengeler. Su filtresi olmadan yetiştirmek risklidir."
+  },
+
+    "ispanak": {
+    "tur": "yaprakli",
+    "buyume_gunu":35,
+    "su_ihtiyaci": 4,
+    "isik_ihtiyaci": "orta",
+    "tokluk": 2,
+    "enerji": 3,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuf"],
+    "name":"Ispanak",
+    "sapma":10,
+    "aciklama": "Enerji katkısı yapraklılar arasında en yüksek. Demir bakımından zengin; uzun süre kapalı ortamda yaşayan kolonistler için kritik besin değeri taşır."
+  },
+
+    "yesil_sogan": {
+    "tur": "yaprakli",
+    "buyume_gunu": 25,
+    "su_ihtiyaci": 2,
+    "isik_ihtiyaci": "dusuk",
+    "tokluk": 2,
+    "enerji": 1,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuruma"],
+    "name":"Yeşil Soğan",
+    "sapma":10,
+    "aciklama": "Düşük ışık ihtiyacıyla derin modüllerde bile yetişebilir. Güneş paneline erişimin olmadığı erken dönemde tarım için en güvenli seçenek."
+  },
+
+    "domates": {
+    "tur": "sebze",
+    "buyume_gunu":70,
+    "su_ihtiyaci": 2,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 2,
+    "enerji": 2,
+    "moral": 5,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["curume","yumusama"],
+    "name":"Domates",
+    "sapma":20,
+    "aciklama": "Kolonistlerin favorisi. Moral katkısı sebzeler arasında en yüksek; uzun kapalı yaşam dönemlerinde psikolojik dengeyi korur. Yüksek ışık gerektirir, ışık paneli zorunludur."
+  },
+    
+    "salatalik": {
+    "tur": "sebze",
+    "buyume_gunu":55,
+    "su_ihtiyaci": 4,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 3,
+    "enerji": 2,
+    "moral": 4,
+    "su":1,
+    "bozulma_hizi": "hizli",
+    "riskler": ["kuruma","yumusama"],
+    "name":"Salatalık",
+    "sapma":15,
+    "aciklama": "Tokluk değeri yüksek ama hasat sonrası çabuk bozulur. Depo koşulları iyi değilse israf kaçınılmaz. Soğuk depolama sistemi kurulmadan büyük miktarda yetiştirilmesi önerilmez."
+  },
+
+    "biber": {
+    "tur": "sebze",
+    "buyume_gunu":80,
+    "su_ihtiyaci": 4,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 2,
+    "enerji": 2,
+    "moral": 6,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuruma","solma"],
+    "name":"Biber",
+    "sapma":20,
+    "aciklama": "Tüm besinler arasında en yüksek moral değerini taşır. Uzun ve monoton hayatta kalma dönemlerinde kolonist moralini ayakta tutan nadir lezzet kaynaklarından biri."
+  },
+
+    "patates": {
+    "tur": "kok_sebze",
+    "buyume_gunu": 90,
+    "su_ihtiyaci": 1,
+    "isik_ihtiyaci": "dusuk",
+    "tokluk": 5,
+    "enerji": 4,
+    "moral": 5,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["filizlenme","curume"],
+    "name":"Patates",
+    "sapma":25,
+    "aciklama": "Koloninin temel kalori kaynağı. Düşük ışık ihtiyacıyla her modülde yetişir, uzun süre bozulmaz. Geniş kolonilerde vazgeçilmez; açlık krizini önleyen tek bitkidir."
+  },
+
+    "sogan": {
+    "tur": "kok_sebze",
+    "buyume_gunu":85,
+    "su_ihtiyaci": 1,
+    "isik_ihtiyaci": "orta",
+    "tokluk": 3,
+    "enerji": 3,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["filizlenme","curume"],
+    "name":"Soğan",
+    "sapma":25,
+    "aciklama": "Su ve ışık ihtiyacı düşük, uzun ömürlü. Kıt kaynak dönemlerinde güvenilir bir rezerv besini. Diğer besinlerle birlikte tüketildiğinde enerji verimliliğini artırır."
+  },
+    
+    "misir": {
+    "tur": "tahil",
+    "buyume_gunu":120,
+    "su_ihtiyaci": 4,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 5,
+    "enerji": 4,
+    "moral": 6,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["kuruma"],
+    "name":"Mısır",
+    "sapma":30,
+    "aciklama": "Yüksek moral ve tokluk dengesiyle en çok yönlü tahıl. Uzun büyüme süresine karşın hasat sonrası uzun süre bozulmadan saklanabilir."
+  },
+
+    "bugday": {
+    "tur": "tahil",
+    "buyume_gunu":140,
+    "su_ihtiyaci": 0.5,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 7,
+    "enerji": 6,
+    "moral": 6,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["hasere"],
+    "name":"Buğday",
+    "sapma":40,
+    "aciklama": "En yüksek tokluk değerine sahip bitki. Az su ister ama haşere riski gerçek; kapalı modüllerde böcek salgını tüm stoku mahvedebilir. Düzenli denetim zorunludur."
+    
+  },
+    
+    "pirinc": {
+    "tur": "tahil",
+    "buyume_gunu": 150,
+    "su_ihtiyaci": 8,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 9,
+    "enerji": 7,
+    "moral": 5,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["nem","kuf"],
+    "name":"Pirinç",
+    "sapma":30,
+    "aciklama": "En besleyici bitki ama en fazla su tüketenlerden biri. Su geri dönüşüm ünitesi olmadan yetiştirmek ciddi kaynak baskısı yaratır. Olgun koloni için ideal, erken dönem için riskli."
+  },
+
+    "mercimek": {
+    "tur": "bakliyat",
+    "buyume_gunu":110,
+    "su_ihtiyaci": 2,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 7,
+    "enerji": 8,
+    "moral": 3,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kurtlanma"],
+    "name":"Mercimek",
+    "sapma":20,
+    "aciklama": "Enerji değeri bakımından bakliyatlar arasında öne çıkar. Moral katkısı düşük; kolonistler uzun süre mercimek yemekten şikayet edebilir. Çeşitli beslenme için diğer bitkilerle dengele."
+  },
+    
+    "nohut": {
+    "tur": "bakliyat",
+    "buyume_gunu":120,
+    "su_ihtiyaci": 1,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 8,
+    "enerji": 9,
+    "moral": 4,
+    "su":1,
+    "bozulma_hizi": "yavas",
+    "riskler": ["sertlesme"],
+    "name":"Nohut",
+    "sapma":30,
+    "aciklama": "En yüksek enerji değeri ve en düşük su ihtiyacıyla en verimli bakliyat. Uzun hasat süresi sabır ister ama stoklandığında koloniye uzun vadeli güvence sağlar."
+  },
+
+    "fasulye": {
+    "tur": "bakliyat",
+    "buyume_gunu":100,
+    "su_ihtiyaci": 2,
+    "isik_ihtiyaci": "yuksek",
+    "tokluk": 7,
+    "enerji": 8,
+    "moral": 2,
+    "su":1,
+    "bozulma_hizi": "orta",
+    "riskler": ["kuf"],
+    "name":"Fasulye",
+    "sapma":20,
+    "aciklama": "Yüksek besin değerine karşın moral katkısı en düşük bitkilerden biri. Temel ihtiyacı karşılar ama kolonist memnuniyeti için mutlaka başka bitkilerle desteklenmeli."
+  },
+  
+    "bezelye": {
+    "tur": "bakliyat",
+    "buyume_gunu":70,
+    "su_ihtiyaci": 2,
+    "isik_ihtiyaci": "orta",
+    "tokluk": 4,
+    "enerji": 5,
+    "moral": 4,
+    "su":2,
+    "bozulma_hizi": "orta",
+    "riskler": ["burkulma"],
+    "name":"Bezelye",
+    "sapma":10,
+    "aciklama": "Bakliyatlar arasında en hızlı yetişen. Dengeli tokluk-enerji-moral değerleriyle geçiş döneminin güvenilir besini. Uzun ömürlü ürünlerin hazır olmadığı dönemlerde açığı kapatır."
+  },
+
+    "aycicegi": {
+    "tur": "yagli_tohum",
+    "buyume_gunu":120,
+    "su_ihtiyaci": 0.5,
+    "isik_ihtiyaci": "cok_yuksek",
+    "tokluk": 4,
+    "enerji": 8,
+    "moral": 4,
+    "su":1,
+    "bozulma_hizi": "cok_yavas",
+    "riskler": ["yag_oksidasyonu"],
+    "name":"Ay Çiçeği",
+    "sapma":20,
+    "aciklama": "Çok yüksek ışık ister ama su neredeyse hiç gerekmez. Hasat sonrası son derece uzun süre bozulmaz; uzun yolculuk veya karantina dönemleri için ideal stok besini. Yağı yakıt ve gres olarak da kullanılabilir."
+  }
+}

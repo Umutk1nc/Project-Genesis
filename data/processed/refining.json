@@ -1,0 +1,57 @@
+{
+  "demir_levha": {
+    "gerekli_malzemeler": { "demir": 3 },
+    "gerekli_istasyon": "maden_isleme_firini",
+    "sure": 20,
+    "enerji_tuketimi": 15,
+    "aciklama": "Dövülmüş demirden elde edilen, üssün temel iskeletini ve dayanıklı zırh katmanlarını oluşturan standart metal plaka."
+  },
+
+  "bakir_tel": {
+    "gerekli_malzemeler": { "bakir": 2 },
+    "gerekli_istasyon": "maden_isleme_firini",
+    "sure": 15,
+    "enerji_tuketimi": 12,
+    "aciklama": "Elektrik iletimi için kullanılan, ince ve esnek bakır tel. İletişim sistemleri ve enerji dağıtımı için kritik bir bileşen."
+  },
+
+  "aluminyum_profil": {
+    "gerekli_malzemeler": { "aluminyum": 3 },
+    "gerekli_istasyon": "maden_isleme_firini",
+    "sure": 20,
+    "enerji_tuketimi": 14,
+    "aciklama": "Hafif ve dayanıklı aluminyumdan üretilen, yapısal destek ve çerçeve oluşturmak için kullanılan profil. Özellikle uçak ve araç yapımında tercih edilir."
+  },
+
+  "titanyum_bar": {
+    "gerekli_malzemeler": { "titanyum": 2, "nikel": 1 },
+    "gerekli_istasyon": "maden_isleme_firini",
+    "sure": 40,
+    "enerji_tuketimi": 25,
+    "aciklama": "Yüksek mukavemet ve korozyon direncine sahip titanyumdan yapılan, zırh ve yapısal bileşenlerde kullanılan güçlü bir metal çubuk."
+  },
+
+  "silisyum_kristal": {
+    "gerekli_malzemeler": { "silisyum": 3, "kuvars": 1 },
+    "gerekli_istasyon": "maden_isleme_firini",
+    "sure": 35,
+    "enerji_tuketimi": 20,
+    "aciklama": "Yarı iletken özelliklere sahip silisyumdan üretilen, elektronik devreler ve güneş panelleri için kritik bir bileşen."
+  },
+
+  "karbon_fiber": {
+    "gerekli_malzemeler": { "karbon": 4 },
+    "gerekli_istasyon": "maden_isleme_firini",
+    "sure": 30,
+    "enerji_tuketimi": 18,
+    "aciklama": "Yüksek mukavemet ve düşük ağırlığa sahip karbon fiber, zırh ve yapısal bileşenlerde kullanılan gelişmiş bir malzeme."
+  },
+
+  "krom_kaplama": {
+    "gerekli_malzemeler": { "krom": 2, "bakir": 1 },
+    "gerekli_istasyon": "maden_isleme_firini",
+    "sure": 25,
+    "enerji_tuketimi": 16,
+    "aciklama": "Krom kaplama, dayanıklılığı artırmak ve korozyona karşı koruma sağlamak için kullanılan bir yüzey işlemi. Genellikle zırh ve araç parçalarında kullanılır."
+  }
+}

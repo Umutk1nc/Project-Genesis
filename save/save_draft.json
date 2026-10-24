@@ -21,12 +21,12 @@
   "oyuncu": {
     "_yorum": "Tüm stat'lar 0-maks arasındadır. aktif_efektler dizisi her tur işlenir.",
 
-    "saglik":       { "mevcut": 100, "kayip": 10 },
-    "oksijen":      { "mevcut": 100, "kayip": 10 },
-    "tokluk":       { "mevcut": 100, "kayip": 10 },
-    "su":           { "mevcut": 100, "kayip": 10 },
-    "moral":        { "mevcut": 100, "kayip": 10 },
-    "enerji":       { "mevcut": 100, "kayip": 10 },
+    "saglik":       { "mevcut": 100, "maks": 100 },
+    "oksijen":      { "mevcut": 100, "maks": 100 },
+    "tokluk":       { "mevcut": 100, "maks": 100 },
+    "su":           { "mevcut": 100, "maks": 100 },
+    "moral":        { "mevcut": 100, "maks": 100 },
+    "enerji":       { "mevcut": 100, "maks": 100 },
 
     "konum": "merkez_us",
 

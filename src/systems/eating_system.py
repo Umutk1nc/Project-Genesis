@@ -1,116 +1,115 @@
-import os
-import json
-from pathlib import Path
-from tabulate import tabulate
-
-systems = Path(__file__).parent
-project = systems.parent.parent
-DATA_DIR = project / "data" / "processed"
-Foods = DATA_DIR / "besinler.json"
-foods_have=DATA_DIR / "foods_save.json"
-
-your_foods_array=[]
-toklukArray=[]
-foodsNameArray=[]
-tablo_verisi = []
-foodsEnergyArray=[]
-foodsMoralArray=[]
-
-with open(Foods, "r", encoding="utf-8") as file:
-    foods_all = json.load(file)
-    
-with open(foods_have, "r", encoding="utf-8") as file:
-    your_foods_have = json.load(file)
-
-for key3, result3 in foods_all.items():
-    givenEnergy=result3.get("enerji",key3)
-    foodsEnergyArray.append(givenEnergy)
-    
-    
-for key4, result4 in foods_all.items():
-    foodsMoral=result4.get("moral",key4)
-    foodsMoralArray.append(foodsMoral)
-
-    
-for key2, result2 in your_foods_have.items():
-    sahip_olunan=result2.get("miktar",key2)
-    your_foods_array.append(sahip_olunan)
-    
-    
-    
-for key, result in foods_all.items():
-    # Eğer 'name' anahtarı yoksa (ispanak gibi), anahtarın kendi adını baş harfi büyük yapıp yazdır
-    name = result.get("name", key.capitalize())
-    foodsNameArray.append(name)
-
-for value, tokluk in foods_all.items():
-    tokluk_deger = tokluk.get("tokluk", value.capitalize())
-    toklukArray.append(tokluk_deger)
-
-
+import config
+import helpers 
+class Data_Reader:
+    def Read_Keys(self,FILE,string):
+        ARRAY=[]
+        for key, result in FILE.items():
+            set_value=result.get(string,key)
+            ARRAY.append(set_value)
+        return ARRAY     
         
-for index in range(1,len(foodsNameArray)+1):
-    satir = [index, foodsNameArray[index-1], toklukArray[index-1],foodsEnergyArray[index-1],foodsMoralArray[index-1],  your_foods_array[index-1]]
-    tablo_verisi.append(satir)
-
-def eating_command():
-    while True:
-        without_eat_condition=input("1 - Tekrar Dene\n2 - Vazgeç\nKomutun:")
-        if without_eat_condition=="1":
-            return eating_choose()
+class Eating_System:
+    def __init__(self,commands,general):
+        self.commands = commands
+        self.general = general
         
-        elif without_eat_condition=="2":
+    
+    def Create_Table_Data(self,FOODS_FILE,SAVE_FILE):
+        table_data=[]
+        food_keys=[]
+        index=0#ister 0 ister 1'den başlasın
+        for key,result in FOODS_FILE.items():
+            row=[index,result["name"],result["tokluk"],result["enerji"],result["moral"],result["su"],SAVE_FILE["foods"][key]["miktar"],result["buyume_gunu"]]
+            food_keys.append(key)
+            table_data.append(row)
+            index+=1
+        return table_data,food_keys
+    def Choose_Food(self,minimum,maximum):#tablo gösterme kısmının sonra yaparsın.
+        string="Yemek istediğin besinin index numarasını gir:"
+        valid_index=self.commands.Choose(minimum,maximum,string)
+        
+        return valid_index
+    
+    def Check_Food(self,food_index, food_keys,SAVE_FILE):
+        key_choice=food_keys[food_index]
+        food_key=SAVE_FILE["foods"][key_choice]
+        value=food_key["miktar"]
+        if value>=1:#later maybe it can be multi eating
+            return key_choice
+        else:
             return None
         
-        else:
-            print("Geçerli komut girmelisin")
-            continue
-
-
-def eating_choose():
-    basliklar = ["Index", "Besin Adı", "Doyurma Etkisi","Enerji Etkisi","Moral Etkisi", "Sahip Olduğun"]
-    print(tabulate(tablo_verisi, headers=basliklar, tablefmt="grid"))
-    while True:
-        eat=input("\n\n\n\nYemek İstediğin Besini Seç:")
         
-        if eat.isdigit():        # Sayı mı?
-            eat = int(eat)
-            if eat<=len(foodsNameArray) and eat>=1:
-                break
-            else:
-                print(f"Lütfen 1 -",len(foodsNameArray),"aralığında sayı gir! ❌")                          
+
+    def Eat(self,Key,SAVE_FILE,FOODS_FILE):
+        if Key is None:
+            print("Bu besine sahip olmadığın için yiyemezsin.")
+            return False
+                
         else:
-            print("Lütfen sayı gir! ❌")
+            #update food
+            SAVE_FILE["foods"][Key]["miktar"]-=1      
+            #find food values
+            satiety=FOODS_FILE[Key]["tokluk"]
+            energy=FOODS_FILE[Key]["enerji"]
+            moral=FOODS_FILE[Key]["moral"]
+            water=FOODS_FILE[Key]["su"]
+            #update character values
+            #TO DO
+            SAVE_FILE["player_condition"]["tokluk"]+=satiety
+            SAVE_FILE["player_condition"]["tokluk"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["tokluk"],0,100)
+            SAVE_FILE["player_condition"]["enerji"]+=energy
+            SAVE_FILE["player_condition"]["enerji"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["enerji"],0,100)
+            SAVE_FILE["player_condition"]["moral"]+=moral
+            SAVE_FILE["player_condition"]["moral"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["moral"],0,100)
+            SAVE_FILE["player_condition"]["su"]+=water    
+            SAVE_FILE["player_condition"]["su"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["su"],0,100)
+            return True
 
-    
-    
-    for index in range(1,len(foodsNameArray)+1):
-        if eat==index:
-            if your_foods_array[index-1]>0:
-                
-                
-                with open(foods_have, "r", encoding="utf-8") as file:
-                    oyuncu_envanteri = json.load(file)
-                
-                
-                secilen_besin=your_foods_array[index-1]   
-                Key_list=list(oyuncu_envanteri.keys())
-                Key=Key_list[eat-1]
-                oyuncu_envanteri[Key]["miktar"] -= 1
-                
-                keyName=foodsNameArray[eat-1]
-                print("1",keyName,"yedin.")
-
-
-                with open(foods_have, "w", encoding="utf-8") as file:
-                    json.dump(oyuncu_envanteri, file, indent=4, ensure_ascii=False)
-                pass
+class EatingController:
+    def __init__(self):
+        self.save_manager = helpers.SaveManager()
+        self.commands = helpers.Commands()
+        self.table = helpers.Table()
+        self.general = helpers.General()
+        self.eating_system = Eating_System(self.commands,self.general)
+        
+        
+    def Run(self):
+        #Read File
+        FOODS_FILE=self.save_manager.ReadFile(config.FOODS_PATH)
+        SAVE_FILE=self.save_manager.ReadFile(config.SAVE_PATH)
+        #EatingController LOOP
+        while True:
+            #Make Table
+            Table_Data,food_keys=self.eating_system.Create_Table_Data(FOODS_FILE,SAVE_FILE)
+            #Show Table
+            title=["Index", "Besin Adı", "Doyurma Etkisi","Enerji Etkisi","Moral Etkisi", "Su Etkisi","Miktar","Büyüme Süresi"]
+            self.table.Show_Table(Table_Data,title)
+            #Find First and Last index for decision
+            last_index = len(food_keys) - 1
+            first_index=Table_Data[0][0]
+            #Choose the food That you want
+            valid_index=self.eating_system.Choose_Food(first_index,last_index)
+            #Control the food and take the key of food
+            Key=self.eating_system.Check_Food(valid_index,food_keys,SAVE_FILE)
+            #Control whether you eat the food
+            is_eat=self.eating_system.Eat(Key,SAVE_FILE,FOODS_FILE)
+            if is_eat==True:
+                    self.save_manager.SaveFile(config.SAVE_PATH,SAVE_FILE)
+                    print(FOODS_FILE[Key]["name"]," adlı besin başarıyla yendi")
+                    result_command=self.commands.Choose(0,1,"0 - Başka besin Ye\n1 - Ana Menüye Dön\n")
+                    if result_command==0:
+                        continue
+                    else:
+                        break
             else:
-                print("Bu Besine Sahip Olmadığın İçin Yiyemezsin❌")
-                eating_com=eating_command()
-                if eating_com is None:
-                    return None
-                    
-                    
-                  
-    return eat
+                returning="0 - Farklı besin ye\n1 - Ana Menüye Dön\n"
+                result=self.commands.Choose(0,1,returning)
+                if result==0:
+                    continue
+                else:
+                    break    
+#Tablo gösterirken sadece Sahip olunanlar gösterilebilir.
+game = EatingController()
+game.Run()

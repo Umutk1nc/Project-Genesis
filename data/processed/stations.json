@@ -1,0 +1,57 @@
+{
+  "basit_atolye": {
+    "gerekli_malzemeler": { "demir": 6, "bakir": 2 },
+    "enerji_tuketimi": 10,
+    "yapim_suresi": 60,
+    "aciklama": "İlk kurulan üretim birimi. Temel aletler ve ara parçalar burada üretilir. Karmaşık sistemler için yetersiz kalır."
+  },
+
+  "montaj_atolyesi": {
+    "gerekli_malzemeler": { "demir": 8, "bakir": 4, "aluminyum": 3 },
+    "enerji_tuketimi": 25,
+    "yapim_suresi": 180,
+    "aciklama": "Mekanik parçaları bir araya getiren orta seviye atölye. Koruyucu ekipman ve yaşam destek modüllerinin üretim noktası."
+  },
+
+  "elektronik_atolyesi": {
+    "gerekli_malzemeler": { "bakir": 6, "silisyum": 4, "aluminyum": 2 },
+    "enerji_tuketimi": 30,
+    "yapim_suresi": 240,
+    "aciklama": "Devre kartları, enerji sistemleri ve sensörlerin üretildiği hassas ortam. Toz ve nem kontrolü zorunludur."
+  },
+
+  "pres_makinesi": {
+    "gerekli_malzemeler": { "demir": 10, "aluminyum": 4, "nikel": 2 },
+    "enerji_tuketimi": 35,
+    "yapim_suresi": 300,
+    "aciklama": "Yüksek basınçla metal şekillendirme yapar. Titanyum plaka ve yapısal bileşenler bu makinede üretilir."
+  },
+
+  "insaat_atolyesi": {
+    "gerekli_malzemeler": { "demir": 8, "kirectasi": 6, "aluminyum": 3 },
+    "enerji_tuketimi": 20,
+    "yapim_suresi": 240,
+    "aciklama": "Üs genişletme ve yapısal inşaat işlemlerinin merkezi. Yeni hücreler ve altyapı modülleri buradan yönetilir."
+  },
+
+  "kimya_masasi": {
+    "gerekli_malzemeler": { "demir": 6, "bakir": 3, "kuvars": 2 },
+    "enerji_tuketimi": 20,
+    "yapim_suresi": 180,
+    "aciklama": "Kimyasal bileşiklerin sentezlendiği kontrollü ortam. Su arıtma, gübre üretimi ve atmosfer sistemleri burada hazırlanır."
+  },
+
+  "maden_isleme_firini": {
+    "gerekli_malzemeler": { "demir": 10, "kirectasi": 4, "bakir": 3 },
+    "enerji_tuketimi": 45,
+    "yapim_suresi": 360,
+    "aciklama": "Ham mineralleri işlenmiş ve kullanılabilir forma dönüştürür. Uranyum ve lityum gibi tehlikeli elementlerin güvenli işlenmesi için zırhlı kabin içerir."
+  },
+
+  "gelismis_atolye": {
+    "gerekli_malzemeler": { "titanyum": 6, "bakir": 6, "silisyum": 4, "nikel": 3 },
+    "enerji_tuketimi": 60,
+    "yapim_suresi": 600,
+    "aciklama": "Koloninin en ileri üretim birimi. Nükleer reaktörler, keşif araçları ve otonom sistemler yalnızca burada üretilebilir. Kurulumu aylar alabilir."
+  }
+}

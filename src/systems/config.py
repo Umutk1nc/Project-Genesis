@@ -1,0 +1,41 @@
+import os
+from pathlib import Path
+import math
+#FILES FOR EATING SYSTEM
+SYSTEMS_PATH = Path(__file__).parent
+PROJECT_PATH = SYSTEMS_PATH.parent.parent
+PROCESSED_PATH = PROJECT_PATH / "data" / "processed"
+FOODS_PATH = PROCESSED_PATH / "foods.json"
+FOODS_SAVE_PATH=PROCESSED_PATH / "foods_save.json"
+SAVE_CLASSOR=PROJECT_PATH/"save"
+SAVE_PATH=SAVE_CLASSOR/"save_system.json"
+
+#STARTING CONSTANTS FOR EATİNG SYSTEM
+your_foods=[]
+satiety=[]
+foods_name=[]
+table_data = []
+foods_energy=[]
+foods_moral=[]
+
+# LIMITS
+MAX_ENERGY = 100
+MAX_HUNGER = 100
+MAX_MORAL = 100
+MAX_WATER = 100
+
+# TIME
+DAY = 24
+HOUR = 1
+
+# PLAYER
+START_ENERGY = 100
+START_HUNGER = 100
+
+#HARVEST
+CURVE_CONSTANT=8
+HARVEST_SPEED=10
+
+#IRRIGATION
+IRRIGATION_CONSTANT=10
+IRRIGATION_SPEED_CONSTANT=20

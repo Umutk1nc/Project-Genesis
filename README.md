@@ -1,15 +1,16 @@
 # Project Genesis
 
-A survival and resource management game. A pilot crash-lands on an unknown planet and has to stay alive with limited resources.
+A survival and resource management game in development. A pilot crash-lands on an unknown planet and has to stay alive with limited resources. Long-term goal: a full game with RPG elements and moral choices.
 
-> **Status:** early Python console prototype. Long-term goal: a full game with RPG elements and moral choices.
+> **Status:** Early development. The code is being rebuilt with an object-oriented architecture, and no version has a runnable entry point yet. The earlier procedural prototype is available at [v0.1.1](https://github.com/Umutk1nc/Project-Genesis/tree/v0.1.1).
 
 ## What's here
 
 - Time and day periods
-- Survival meters (health, oxygen, satiety, water, energy, morale)
 - Food and eating system
-- JSON-based save data
+- Farming system (planting, watering, harvesting)
+- Player condition data (health, oxygen, satiety, water, energy, morale) in the save file
+- JSON-based game data and save structure
 
 More systems will be added step by step. Planned work is tracked in Issues and the Project board.
 
@@ -19,4 +20,16 @@ Requires Python 3.13 and `tabulate`:
 
 ```bash
 pip install tabulate
+```
+
+The game reads `save/save_system.json`. This file changes while you play, so Git does not track it. Create it from the template before the first run:
+
+```bash
+cp save/save_example.json save/save_system.json
+```
+
+On Windows PowerShell:
+
+```powershell
+Copy-Item save/save_example.json save/save_system.json
 ```

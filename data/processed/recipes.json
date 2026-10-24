@@ -1,0 +1,189 @@
+{
+  "alet": {
+    "kazma": {
+      "gerekli_malzemeler": { "demir": 3, "bakir": 1 },
+      "gerekli_istasyon": "basit_atolye",
+      "sure": 15,
+      "enerji_tuketimi": 5,
+      "aciklama": "İlk kazı aleti. Yüzey kayaçlarını ve yumuşak mineral yataklarını kırar. Sert katmanlara inmek için yetersiz kalır."
+    },
+    "el_feneri": {
+      "gerekli_malzemeler": { "bakir": 2, "silisyum": 1, "lityum": 1 },
+      "gerekli_istasyon": "basit_atolye",
+      "sure": 20,
+      "enerji_tuketimi": 8,
+      "aciklama": "Şarj edilebilir el feneri. Derin tünellerde ve güneş ışığı olmayan alanlarda temel görüş kaynağı."
+    },
+    "lazer_kazici": {
+      "gerekli_malzemeler": { "demir": 2, "bakir": 3, "silisyum": 2, "titanyum": 1 },
+      "gerekli_istasyon": "gelismis_atolye",
+      "sure": 90,
+      "enerji_tuketimi": 30,
+      "aciklama": "Yüksek yoğunluklu lazer ile titanyum ve uranyum yataklarını bile keser. Standart kazmanın ulaşamadığı derin seviyelerin vazgeçilmez aleti."
+    }
+  },
+
+  "parca": {
+    "kablo": {
+      "gerekli_malzemeler": { "bakir": 3, "krom": 1 },
+      "gerekli_istasyon": "basit_atolye",
+      "sure": 10,
+      "enerji_tuketimi": 3,
+      "aciklama": "Krom kaplı bakır iletken. Üsteki korozyon tabakası sayesinde nem ve kimyasal maddelere karşı dayanıklıdır. Tüm elektrik sistemlerinin omurgası."
+    },
+    "titanyum_plaka": {
+      "gerekli_malzemeler": { "titanyum": 3, "nikel": 1 },
+      "gerekli_istasyon": "pres_makinesi",
+      "sure": 30,
+      "enerji_tuketimi": 15,
+      "aciklama": "Yüksek mukavemetli yapısal panel. Basınç kapıları, gemi gövdeleri ve ileri üretim ekipmanlarında kullanılır."
+    },
+    "elektronik_devre": {
+      "gerekli_malzemeler": { "silisyum": 2, "bakir": 2 },
+      "gerekli_istasyon": "elektronik_atolyesi",
+      "sure": 20,
+      "enerji_tuketimi": 10,
+      "aciklama": "Çok amaçlı devre kartı. Botlar, sensörler ve otomasyon sistemlerinin beyni. Üretimi hassasiyet gerektirir."
+    }
+  },
+
+  "enerji": {
+    "batarya": {
+      "gerekli_malzemeler": { "lityum": 3, "bakir": 2, "nikel": 1 },
+      "gerekli_istasyon": "elektronik_atolyesi",
+      "sure": 30,
+      "enerji_tuketimi": 10,
+      "aciklama": "Yüksek kapasiteli lityum hücresi. Taşınabilir cihazları ve keşif araçlarını besler. Hasar gören hücre yangın riski taşır."
+    },
+    "gunes_paneli": {
+      "gerekli_malzemeler": { "silisyum": 4, "bakir": 3, "aluminyum": 2 },
+      "gerekli_istasyon": "elektronik_atolyesi",
+      "sure": 120,
+      "enerji_tuketimi": 20,
+      "aciklama": "Temel yenilenebilir enerji kaynağı. Yeterli güneş ışığı alan yüzeylere kurulur. Derin katmanlarda işlevsizdir."
+    },
+    "nukleer_reaktor": {
+      "gerekli_malzemeler": { "uranyum": 2, "titanyum": 4, "bakir": 3, "demir": 4, "kablo": 4 },
+      "gerekli_istasyon": "gelismis_atolye",
+      "sure": 600,
+      "enerji_tuketimi": 80,
+      "aciklama": "Tüm üssü besleyebilecek güçte enerji üretir. Kurulumu aylarca sürer, işletimi uzmanlık gerektirir. Yakıt çekirdeğine yaklaşmak için radyasyon kıyafeti zorunludur."
+    },
+    "oksijen_ureteci": {
+      "gerekli_malzemeler": { "bakir": 4, "aluminyum": 3, "silisyum": 2, "karbon": 2 },
+      "gerekli_istasyon": "kimya_masasi",
+      "sure": 90,
+      "enerji_tuketimi": 25,
+      "aciklama": "Elektroliz yöntemiyle sürekli oksijen üretir. Tank oksijeni biter, bu bitmez. Kapalı üs modüllerinin hayat hattı."
+    }
+  },
+
+  "saglik": {
+    "medkit": {
+      "gerekli_malzemeler": { "karbon": 2, "azot": 1, "fosfat": 1 },
+      "gerekli_istasyon": "kimya_masasi",
+      "sure": 20,
+      "enerji_tuketimi": 5,
+      "aciklama": "Temel ilk yardım kiti. Yüzeysel yaralanmaları stabilize eder. Ciddi kırık veya iç kanama durumunda yetersizdir."
+    }
+  },
+
+  "koruma": {
+    "radyasyon_kiyafeti": {
+      "gerekli_malzemeler": { "titanyum": 2, "krom": 2, "nikel": 2, "aluminyum": 1 },
+      "gerekli_istasyon": "montaj_atolyesi",
+      "sure": 150,
+      "enerji_tuketimi": 25,
+      "aciklama": "Uranyum bölgelerine ve nükleer reaktöre yaklaşmak için zorunlu ekipman. Krom-nikel tabakası gama radyasyonunu büyük ölçüde emer."
+    }
+  },
+
+  "altyapi": {
+    "oksijen_tupu": {
+      "gerekli_malzemeler": { "azot": 3, "aluminyum": 2, "bakir": 1 },
+      "gerekli_istasyon": "montaj_atolyesi",
+      "sure": 45,
+      "enerji_tuketimi": 12,
+      "aciklama": "Dış ortam ve basınçsız alanlarda sınırlı süre nefes almayı sağlar. Dolumu için oksijen üreteci gereklidir."
+    },
+    "tank": {
+      "gerekli_malzemeler": { "aluminyum": 3, "titanyum": 1, "bakir": 1 },
+      "gerekli_istasyon": "pres_makinesi",
+      "sure": 60,
+      "enerji_tuketimi": 15,
+      "aciklama": "Basınçlı depolama kabı. Su veya oksijen için kullanılır, içerik türü kurulumda belirlenir. Titanyum cidar yüksek basınca dayanır."
+    },
+    "su_filtresi": {
+      "gerekli_malzemeler": { "karbon": 3, "kuvars": 2, "demir": 2 },
+      "gerekli_istasyon": "kimya_masasi",
+      "sure": 45,
+      "enerji_tuketimi": 10,
+      "aciklama": "Karbon ve kuvars katmanları zararlı maddeleri ve minerallerini tutar. Tüketilmiş karbon filtresi değiştirilmezse zehirlenme riski oluşur."
+    },
+    "sicaklik_dengeleyici": {
+      "gerekli_malzemeler": { "bakir": 3, "nikel": 2, "aluminyum": 2, "lityum": 1 },
+      "gerekli_istasyon": "montaj_atolyesi",
+      "sure": 120,
+      "enerji_tuketimi": 20,
+      "aciklama": "Üs içi sıcaklığını yaşanabilir aralıkta tutar. Aşırı sıcak veya soğuk ortamlarda kurulmadan önce hiçbir canlı modülde yaşanamaz."
+    },
+    "basinc_dengeleyici": {
+      "gerekli_malzemeler": { "titanyum": 3, "demir": 2, "bakir": 2 },
+      "gerekli_istasyon": "montaj_atolyesi",
+      "sure": 120,
+      "enerji_tuketimi": 20,
+      "aciklama": "Derin su ve yüksek basınçlı ortamlarda üs bütünlüğünü korur. Arızası ani patlama ile sonuçlanabilir."
+    },
+    "hava_kilidi": {
+      "gerekli_malzemeler": { "titanyum": 3, "demir": 4, "bakir": 2, "krom": 1 },
+      "gerekli_istasyon": "insaat_atolyesi",
+      "sure": 180,
+      "enerji_tuketimi": 15,
+      "aciklama": "Üs ile dış ortam arasındaki geçiş odası. İçerideki basınç ve atmosferi bozmadan giriş-çıkış sağlar. Olmadan dış ortama her çıkışta tüm modül basıncı düşer."
+    },
+    "depo": {
+      "gerekli_malzemeler": { "demir": 6, "aluminyum": 3, "kirectasi": 2 },
+      "gerekli_istasyon": "insaat_atolyesi",
+      "sure": 90,
+      "enerji_tuketimi": 5,
+      "aciklama": "Mineral ve üretilmiş malzemelerin depolandığı modül. Sınırlı envanter kapasitesini genişletir. Düzensiz depo yangın ve kontaminasyon riski yaratır."
+    },
+    "isik_paneli": {
+      "gerekli_malzemeler": { "bakir": 2, "silisyum": 2, "aluminyum": 1 },
+      "gerekli_istasyon": "elektronik_atolyesi",
+      "sure": 30,
+      "enerji_tuketimi": 8,
+      "aciklama": "Üs modüllerine monte edilen sabit aydınlatma sistemi. El fenerinin aksine sürekli çalışır. Tarım modüllerinde büyüme ışığı olarak da kullanılır."
+    }
+  },
+
+  "yapi": {
+    "hucre": {
+      "gerekli_malzemeler": { "demir": 5, "titanyum": 2, "kirectasi": 3, "aluminyum": 2 },
+      "gerekli_istasyon": "insaat_atolyesi",
+      "sure": 240,
+      "enerji_tuketimi": 40,
+      "aciklama": "Üsse eklenen yeni yaşam veya üretim modülü. Her hücre bağımsız basınç, sıcaklık ve hava yönetimi gerektirir. Koloninin büyüme birimi."
+    }
+  },
+
+  "tarim": {
+    "tarla": {
+      "gerekli_malzemeler": { "demir": 2, "fosfat": 3, "azot": 2 },
+      "gerekli_istasyon": "insaat_atolyesi",
+      "sure": 60,
+      "enerji_tuketimi": 10,
+      "aciklama": "Kapalı ortam tarım tezgahı. Fosfat ve azot gübre olarak kullanılır. Verim için ışık paneli ve su filtresi ile birlikte çalışmalıdır."
+    }
+  },
+
+  "arac": {
+    "kesif_araci": {
+      "gerekli_malzemeler": { "demir": 4, "aluminyum": 3, "bakir": 4, "titanyum": 2, "batarya": 2 },
+      "gerekli_istasyon": "gelismis_atolye",
+      "sure": 300,
+      "enerji_tuketimi": 50,
+      "aciklama": "Dış ortamda hızlı hareket ve mineral taşıma sağlar. İki batarya ile çalışır; boşaldığında üsse çekilmek zorunda kalırsın."
+    }
+  }
+}
