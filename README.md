@@ -21,15 +21,3 @@ Requires Python 3.13 and `tabulate`:
 ```bash
 pip install tabulate
 ```
-
-The game reads `save/save_system.json`. This file changes while you play, so Git does not track it. Create it from the template before the first run:
-
-```bash
-cp save/save_example.json save/save_system.json
-```
-
-On Windows PowerShell:
-
-```powershell
-Copy-Item save/save_example.json save/save_system.json
-```

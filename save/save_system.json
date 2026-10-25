@@ -1,0 +1,381 @@
+{
+    "time_system": {
+        "time": 23,
+        "day_loop": "Night"
+    },
+    "player_condition": {
+        "saglik": 100,
+        "oksijen": 100,
+        "tokluk": 70,
+        "enerji": 49,
+        "moral": 32,
+        "su": 17,
+        "konum": "merkez_us",
+        "aktif_efektler": [
+            "radyasyon_zehirlenmesi",
+            "tokluk_hissi"
+        ]
+    },
+    "equipment": {
+        "materials": {
+            "demir": 0,
+            "bakir": 0,
+            "aluminyum": 0,
+            "titanyum": 0,
+            "nikel": 0,
+            "krom": 0,
+            "lityum": 0,
+            "karbon": 0,
+            "uranyum": 0,
+            "hidrojen": 0,
+            "silisyum": 0,
+            "kuvars": 0,
+            "kirectasi": 0,
+            "kukurt": 0,
+            "fosfor": 0,
+            "azot": 0
+        },
+        "refining": {
+            "demir_levha": 0,
+            "bakir_tel": 0,
+            "aluminyum_profil": 0,
+            "titanyum_bar": 0,
+            "silisyum_kristal": 0,
+            "karbon_fiber": 0,
+            "krom_kaplama": 0
+        },
+        "recipes": {
+            "kazma": 0,
+            "el_feneri": 0,
+            "lazer_kazici": 0,
+            "kablo": 0,
+            "titanyum_plaka": 0,
+            "elektronik_devre": 0,
+            "batarya": 0,
+            "gunes_paneli": 0,
+            "nukleer_reaktor": 0,
+            "oksijen_ureteci": 0,
+            "medkit": 0,
+            "radyasyon_kiyafeti": 0,
+            "oksijen_tupu": 0,
+            "tank": 0,
+            "su_filtresi": 0,
+            "sicaklik_dengeleyici": 0,
+            "basinc_dengeleyici": 0,
+            "hava_kilidi": 0,
+            "depo": 0,
+            "isik_paneli": 0,
+            "hucre": 0,
+            "tarla": 0,
+            "kesif_araci": 0
+        },
+        "advanced_recipes": {
+            "maden_botu": 0,
+            "tarim_botu": 0,
+            "kesif_dronu": 0,
+            "robot_sarj_istasyonu": 0,
+            "medikal_pod": 0,
+            "hava_donusturucu": 0,
+            "su_geri_donusum_unitesi": 0,
+            "uzay_giysisi": 0,
+            "tarim_hucresi": 0,
+            "enerji_hucresi": 0,
+            "isleme_fabrikasi": 0,
+            "radar_kulesi": 0,
+            "kargo_platformu": 0
+        }
+    },
+    "foods": {
+        "roka": {
+            "miktar": 0
+        },
+        "tere": {
+            "miktar": 0
+        },
+        "marul": {
+            "miktar": 0
+        },
+        "ispanak": {
+            "miktar": 0
+        },
+        "yesil_sogan": {
+            "miktar": 0
+        },
+        "domates": {
+            "miktar": 5
+        },
+        "salatalik": {
+            "miktar": 0
+        },
+        "biber": {
+            "miktar": 0
+        },
+        "patates": {
+            "miktar": 8
+        },
+        "sogan": {
+            "miktar": 845
+        },
+        "misir": {
+            "miktar": 0
+        },
+        "bugday": {
+            "miktar": 0
+        },
+        "pirinc": {
+            "miktar": 85
+        },
+        "mercimek": {
+            "miktar": 46
+        },
+        "nohut": {
+            "miktar": 29
+        },
+        "fasulye": {
+            "miktar": 0
+        },
+        "bezelye": {
+            "miktar": 42
+        },
+        "aycicegi": {
+            "miktar": 0
+        }
+    },
+    "us_durumu": {
+        "sicaklik": 25,
+        "ana_batarya": {
+            "kapasite": 500,
+            "mevcut": 400
+        },
+        "enerji_tuketimi": 10,
+        "oksijen": {
+            "kapasite": 500,
+            "mevcut": 400
+        },
+        "oksijen_tuketimi": 20,
+        "basinc": 1,
+        "basinc_durumu": -0.1,
+        "su": {
+            "kapasite": 500,
+            "mevcut": 400
+        },
+        "temiz_su": {
+            "kapasite": 100,
+            "mevcut": 50
+        },
+        "stations": {
+            "basit_atolye": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    0,
+                    0,
+                    0
+                ],
+                "miktar": 1
+            },
+            "montaj_atolyesi": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    0,
+                    0,
+                    0
+                ],
+                "miktar": 1
+            },
+            "elektronik_atolyesi": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    0,
+                    0,
+                    0
+                ],
+                "miktar": 1
+            },
+            "pres_makinesi": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    0,
+                    0,
+                    0
+                ],
+                "miktar": 1
+            },
+            "insaat_atolyesi": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    0,
+                    0,
+                    0
+                ],
+                "miktar": 1
+            },
+            "kimya_masasi": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    10,
+                    0,
+                    0
+                ],
+                "miktar": 2
+            },
+            "maden_isleme_firini": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    0,
+                    0,
+                    0
+                ],
+                "miktar": 1
+            },
+            "gelismis_atolye": {
+                "unlock": "True",
+                "running": [
+                    0
+                ],
+                "to_complete_time": [
+                    0
+                ],
+                "seviye": 1,
+                "kalan_kullanim": [
+                    1,
+                    0,
+                    0,
+                    0
+                ],
+                "miktar": 1
+            }
+        }
+    },
+    "events": {},
+    "technology": {},
+    "fields": [
+        {
+            "capacity": 30,
+            "water": 40,
+            "fertility": 50,
+            "temperature": 22,
+            "crops": [
+                {
+                    "food": "mercimek",
+                    "amount": 20,
+                    "plant_time": 110,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                },
+                {
+                    "food": "patates",
+                    "amount": 5,
+                    "plant_time": 90,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                },
+                {
+                    "food": "patates",
+                    "amount": 5,
+                    "plant_time": 90,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                }
+            ]
+        },
+        {
+            "capacity": 20,
+            "water": 100,
+            "fertility": 75,
+            "temperature": 22,
+            "crops": [
+                {
+                    "food": "sogan",
+                    "amount": 10,
+                    "plant_time": 85,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                },
+                {
+                    "food": "ispanak",
+                    "amount": 5,
+                    "plant_time": 35,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                },
+                {
+                    "food": "nohut",
+                    "amount": 4,
+                    "plant_time": 120,
+                    "elapsed_days": 0,
+                    "ready": 2,
+                    "hp": 100
+                },
+                {
+                    "food": "pirinc",
+                    "amount": 1,
+                    "plant_time": 150,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                }
+            ]
+        }
+    ]
+}

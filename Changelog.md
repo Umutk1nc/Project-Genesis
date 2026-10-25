@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- `save/save_system.json` is now tracked and its current state is committed as it changes
 
 ## [0.2.0-alpha.1] - 2026-10-24
 ### Changed
