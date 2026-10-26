@@ -17,15 +17,15 @@ class EatingSystem:
     def create_table_data(self,foods_file,save_file):
         table_data=[]
         food_keys=[]
-        index=0#ister 0 ister 1'den başlasın
+        index=0#start from 0 or 1
         for key,result in foods_file.items():
             row=[index,result["name"],result["satiety"],result["energy"],result["morale"],result["water"],save_file["foods"][key]["amount"],result["growth_day"]]
             food_keys.append(key)
             table_data.append(row)
             index+=1
         return table_data,food_keys
-    def choose_food(self,minimum,maximum):#tablo gösterme kısmının sonra yaparsın.
-        string="Yemek istediğin besinin index numarasını gir:"
+    def choose_food(self,minimum,maximum):#you will do the table display part later.
+        string="Enter the index number of the food you want to eat:"
         valid_index=self.commands.choose(minimum,maximum,string)
         
         return valid_index
@@ -43,7 +43,7 @@ class EatingSystem:
 
     def eat(self,key,save_file,foods_file):
         if key is None:
-            print("Bu besine sahip olmadığın için yiyemezsin.")
+            print("You cannot eat this food because you do not have it.")
             return False
                 
         else:
@@ -84,7 +84,7 @@ class EatingController:
             #Make Table
             table_data,food_keys=self.eating_system.create_table_data(foods_file,save_file)
             #Show Table
-            title=["Index", "Besin Adı", "Doyurma Etkisi","Enerji Etkisi","Moral Etkisi", "Su Etkisi","Miktar","Büyüme Süresi"]
+            title=["Index", "Food Name", "Satiety Effect","Energy Effect","Morale Effect", "Water Effect","Amount","Growth Time"]
             self.table.show_table(table_data,title)
             #Find First and Last index for decision
             last_index = len(food_keys) - 1
@@ -97,19 +97,19 @@ class EatingController:
             is_eat=self.eating_system.eat(key,save_file,foods_file)
             if is_eat==True:
                     self.save_manager.save_file(config.SAVE_PATH,save_file)
-                    print(foods_file[key]["name"]," adlı besin başarıyla yendi")
-                    result_command=self.commands.choose(0,1,"0 - Başka besin Ye\n1 - Ana Menüye Dön\n")
+                    print(foods_file[key]["name"]," was eaten successfully")
+                    result_command=self.commands.choose(0,1,"0 - Eat Another Food\n1 - Return to Main Menu\n")
                     if result_command==0:
                         continue
                     else:
                         break
             else:
-                returning="0 - Farklı besin ye\n1 - Ana Menüye Dön\n"
+                returning="0 - Eat a Different Food\n1 - Return to Main Menu\n"
                 result=self.commands.choose(0,1,returning)
                 if result==0:
                     continue
                 else:
                     break    
-#Tablo gösterirken sadece Sahip olunanlar gösterilebilir.
+#When showing the table, only owned items can be displayed.
 game = EatingController()
 game.run()

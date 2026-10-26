@@ -32,29 +32,29 @@ with open(SAVE_PATH, "r", encoding="utf-8") as file:
 
 #with open(SAVE_PATH, "w", encoding="utf-8") as file:
 #    json.dump(time_save,file, indent=4, ensure_ascii=False)
-gun=save["zaman"]["gun"]
-saat=save["zaman"]["saat"]
-mevcut_periyot=save["zaman"]["periyot"]
-saat=+1
-if saat>24:
-    saat=1
-    gun=+1
-if  saat<6  or saat==24:
-    periyot="gece"
-elif saat<12:
-    periyot="sabah"
-elif saat<18:
-    periyot="ögle"
-elif saat<24:
-    periyot="aksam"
+day=save["time"]["day"]
+hour=save["time"]["hour"]
+current_period=save["time"]["period"]
+hour=+1
+if hour>24:
+    hour=1
+    day=+1
+if  hour<6  or hour==24:
+    period="night"
+elif hour<12:
+    period="morning"
+elif hour<18:
+    period="noon"
+elif hour<24:
+    period="evening"
 
-save["oyuncu"]["saglik"]["mevcut"]=-save["oyuncu"]["saglik"]["kayip"]
-save["oyuncu"]["oksijen"]["mevcut"]=-save["oyuncu"]["oksijen"]["kayip"]
-save["oyuncu"]["tokluk"]["mevcut"]=-save["oyuncu"]["tokluk"]["kayip"]
-save["oyuncu"]["su"]["mevcut"]=-save["oyuncu"]["su"]["kayip"]
-save["oyuncu"]["moral"]["mevcut"]=-save["oyuncu"]["moral"]["kayip"]
-save["oyuncu"]["enerji"]["mevcut"]=-save["oyuncu"]["enerji"]["kayip"]
+save["player"]["health"]["current"]=-save["player"]["health"]["loss"]
+save["player"]["oxygen"]["current"]=-save["player"]["oxygen"]["loss"]
+save["player"]["satiety"]["current"]=-save["player"]["satiety"]["loss"]
+save["player"]["water"]["current"]=-save["player"]["water"]["loss"]
+save["player"]["morale"]["current"]=-save["player"]["morale"]["loss"]
+save["player"]["energy"]["current"]=-save["player"]["energy"]["loss"]
 
-#tarim güncellemesi olacak
-#oksijen_sistemi()
+#farming update will be added
+#oxygen_system()
 """

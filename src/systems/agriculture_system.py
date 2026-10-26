@@ -6,8 +6,8 @@ import time_system
 class MenuData:
     def __init__(self):
         
-        self.field_menu_title="Tarla"
-        self.field_menu_chooses=["Ekim","Hasat","Sulama","Gübreleme","Başka Tarla Seç","Ana Menü"]
+        self.field_menu_title="Field"
+        self.field_menu_chooses=["Plant","Harvest","Irrigate","Fertilize","Select Another Field","Main Menu"]
    
         
 
@@ -18,7 +18,7 @@ class FieldManager:
         
     def view_fields(self,save_file):
         fields=save_file["fields"]
-        title=["Index", "Miktar","Hazır","Su","Verim", "Sıcaklık"]
+        title=["Index", "Amount","Ready","Water","Fertility", "Temperature"]
         for field_index,field in enumerate(fields):
             crops=field["crops"]
             table_data=[]
@@ -32,7 +32,7 @@ class FieldManager:
             total_amount = sum(crop["amount"] for crop in crops)
             
             table_data.append([field_index,f"{total_amount}/{capacity}",total_ready,water,fertility,temperature])
-            print(f"\n===================== Tarla {field_index} =====================")
+            print(f"\n===================== Field {field_index} =====================")
             self.table.show_table(table_data,title)      
     
     def get_field(self,save_file,field_index):
@@ -46,7 +46,7 @@ class FieldManager:
         field_data=[]
         total_amount=self.get_total(crops)
         total_ready = sum(crop["ready"] for crop in crops)
-        print(f"\n=============== Tarla {index} ===============")
+        print(f"\n=============== Field {index} ===============")
         print(f"Capacity:{total_amount}/{field["capacity"]}")
         print(f"Water:{field["water"]}")
         print(f"Fertility:{field["fertility"]}")
@@ -65,7 +65,7 @@ class FieldManager:
             ready=crop["ready"]
             hp=crop["hp"]
             field_data.append([name,amount,f"{elapsed_days}/{plant_time}",ready,hp])
-        title=["Bitki","Miktar","Büyüme","Hazır","HP"]
+        title=["Plant","Amount","Growth","Ready","HP"]
         self.table.show_table(field_data,title)
             
     #def Show_Field_Crops(self,)    
@@ -92,9 +92,9 @@ class PlantManager:
                 food_keys.append(food_key)
                 table_data.append([index,name,amount])
                 index+=1
-        #Su ışık ihtiyacı olma süresi
-        #burada detaylı göster menüsü olsun böyle olursa eating systemdeki detaylı gösterilen bitki tablosu gelsin
-        title=["Index","Bitki","Miktar"]  
+        #Water and light requirement duration
+        #there should be a detailed display menu here; if so, use the detailed plant table from the eating system
+        title=["Index","Plant","Amount"]  
         self.table.show_table(table_data,title)
         return food_keys
     
@@ -129,13 +129,13 @@ class PlantManager:
 
     def plant_controller(self,current_field_index,save_file,foods_file):
         if not self.has_plant_in_stock(save_file):
-            print("Ekilecek Bitki Bulunamadı.\n")
+            print("No Seeds Available to Plant.\n")
             return "field_menu"
         
         total_area=self.find_empty_area(current_field_index,save_file)
         if total_area==0:
-            print("Maximum ekim kapasitesine ulaşıldı.\n")
-            choose=self.commands.choose(0,2,"0 - Başka Tarlada Ekim Yap\n1 - Başka İşlem Yap\n2 - Ana Menü\nKomut:")
+            print("Maximum planting capacity reached.\n")
+            choose=self.commands.choose(0,2,"0 - Plant in Another Field\n1 - Do Another Action\n2 - Main Menu\nCommand:")
             if choose==0:
                 return "another_field"
             elif choose==1:
@@ -144,20 +144,20 @@ class PlantManager:
                 return "main_menu"
         else:
             food_keys=self.show_crops(save_file,foods_file)
-            print(f"Ekilebilir Alan:{total_area}\n")
-            selected_plant_index=self.commands.choose(0,len(food_keys)-1,"Ekilecek Bitkiyi Seç:")
+            print(f"Plantable Area:{total_area}\n")
+            selected_plant_index=self.commands.choose(0,len(food_keys)-1,"Select the Plant to Sow:")
             selected_plant=food_keys[selected_plant_index]
             max_plant=self.get_empty_capacity(selected_plant,total_area,save_file)
             
-            print(f"Maksimum {max_plant} miktarda ekebilirsin")
+            print(f"You can plant a maximum of {max_plant}")
             
-            amount=self.commands.choose(1,max_plant,"Ekilecek Bitki Miktarını Yaz:")
+            amount=self.commands.choose(1,max_plant,"Enter the Amount of Plants to Sow:")
             selected_plant_name=self.general.food_finder(selected_plant,"name",foods_file)
-            print(f"{amount} tane {selected_plant_name} ekeceksin\n")
-            if self.commands.choose(0,1,"0 - Devam et\n1 - Vazgeç\nKomut:")==0:
+            print(f"You will plant {amount} {selected_plant_name}\n")
+            if self.commands.choose(0,1,"0 - Continue\n1 - Cancel\nCommand:")==0:
                 self.plant_crop(amount,current_field_index,selected_plant,save_file,foods_file)
-                print("Bitki Başarıyla Ekildi.")       
-                command_choose=self.commands.choose(0,2,"0 - Başka Tarlada Devam et\n1 - Başka İşlem Yap\n2 - Ana Menü\nKomut:")
+                print("Plant Successfully Sown.")       
+                command_choose=self.commands.choose(0,2,"0 - Continue in Another Field\n1 - Do Another Action\n2 - Main Menu\nCommand:")
                 if command_choose==0:
                     return "another_field"
                 elif command_choose==1:
@@ -211,7 +211,7 @@ class HarvestManager:
                     continue
                 elif crop["elapsed_days"]<max_growth_day:
                     crop["elapsed_days"]+1-min_growth_day
-                else:#çürüme
+                else:#rot
                     ...
     
     def grown_field_table(self,foods_file,save_file,field_index):
@@ -239,7 +239,7 @@ class HarvestManager:
         return grown_amount_data,index_list            
     
     def show_grown_plants(self,grown_amount_data):
-        title=["Crop Index","Bitki","Hazır","Miktar"]
+        title=["Crop Index","Plant","Ready","Amount"]
         self.table.show_table(grown_amount_data,title)
             
     def select_harvest(self,field_index,save_file):
@@ -248,10 +248,10 @@ class HarvestManager:
         for crop in crops:
             if crop["ready"]>0:
                 number_of_values+=1
-        crop_choose=self.commands.choose(0,number_of_values,f"Bitkileri Hasat Et\nBir Bitki İçin - [0,{number_of_values-1}]\nTüm Hepsi İçin - {number_of_values}\n>>")
+        crop_choose=self.commands.choose(0,number_of_values,f"Harvest Plants\nFor One Plant - [0,{number_of_values-1}]\nFor All - {number_of_values}\n>>")
         return crop_choose,number_of_values
     
-    #HARVEST FROM THE BEGİNİNG
+    #HARVEST FROM THE BEGINNING
     def get_ready_amount(self,crop):
         #return save_file["fields"][field_index]["crops"][crop_index]["ready"]
         return crop["ready"]
@@ -350,40 +350,40 @@ class HarvestManager:
             grown_amount_data,index_list=self.grown_field_table(foods_file,save_file,field_index)
             
             if not grown_amount_data:
-                print(f"Tarla {field_index} İçin Hasat Edilecek Hiç Bitki Yok.")
-                choose=self.commands.choose(0,1,"0 - Başka Tarla Seç\n1 - Başka İşlem Yap\nKomut Seç:")
+                print(f"There Are No Plants to Harvest for Field {field_index}.")
+                choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Do Another Action\nSelect Command:")
                 if choose==0:
                     return "another_field"
                 else:
                     return "field_menu"         
             else:
-                print(f"\n=================== Tarla {field_index} ===================")
+                print(f"\n=================== Field {field_index} ===================")
             
             self.show_grown_plants(grown_amount_data)
             crop_choose,number_of_values=self.select_harvest(field_index,save_file)
             
-            if self.commands.choose(0,1,"0 - Devam et\n1 - Vazgeç\n")==1:
+            if self.commands.choose(0,1,"0 - Continue\n1 - Cancel\n")==1:
                 return "field_menu"
                 
             if self.compare_the_choose(number_of_values,crop_choose):
-                print(f"Hasat Edilen Miktar:{sum(crop['ready'] for crop in field['crops'])}")
+                print(f"Harvested Amount:{sum(crop['ready'] for crop in field['crops'])}")
                 self.harvest_field(field,save_file)
-                message="Tarla Hasadı Bitti.\n0 - Tarla Seç\n1 - Başka İşlem Yap\n2 - Ana Menü\nKomut:"
+                message="Field Harvest Complete.\n0 - Select Field\n1 - Do Another Action\n2 - Main Menu\nCommand:"
                 condition="another_field"
                 
             else:
                 crop_index=index_list[crop_choose]
-                print(f"Hasat Edilen Miktar:{field['crops'][crop_index]['ready']}")
+                print(f"Harvested Amount:{field['crops'][crop_index]['ready']}")
                 self.harvest_one_crop(field["crops"][crop_index],save_file)
-                message="Bitki Hasadı Bitti.\n0 - Başka Hasat Yap\n1 - Başka İşlem Yap\n2 - Ana Menü\nKomut:"
+                message="Plant Harvest Complete.\n0 - Harvest Again\n1 - Do Another Action\n2 - Main Menu\nCommand:"
                 condition="another_crop"
-            print("Tarla Hasat Ediliyor...")
+            print("Field Being Harvested...")
                 
             end_time = save_file["time_system"]["time"]
-            print(f"Geçen Zaman:{end_time-start_time}")
-            #Hasat edilen miktar göster
-            #Hasat ediln Bitkileri Envantere Ekle
-            #Tarlada hiç hazır bitki yok uyarısı
+            print(f"Elapsed Time:{end_time-start_time}")
+            #Show harvested amount
+            #Add harvested plants to inventory
+            #Warning if there are no ready plants in the field
             delete_list=self.find_to_delete_crop(field["crops"])
             self.crop_delete(field["crops"],delete_list)
             self.save_manager.save_file(config.SAVE_PATH,save_file)
@@ -463,14 +463,14 @@ class WaterManager:
         water=field["water"]
         current_water_need=self.calculate_current_water_need(field,foods_file)
         time_need=self.calculate_irrigation_time(save_file,current_water_need)
-        title=["Nem","Su İhtiyacı","Sulama Süresi","Verim","Doluluk"]
+        title=["Moisture","Water Need","Irrigation Time","Fertility","Occupancy"]
         table_data.append([f"%{water}",current_water_need,time_need,fertility,f"{amount}/{capacity}"])
         return table_data,title
     
     def create_crops_water_table(self,field,foods_file):
         crops=field["crops"]
         table_data=[]
-        title=["Bitki","Miktar","Su İhtiyacı","Durum"]
+        title=["Plant","Amount","Water Need","Status"]
         total_water_need_array=self.calculate_crops_water_need(crops,foods_file)
         
         for index,crop in enumerate(crops):
@@ -479,11 +479,11 @@ class WaterManager:
             name=self.general.food_finder(key,"name",foods_file)
             water_need=self.general.food_finder(key,"water_need",foods_file)
             if water_need<2:
-                result="🟢 Az Su İster"
+                result="🟢 Needs Little Water"
             elif water_need==2:
                 result="🟡 Normal"
             else:
-                result="🔴 Çok Su İster"
+                result="🔴 Needs A Lot of Water"
             table_data.append([name,amount,total_water_need_array[index],result])
         self.table.show_table(table_data,title)
         return table_data,title
@@ -498,22 +498,22 @@ class WaterManager:
         current_water_need=self.calculate_current_water_need(field,foods_file)
         water_time=self.calculate_irrigation_time(save_file,current_water_need)
         
-        print("================ Sulama Özeti  ================")
-        print(f"Temiz Su Deposu      : {clean_water} L")
-        print(f"Gerekli Su           : {current_water_need} L")
-        print(f"Nem                  : %{field["water"]}")
+        print("================ Irrigation Summary  ================")
+        print(f"Clean Water Tank     : {clean_water} L")
+        print(f"Required Water       : {current_water_need} L")
+        print(f"Moisture             : %{field["water"]}")
         
         if self.is_field_fully_watered(field):
-            result="💧 Sulamaya Gerek Yok"
+            result="💧 No Irrigation Needed"
         elif clean_water<current_water_need:
-            print(f"Eksik Su           : {current_water_need-clean_water} L")
-            print(f"Sulama Süresi        : {water_time} saat")
-            result="❌ Yetersiz Su Miktarı"
+            print(f"Water Shortage     : {current_water_need-clean_water} L")
+            print(f"Irrigation Time      : {water_time} hours")
+            result="❌ Insufficient Water Amount"
         else:
-            print(f"Sulama Süresi        : {water_time} saat")
-            result="✅ Sulanabilir"
+            print(f"Irrigation Time      : {water_time} hours")
+            result="✅ Irrigable"
 
-        print(f"Durum                : {result}     ")
+        print(f"Status               : {result}     ")
         print("===============================================")
         
         return result
@@ -528,22 +528,22 @@ class WaterManager:
         table_data=[]
         fields=field=save_file["fields"]
         
-        title=["Tarla","Nem","Sulama Maliyeti","Tahmini Süre","Durum"]
+        title=["Field","Moisture","Irrigation Cost","Estimated Time","Status"]
         for index,field in enumerate(fields):
             real_water_need=self.calculate_current_water_need(field,foods_file)
             field_time_need=self.calculate_irrigation_time(save_file,real_water_need)
             humidity=field["water"]
             real_water_need=self.calculate_current_water_need(field,foods_file)
             if humidity==100:
-                condition="❌ Sulanamaz"
+                condition="❌ Cannot Irrigate"
             else:
-                condition="💧 Sulanabilir"
-            table_data.append([f"Tarla {index}",humidity,real_water_need,field_time_need,condition])
+                condition="💧 Irrigable"
+            table_data.append([f"Field {index}",humidity,real_water_need,field_time_need,condition])
         
         total_water_need=sum(self.calculate_current_water_need(field,foods_file) for field in fields)
         total_time_need=self.calculate_irrigation_time(save_file,total_water_need)
         
-        table_data.append(["Tüm Tarlalar","-",total_water_need,total_time_need,"-"])
+        table_data.append(["All Fields","-",total_water_need,total_time_need,"-"])
         return table_data,title
     
     
@@ -553,24 +553,24 @@ class WaterManager:
     #OPTIONS
     
     def select_water_mode(self,field_index):
-        choose=self.commands.choose(0,1,f"0 - Tarla {field_index}'den devam et\n1 - Tarla Değiştir\nKomut:")
+        choose=self.commands.choose(0,1,f"0 - Continue from Field {field_index}\n1 - Change Field\nCommand:")
         return choose
     
     
     def confirm_watering(self):
-        choose=self.commands.choose(0,1,"0 - Sulamaya Başla\n1 - Vazgeç\nKomut:") 
+        choose=self.commands.choose(0,1,"0 - Start Irrigation\n1 - Cancel\nCommand:") 
         if choose==1:
             return "field_menu"
         
         
     def after_water_menu(self):
-        choose=self.commands.choose(0,2,"0 - Başka Sulama Yap\n1 - Tarla Menüsüne Dön\n2 - Ana Menü\nKomut:") 
+        choose=self.commands.choose(0,2,"0 - Irrigate Again\n1 - Return to Field Menu\n2 - Main Menu\nCommand:") 
         if choose==1:
             return "field_menu"
         elif choose==2:
             return "main_menu"
     
-    #IRRIGRATION 
+    #IRRIGATION 
     def water_field(self,field,foods_file,save_file):
         water_cost=self.calculate_field_water_need(field,foods_file)*config.IRRIGATION_CONSTANT
         energy=save_file["player_condition"]["energy"]
@@ -580,13 +580,13 @@ class WaterManager:
     #CONTROLLER   
     def water_controller(self,save_file,foods_file,field_index):
         field=save_file["fields"][field_index]
-        #print(f"\n=============== Tarla {field_index} ===============")
+        #print(f"\n=============== Field {field_index} ===============")
         clean_water=self.get_clean_water(save_file)
         self.show_costs(save_file,foods_file)
         choose=self.select_water_mode(field_index)
         
         if choose==1:
-            field_choose=self.commands.choose(0,len(save_file["fields"]),f"Tarla Seç\nBir Tarla İçin -> [0,{len(save_file["fields"])-1}]\nTüm Tarlalar İçin -> {len(save_file["fields"])}\nKomut:")
+            field_choose=self.commands.choose(0,len(save_file["fields"]),f"Select Field\nFor One Field -> [0,{len(save_file["fields"])-1}]\nFor All Fields -> {len(save_file["fields"])}\nCommand:")
             if field_choose==len(save_file["fields"]):
                 ...
             else:
@@ -597,10 +597,10 @@ class WaterManager:
         self.table.show_table(table_data,title)          
         self.create_crops_water_table(field,foods_file)
         irrigation_result=self.show_irrigation_info(field,save_file,foods_file)
-        if irrigation_result=="✅ Sulanabilir":
+        if irrigation_result=="✅ Irrigable":
             result=self.confirm_watering()
         else:
-            command=self.commands.choose(0,1,"0 - Başka Tarla Sula\n1 - Tarla Menüsüne Dön\nKomut:")
+            command=self.commands.choose(0,1,"0 - Irrigate Another Field\n1 - Return to Field Menu\nCommand:")
             if command==0:
                 ...
                 #continue
@@ -660,7 +660,7 @@ class AgricultureController:
             elif field_menu_choose==2:
                 self.water_manager.water_controller(self.save_file,self.foods_file,self.current_field_index)
             elif field_menu_choose==3:
-                #Gübrele
+                #Fertilize
                 ...
             elif field_menu_choose==4:
                 return "another_field"        
@@ -673,8 +673,8 @@ class AgricultureController:
         #LOOP START
         while True:
             self.field_manager.view_fields(self.save_file)
-            #Index kısmı değişsin mi?
-            self.current_field_index=self.commands.choose(0,len(self.save_file["fields"])-1,"Bir Tarla Seç:")
+            #Should the index part change?
+            self.current_field_index=self.commands.choose(0,len(self.save_file["fields"])-1,"Select a Field:")
             self.current_field=self.field_manager.get_field(self.save_file,self.current_field_index)
             #self.field_manager.MakeFieldTable(self.current_field,self.foods_file)
             self.field_manager.show_field(self.current_field,self.current_field_index,self.foods_file)

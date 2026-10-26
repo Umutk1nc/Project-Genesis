@@ -42,7 +42,7 @@ class SaveManager:
 
 #While you are saving a file you can do:
 #Read DATA=ReadFile(self,PATH)  
-#Change DATA[]...[domates]=5
+#Change DATA[]...[tomato]=5
 #Save SaveFile (self,PATH,DATA)
 
     def save_file (self,path,data):
@@ -62,11 +62,11 @@ class Commands:
                 if choice_value<=maximum and choice_value>=minimum:
                     return choice_value
                 else:#again and again message may write
-                    print(f"Lütfen " ,minimum, "-",maximum,"aralığında sayı gir! ")
+                    print(f"Please enter a number between ",minimum, "-",maximum,"! ")
             else:
-                print("Lütfen geçerli bir komut gir! ")
+                print("Please enter a valid command! ")
     def choice(self):
-        choice=self.choose(1,2,"1 - Tekrar Dene\n2 - Vazgeç\nKomutun:")            
+        choice=self.choose(1,2,"1 - Try Again\n2 - Cancel\nCommand:")            
         if choice == 1:
             return 1
 
@@ -78,10 +78,10 @@ class MenuManager:
         self.commands=Commands()
                 
     def show_menu(self,title,options):
-        print(f"=================={title} Menüsü=================\n")
+        print(f"=================={title} Menu=================\n")
         for index,option in enumerate(options):
             print(f"{index} - {option}\n")
-        string="Komut Seç:"
+        string="Select Command:"
         return self.commands.choose(0,index,string)
     
 
