@@ -86,7 +86,7 @@ class PlantManager:
         index=0  
         foods=save_file["foods"]
         for food_key in foods:
-            amount=foods[food_key]["miktar"]
+            amount=foods[food_key]["amount"]
             if amount>0: 
                 name=self.general.food_finder(food_key,"name",foods_file)
                 food_keys.append(food_key)
@@ -105,15 +105,15 @@ class PlantManager:
         return capacity-total_amount        
     
     def get_empty_capacity(self,selected_plant,total_area,save_file):
-        if save_file["foods"][selected_plant]["miktar"]<total_area:
-            return save_file["foods"][selected_plant]["miktar"]
+        if save_file["foods"][selected_plant]["amount"]<total_area:
+            return save_file["foods"][selected_plant]["amount"]
         else:
             return total_area
     
     def plant_crop(self,amount,field_index,plant_key,save_file,foods_file):
-        save_file["foods"][plant_key]["miktar"]-=amount
+        save_file["foods"][plant_key]["amount"]-=amount
         crops=save_file["fields"][field_index]["crops"]
-        growth_time=foods_file[plant_key]["buyume_gunu"]
+        growth_time=foods_file[plant_key]["growth_day"]
         new_crop = {
         "food": plant_key,
         "amount": amount,
@@ -124,15 +124,8 @@ class PlantManager:
         crops.append(new_crop)
         self.save_manager.save_file(config.SAVE_PATH,save_file)
 
-    def have_a_plant(self,save_file):
-        save_foods=save_file["foods"]
-        for food_key in save_foods:
-            if save_foods[food_key]["miktar"]>0:
-                return True
-        return False
-
     def has_plant_in_stock(self,save_file):
-        return any(food["miktar"] > 0 for food in save_file["foods"].values())
+        return any(food["amount"] > 0 for food in save_file["foods"].values())
 
     def plant_controller(self,current_field_index,save_file,foods_file):
         if not self.has_plant_in_stock(save_file):
@@ -210,7 +203,7 @@ class HarvestManager:
         for field in fields:
             crops=field["crops"]
             for crop in crops:
-                deviation=foods_file[crop["food"]]["sapma"]
+                deviation=foods_file[crop["food"]]["deviation"]
                 max_growth_day=crop["plant_time"]+deviation
                 min_growth_day=crop["plant_time"]-deviation
                 
@@ -233,7 +226,7 @@ class HarvestManager:
             amount=crop["amount"]
             elapsed_days=crop["elapsed_days"]
             plant_time=crop["plant_time"]
-            deviation=foods_file[key]["sapma"]
+            deviation=foods_file[key]["deviation"]
             ready=crop["ready"]
             
             #Show new system and write to json new variables
@@ -284,7 +277,7 @@ class HarvestManager:
         key=crop["food"]
         crop["ready"]=ready
         crop["amount"]-=harvested_amount
-        save_file["foods"][key]["miktar"]+=harvested_amount
+        save_file["foods"][key]["amount"]+=harvested_amount
             
     def is_hour_finished(self,remaining_speed):
         return remaining_speed == 0
@@ -414,7 +407,7 @@ class WaterManager:
     #GET AND CALCULATE
     
     def get_clean_water(self,save_file):
-        return save_file["us_durumu"]["temiz_su"]["mevcut"]
+        return save_file["base_status"]["clean_water"]["current"]
     
    
    
@@ -428,7 +421,7 @@ class WaterManager:
         for crop in crops:
             key=crop["food"]
             amount=crop["amount"]
-            water_need_coefficient=foods_file[key]["su_ihtiyaci"]                  
+            water_need_coefficient=foods_file[key]["water_need"]                  
             hourly_water_need=self.calculate_hourly_water_need(amount,water_need_coefficient)
             hourly_water_need_array.append(hourly_water_need)
         return hourly_water_need_array
@@ -451,7 +444,7 @@ class WaterManager:
         
     
     def calculate_irrigation_time(self,save_file,current_water_need):
-        energy=save_file["player_condition"]["enerji"]
+        energy=save_file["player_condition"]["energy"]
         current_speed=self.calculate_irrigation_speed(energy)
         return math.ceil(current_water_need/current_speed)
     
@@ -484,7 +477,7 @@ class WaterManager:
             amount=crop["amount"]
             key=crop["food"]
             name=self.general.food_finder(key,"name",foods_file)
-            water_need=self.general.food_finder(key,"su_ihtiyaci",foods_file)
+            water_need=self.general.food_finder(key,"water_need",foods_file)
             if water_need<2:
                 result="🟢 Az Su İster"
             elif water_need==2:
@@ -501,7 +494,7 @@ class WaterManager:
         
     
     def show_irrigation_info(self,field,save_file,foods_file):
-        clean_water=save_file["us_durumu"]["temiz_su"]["mevcut"]
+        clean_water=save_file["base_status"]["clean_water"]["current"]
         current_water_need=self.calculate_current_water_need(field,foods_file)
         water_time=self.calculate_irrigation_time(save_file,current_water_need)
         
@@ -580,7 +573,7 @@ class WaterManager:
     #IRRIGRATION 
     def water_field(self,field,foods_file,save_file):
         water_cost=self.calculate_field_water_need(field,foods_file)*config.IRRIGATION_CONSTANT
-        energy=save_file["player_condition"]["enerji"]
+        energy=save_file["player_condition"]["energy"]
         current_speed=self.calculate_irrigation_speed(energy)
         
     

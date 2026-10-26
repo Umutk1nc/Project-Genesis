@@ -19,7 +19,7 @@ class EatingSystem:
         food_keys=[]
         index=0#ister 0 ister 1'den başlasın
         for key,result in foods_file.items():
-            row=[index,result["name"],result["tokluk"],result["enerji"],result["moral"],result["su"],save_file["foods"][key]["miktar"],result["buyume_gunu"]]
+            row=[index,result["name"],result["satiety"],result["energy"],result["morale"],result["water"],save_file["foods"][key]["amount"],result["growth_day"]]
             food_keys.append(key)
             table_data.append(row)
             index+=1
@@ -33,7 +33,7 @@ class EatingSystem:
     def check_food(self,food_index, food_keys,save_file):
         key_choice=food_keys[food_index]
         food_key=save_file["foods"][key_choice]
-        value=food_key["miktar"]
+        value=food_key["amount"]
         if value>=1:#later maybe it can be multi eating
             return key_choice
         else:
@@ -48,22 +48,22 @@ class EatingSystem:
                 
         else:
             #update food
-            save_file["foods"][key]["miktar"]-=1      
+            save_file["foods"][key]["amount"]-=1      
             #find food values
-            satiety=foods_file[key]["tokluk"]
-            energy=foods_file[key]["enerji"]
-            moral=foods_file[key]["moral"]
-            water=foods_file[key]["su"]
+            satiety=foods_file[key]["satiety"]
+            energy=foods_file[key]["energy"]
+            morale=foods_file[key]["morale"]
+            water=foods_file[key]["water"]
             #update character values
             #TO DO
-            save_file["player_condition"]["tokluk"]+=satiety
-            save_file["player_condition"]["tokluk"]=self.general.limit_value(save_file["player_condition"]["tokluk"],0,100)
-            save_file["player_condition"]["enerji"]+=energy
-            save_file["player_condition"]["enerji"]=self.general.limit_value(save_file["player_condition"]["enerji"],0,100)
-            save_file["player_condition"]["moral"]+=moral
-            save_file["player_condition"]["moral"]=self.general.limit_value(save_file["player_condition"]["moral"],0,100)
-            save_file["player_condition"]["su"]+=water    
-            save_file["player_condition"]["su"]=self.general.limit_value(save_file["player_condition"]["su"],0,100)
+            save_file["player_condition"]["satiety"]+=satiety
+            save_file["player_condition"]["satiety"]=self.general.limit_value(save_file["player_condition"]["satiety"],0,100)
+            save_file["player_condition"]["energy"]+=energy
+            save_file["player_condition"]["energy"]=self.general.limit_value(save_file["player_condition"]["energy"],0,100)
+            save_file["player_condition"]["morale"]+=morale
+            save_file["player_condition"]["morale"]=self.general.limit_value(save_file["player_condition"]["morale"],0,100)
+            save_file["player_condition"]["water"]+=water    
+            save_file["player_condition"]["water"]=self.general.limit_value(save_file["player_condition"]["water"],0,100)
             return True
 
 class EatingController:
