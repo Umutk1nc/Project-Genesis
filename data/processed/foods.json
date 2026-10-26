@@ -10,6 +10,7 @@
     "su":1,
     "bozulma_hizi": "orta",
     "riskler": ["solma","kuf"],
+    "sapma":5,
     "name":"Roka",
     "aciklama":"Hızlı büyür, az yer kaplar. İlk tarla kurulduğunda koloni beslenmesine en çabuk katkıyı o sağlar. Besin değeri düşük ama morali tutar."
 

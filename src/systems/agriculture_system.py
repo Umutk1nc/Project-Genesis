@@ -123,9 +123,22 @@ class PlantManager:
         "hp": 100}
         crops.append(new_crop)
         self.save_manager.save_file(config.SAVE_PATH,save_file)
-    
+
+    def have_a_plant(self,save_file):
+        save_foods=save_file["foods"]
+        for food_key in save_foods:
+            if save_foods[food_key]["miktar"]>0:
+                return True
+        return False
+
+    def has_plant_in_stock(self,save_file):
+        return any(food["miktar"] > 0 for food in save_file["foods"].values())
+
     def plant_controller(self,current_field_index,save_file,foods_file):
-        food_keys=self.show_crops(save_file,foods_file)
+        if not self.has_plant_in_stock(save_file):
+            print("Ekilecek Bitki Bulunamadı.\n")
+            return "field_menu"
+        
         total_area=self.find_empty_area(current_field_index,save_file)
         if total_area==0:
             print("Maximum ekim kapasitesine ulaşıldı.\n")
@@ -137,6 +150,7 @@ class PlantManager:
             else:
                 return "main_menu"
         else:
+            food_keys=self.show_crops(save_file,foods_file)
             print(f"Ekilebilir Alan:{total_area}\n")
             selected_plant_index=self.commands.choose(0,len(food_keys)-1,"Ekilecek Bitkiyi Seç:")
             selected_plant=food_keys[selected_plant_index]
@@ -546,7 +560,7 @@ class WaterManager:
     #OPTIONS
     
     def select_water_mode(self,field_index):
-        choose=self.commands.choose(0,2,f"0 - Tarla {field_index}'den devam et\n1 - Tarla Değiştir\nKomut:")
+        choose=self.commands.choose(0,1,f"0 - Tarla {field_index}'den devam et\n1 - Tarla Değiştir\nKomut:")
         return choose
     
     
@@ -557,7 +571,7 @@ class WaterManager:
         
         
     def after_water_menu(self):
-        choose=self.commands.choose(0,1,"0 - Başka Sulama Yap\n1 - Tarla Menüsüne Dön\n2 - Ana Menü\nKomut:") 
+        choose=self.commands.choose(0,2,"0 - Başka Sulama Yap\n1 - Tarla Menüsüne Dön\n2 - Ana Menü\nKomut:") 
         if choose==1:
             return "field_menu"
         elif choose==2:
