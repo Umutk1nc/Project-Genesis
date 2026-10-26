@@ -6,7 +6,7 @@ SAVE_PATH = project / "saves" / "save_system.json"
 
 
 class TimeManager:
-    def TimeLoop(self,save_file):
+    def time_loop(self,save_file):
         time=save_file["time_system"]["time"]
         if time%24<6:
             save_file["time_system"]["day_loop"]="Night"
@@ -19,9 +19,9 @@ class TimeManager:
             
             
         
-    def PassHour(self,save_file):
+    def pass_hour(self,save_file):
         save_file["time_system"]["time"]+=1
-        self.TimeLoop(save_file)
+        self.time_loop(save_file)
     
         
 
