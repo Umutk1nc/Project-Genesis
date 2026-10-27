@@ -1,12 +1,5 @@
 import config
 import helpers 
-class DataReader:
-    def read_keys(self,file,string):
-        array=[]
-        for key, result in file.items():
-            set_value=result.get(string,key)
-            array.append(set_value)
-        return array     
         
 class EatingSystem:
     def __init__(self,commands,general):

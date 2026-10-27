@@ -67,8 +67,6 @@ class FieldManager:
             field_data.append([name,amount,f"{elapsed_days}/{plant_time}",ready,hp])
         title=["Plant","Amount","Growth","Ready","HP"]
         self.table.show_table(field_data,title)
-            
-    #def Show_Field_Crops(self,)    
 
     
     

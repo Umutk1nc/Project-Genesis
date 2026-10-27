@@ -1,8 +1,9 @@
 from pathlib import Path
-import json
+import helpers
+import config
 systems = Path(__file__).parent
 project = systems.parent.parent
-SAVE_PATH = project / "saves" / "save_system.json"
+save = helpers.read_file(config.SAVE_PATH)
 
 
 class TimeManager:

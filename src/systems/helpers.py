@@ -41,9 +41,9 @@ class SaveManager:
             return json.load(file)
 
 #While you are saving a file you can do:
-#Read DATA=ReadFile(self,PATH)  
-#Change DATA[]...[tomato]=5
-#Save SaveFile (self,PATH,DATA)
+#Read data=read_file(self,path)  
+#Change data[]...[tomato]=5
+#Save save_file (self,path,data)
 
     def save_file (self,path,data):
         with open(path, "w", encoding="utf-8") as file:
