@@ -98,13 +98,13 @@ class EatingController:
             if is_eat==True:
                     self.save_manager.save_file(config.SAVE_PATH,save_file)
                     print(foods_file[key]["name"]," was eaten successfully")
-                    result_command=self.commands.choose(0,1,"0 - Eat Another Food\n1 - Return to Main Menu\n")
+                    result_command=self.commands.choose(0,1,"0 - Eat Another Food\n1 - Main Menu\n")
                     if result_command==0:
                         continue
                     else:
                         break
             else:
-                returning="0 - Eat a Different Food\n1 - Return to Main Menu\n"
+                returning="0 - Eat Another Food\n1 - Main Menu\n"
                 result=self.commands.choose(0,1,returning)
                 if result==0:
                     continue

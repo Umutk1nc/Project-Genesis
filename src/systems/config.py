@@ -1,6 +1,4 @@
-import os
 from pathlib import Path
-import math
 #FILES FOR EATING SYSTEM
 SYSTEMS_PATH = Path(__file__).parent
 PROJECT_PATH = SYSTEMS_PATH.parent.parent
@@ -10,7 +8,7 @@ FOODS_SAVE_PATH=PROCESSED_PATH / "foods_save.json"
 SAVE_CLASSOR=PROJECT_PATH/"save"
 SAVE_PATH=SAVE_CLASSOR/"save_system.json"
 
-#STARTING CONSTANTS FOR EATİNG SYSTEM
+#STARTING CONSTANTS FOR EATING SYSTEM
 your_foods=[]
 satiety=[]
 foods_name=[]

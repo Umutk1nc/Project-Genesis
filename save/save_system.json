@@ -87,7 +87,7 @@
     },
     "foods": {
         "arugula": {
-            "amount": 4
+            "amount": 2
         },
         "cress": {
             "amount": 0
@@ -307,7 +307,7 @@
     "fields": [
         {
             "capacity": 30,
-            "water": 40,
+            "water": 10,
             "fertility": 50,
             "temperature": 22,
             "crops": [
@@ -371,6 +371,14 @@
                     "food": "rice",
                     "amount": 1,
                     "plant_time": 150,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                },
+                {
+                    "food": "arugula",
+                    "amount": 2,
+                    "plant_time": 20,
                     "elapsed_days": 0,
                     "ready": 0,
                     "hp": 100

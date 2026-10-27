@@ -564,10 +564,12 @@ class WaterManager:
         
         
     def after_water_menu(self):
-        choose=self.commands.choose(0,2,"0 - Irrigate Again\n1 - Return to Field Menu\n2 - Main Menu\nCommand:") 
-        if choose==1:
+        choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Do Another Action\n2 - Main Menu\nCommand:") 
+        if choose==0:
+            return "another_field"
+        elif choose==1:
             return "field_menu"
-        elif choose==2:
+        else:
             return "main_menu"
     
     #IRRIGATION 
@@ -600,12 +602,13 @@ class WaterManager:
         if irrigation_result=="✅ Irrigable":
             result=self.confirm_watering()
         else:
-            command=self.commands.choose(0,1,"0 - Irrigate Another Field\n1 - Return to Field Menu\nCommand:")
+            command=self.commands.choose(0,2,"0 - Select Another Field\n1 - Do Another Action\n2 - Main Menu\nCommand:")
             if command==0:
-                ...
-                #continue
-            else:
+                return "another_field"
+            elif command==1:
                 return "field_menu"
+            else:
+                return "main_menu"
         
         if result=="field_menu":
             return "field_menu"
@@ -640,7 +643,8 @@ class AgricultureController:
                 result=self.plant_manager.plant_controller(self.current_field_index,self.save_file,self.foods_file)
                 if result=="another_field":
                     #another field
-                    break
+                    return "another_field"
+                
                 elif result=="field_menu":
                     #same field and menu screen
                     continue
@@ -658,7 +662,12 @@ class AgricultureController:
                 else:
                     return result       
             elif field_menu_choose==2:
-                self.water_manager.water_controller(self.save_file,self.foods_file,self.current_field_index)
+                result=self.water_manager.water_controller(self.save_file,self.foods_file,self.current_field_index)
+                if result=="another_field":
+                    break
+                elif result=="main_menu":
+                    return "main_menu"
+                
             elif field_menu_choose==3:
                 #Fertilize
                 ...
