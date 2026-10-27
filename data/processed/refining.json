@@ -1,57 +1,57 @@
 {
-  "demir_levha": {
-    "gerekli_malzemeler": { "demir": 3 },
-    "gerekli_istasyon": "maden_isleme_firini",
-    "sure": 20,
-    "enerji_tuketimi": 15,
-    "aciklama": "Dövülmüş demirden elde edilen, üssün temel iskeletini ve dayanıklı zırh katmanlarını oluşturan standart metal plaka."
+  "iron_plate": {
+    "required_materials": { "iron": 3 },
+    "required_station": "ore_processing_furnace",
+    "time": 20,
+    "energy_consumption": 15,
+    "description": "A standard metal plate made from forged iron that forms the base's basic skeleton and durable armor layers."
   },
 
-  "bakir_tel": {
-    "gerekli_malzemeler": { "bakir": 2 },
-    "gerekli_istasyon": "maden_isleme_firini",
-    "sure": 15,
-    "enerji_tuketimi": 12,
-    "aciklama": "Elektrik iletimi için kullanılan, ince ve esnek bakır tel. İletişim sistemleri ve enerji dağıtımı için kritik bir bileşen."
+  "copper_wire": {
+    "required_materials": { "copper": 2 },
+    "required_station": "ore_processing_furnace",
+    "time": 15,
+    "energy_consumption": 12,
+    "description": "A thin and flexible copper wire used for electrical conduction. A critical component for communication systems and energy distribution."
   },
 
-  "aluminyum_profil": {
-    "gerekli_malzemeler": { "aluminyum": 3 },
-    "gerekli_istasyon": "maden_isleme_firini",
-    "sure": 20,
-    "enerji_tuketimi": 14,
-    "aciklama": "Hafif ve dayanıklı aluminyumdan üretilen, yapısal destek ve çerçeve oluşturmak için kullanılan profil. Özellikle uçak ve araç yapımında tercih edilir."
+  "aluminum_profile": {
+    "required_materials": { "aluminum": 3 },
+    "required_station": "ore_processing_furnace",
+    "time": 20,
+    "energy_consumption": 14,
+    "description": "A profile made from lightweight and durable aluminum used to create structural support and frames. Especially preferred in aircraft and vehicle construction."
   },
 
-  "titanyum_bar": {
-    "gerekli_malzemeler": { "titanyum": 2, "nikel": 1 },
-    "gerekli_istasyon": "maden_isleme_firini",
-    "sure": 40,
-    "enerji_tuketimi": 25,
-    "aciklama": "Yüksek mukavemet ve korozyon direncine sahip titanyumdan yapılan, zırh ve yapısal bileşenlerde kullanılan güçlü bir metal çubuk."
+  "titanium_bar": {
+    "required_materials": { "titanium": 2, "nickel": 1 },
+    "required_station": "ore_processing_furnace",
+    "time": 40,
+    "energy_consumption": 25,
+    "description": "A strong metal bar made from titanium with high strength and corrosion resistance, used in armor and structural components."
   },
 
-  "silisyum_kristal": {
-    "gerekli_malzemeler": { "silisyum": 3, "kuvars": 1 },
-    "gerekli_istasyon": "maden_isleme_firini",
-    "sure": 35,
-    "enerji_tuketimi": 20,
-    "aciklama": "Yarı iletken özelliklere sahip silisyumdan üretilen, elektronik devreler ve güneş panelleri için kritik bir bileşen."
+  "silicon_crystal": {
+    "required_materials": { "silicon": 3, "quartz": 1 },
+    "required_station": "ore_processing_furnace",
+    "time": 35,
+    "energy_consumption": 20,
+    "description": "A critical component for electronic circuits and solar panels, produced from silicon with semiconductor properties."
   },
 
-  "karbon_fiber": {
-    "gerekli_malzemeler": { "karbon": 4 },
-    "gerekli_istasyon": "maden_isleme_firini",
-    "sure": 30,
-    "enerji_tuketimi": 18,
-    "aciklama": "Yüksek mukavemet ve düşük ağırlığa sahip karbon fiber, zırh ve yapısal bileşenlerde kullanılan gelişmiş bir malzeme."
+  "carbon_fiber": {
+    "required_materials": { "carbon": 4 },
+    "required_station": "ore_processing_furnace",
+    "time": 30,
+    "energy_consumption": 18,
+    "description": "An advanced material with high strength and low weight, used in armor and structural components."
   },
 
-  "krom_kaplama": {
-    "gerekli_malzemeler": { "krom": 2, "bakir": 1 },
-    "gerekli_istasyon": "maden_isleme_firini",
-    "sure": 25,
-    "enerji_tuketimi": 16,
-    "aciklama": "Krom kaplama, dayanıklılığı artırmak ve korozyona karşı koruma sağlamak için kullanılan bir yüzey işlemi. Genellikle zırh ve araç parçalarında kullanılır."
+  "chromium_coating": {
+    "required_materials": { "chromium": 2, "copper": 1 },
+    "required_station": "ore_processing_furnace",
+    "time": 25,
+    "energy_consumption": 16,
+    "description": "A surface treatment used to increase durability and provide protection against corrosion. Generally used in armor and vehicle parts."
   }
 }
