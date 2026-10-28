@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 ### Changed
+- Code, data files, JSON keys, schemas and in-game texts translated to English (PEP 8 naming)
+- Save files have a `save_version` (2). Old Turkish-key saves are no longer compatible
 - `save/save_system.json` is now tracked and its current state is committed as it changes
+### Fixed
+- Planting with an empty food stock no longer traps the player in a prompt
+- Harvest crash caused by a missing food field
+- Irrigation menu navigation (Select Another Field, Main Menu) and the crash on full fields
 
 ## [0.2.0-alpha.1] - 2026-10-24
 ### Changed
