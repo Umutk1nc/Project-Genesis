@@ -1,39 +1,32 @@
 import config
 import helpers 
-class Data_Reader:
-    def Read_Keys(self,FILE,string):
-        ARRAY=[]
-        for key, result in FILE.items():
-            set_value=result.get(string,key)
-            ARRAY.append(set_value)
-        return ARRAY     
         
-class Eating_System:
+class EatingSystem:
     def __init__(self,commands,general):
         self.commands = commands
         self.general = general
         
     
-    def Create_Table_Data(self,FOODS_FILE,SAVE_FILE):
+    def create_table_data(self,foods_file,save_file):
         table_data=[]
         food_keys=[]
-        index=0#ister 0 ister 1'den başlasın
-        for key,result in FOODS_FILE.items():
-            row=[index,result["name"],result["tokluk"],result["enerji"],result["moral"],result["su"],SAVE_FILE["foods"][key]["miktar"],result["buyume_gunu"]]
+        index=0#start from 0 or 1
+        for key,result in foods_file.items():
+            row=[index,result["name"],result["satiety"],result["energy"],result["morale"],result["water"],save_file["foods"][key]["amount"],result["growth_day"]]
             food_keys.append(key)
             table_data.append(row)
             index+=1
         return table_data,food_keys
-    def Choose_Food(self,minimum,maximum):#tablo gösterme kısmının sonra yaparsın.
-        string="Yemek istediğin besinin index numarasını gir:"
-        valid_index=self.commands.Choose(minimum,maximum,string)
+    def choose_food(self,minimum,maximum):#you will do the table display part later.
+        string="Enter the index number of the food you want to eat:"
+        valid_index=self.commands.choose(minimum,maximum,string)
         
         return valid_index
     
-    def Check_Food(self,food_index, food_keys,SAVE_FILE):
+    def check_food(self,food_index, food_keys,save_file):
         key_choice=food_keys[food_index]
-        food_key=SAVE_FILE["foods"][key_choice]
-        value=food_key["miktar"]
+        food_key=save_file["foods"][key_choice]
+        value=food_key["amount"]
         if value>=1:#later maybe it can be multi eating
             return key_choice
         else:
@@ -41,29 +34,29 @@ class Eating_System:
         
         
 
-    def Eat(self,Key,SAVE_FILE,FOODS_FILE):
-        if Key is None:
-            print("Bu besine sahip olmadığın için yiyemezsin.")
+    def eat(self,key,save_file,foods_file):
+        if key is None:
+            print("You cannot eat this food because you do not have it.")
             return False
                 
         else:
             #update food
-            SAVE_FILE["foods"][Key]["miktar"]-=1      
+            save_file["foods"][key]["amount"]-=1      
             #find food values
-            satiety=FOODS_FILE[Key]["tokluk"]
-            energy=FOODS_FILE[Key]["enerji"]
-            moral=FOODS_FILE[Key]["moral"]
-            water=FOODS_FILE[Key]["su"]
+            satiety=foods_file[key]["satiety"]
+            energy=foods_file[key]["energy"]
+            morale=foods_file[key]["morale"]
+            water=foods_file[key]["water"]
             #update character values
             #TO DO
-            SAVE_FILE["player_condition"]["tokluk"]+=satiety
-            SAVE_FILE["player_condition"]["tokluk"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["tokluk"],0,100)
-            SAVE_FILE["player_condition"]["enerji"]+=energy
-            SAVE_FILE["player_condition"]["enerji"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["enerji"],0,100)
-            SAVE_FILE["player_condition"]["moral"]+=moral
-            SAVE_FILE["player_condition"]["moral"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["moral"],0,100)
-            SAVE_FILE["player_condition"]["su"]+=water    
-            SAVE_FILE["player_condition"]["su"]=self.general.Limit_Value(SAVE_FILE["player_condition"]["su"],0,100)
+            save_file["player_condition"]["satiety"]+=satiety
+            save_file["player_condition"]["satiety"]=self.general.limit_value(save_file["player_condition"]["satiety"],0,100)
+            save_file["player_condition"]["energy"]+=energy
+            save_file["player_condition"]["energy"]=self.general.limit_value(save_file["player_condition"]["energy"],0,100)
+            save_file["player_condition"]["morale"]+=morale
+            save_file["player_condition"]["morale"]=self.general.limit_value(save_file["player_condition"]["morale"],0,100)
+            save_file["player_condition"]["water"]+=water    
+            save_file["player_condition"]["water"]=self.general.limit_value(save_file["player_condition"]["water"],0,100)
             return True
 
 class EatingController:
@@ -72,44 +65,44 @@ class EatingController:
         self.commands = helpers.Commands()
         self.table = helpers.Table()
         self.general = helpers.General()
-        self.eating_system = Eating_System(self.commands,self.general)
+        self.eating_system = EatingSystem(self.commands,self.general)
         
         
-    def Run(self):
+    def run(self):
         #Read File
-        FOODS_FILE=self.save_manager.ReadFile(config.FOODS_PATH)
-        SAVE_FILE=self.save_manager.ReadFile(config.SAVE_PATH)
+        foods_file=self.save_manager.read_file(config.FOODS_PATH)
+        save_file=self.save_manager.read_file(config.SAVE_PATH)
         #EatingController LOOP
         while True:
             #Make Table
-            Table_Data,food_keys=self.eating_system.Create_Table_Data(FOODS_FILE,SAVE_FILE)
+            table_data,food_keys=self.eating_system.create_table_data(foods_file,save_file)
             #Show Table
-            title=["Index", "Besin Adı", "Doyurma Etkisi","Enerji Etkisi","Moral Etkisi", "Su Etkisi","Miktar","Büyüme Süresi"]
-            self.table.Show_Table(Table_Data,title)
+            title=["Index", "Food Name", "Satiety Effect","Energy Effect","Morale Effect", "Water Effect","Amount","Growth Time"]
+            self.table.show_table(table_data,title)
             #Find First and Last index for decision
             last_index = len(food_keys) - 1
-            first_index=Table_Data[0][0]
+            first_index=table_data[0][0]
             #Choose the food That you want
-            valid_index=self.eating_system.Choose_Food(first_index,last_index)
+            valid_index=self.eating_system.choose_food(first_index,last_index)
             #Control the food and take the key of food
-            Key=self.eating_system.Check_Food(valid_index,food_keys,SAVE_FILE)
+            key=self.eating_system.check_food(valid_index,food_keys,save_file)
             #Control whether you eat the food
-            is_eat=self.eating_system.Eat(Key,SAVE_FILE,FOODS_FILE)
+            is_eat=self.eating_system.eat(key,save_file,foods_file)
             if is_eat==True:
-                    self.save_manager.SaveFile(config.SAVE_PATH,SAVE_FILE)
-                    print(FOODS_FILE[Key]["name"]," adlı besin başarıyla yendi")
-                    result_command=self.commands.Choose(0,1,"0 - Başka besin Ye\n1 - Ana Menüye Dön\n")
+                    self.save_manager.save_file(config.SAVE_PATH,save_file)
+                    print(foods_file[key]["name"]," was eaten successfully")
+                    result_command=self.commands.choose(0,1,"0 - Eat Another Food\n1 - Main Menu\n")
                     if result_command==0:
                         continue
                     else:
                         break
             else:
-                returning="0 - Farklı besin ye\n1 - Ana Menüye Dön\n"
-                result=self.commands.Choose(0,1,returning)
+                returning="0 - Eat Another Food\n1 - Main Menu\n"
+                result=self.commands.choose(0,1,returning)
                 if result==0:
                     continue
                 else:
                     break    
-#Tablo gösterirken sadece Sahip olunanlar gösterilebilir.
+#When showing the table, only owned items can be displayed.
 game = EatingController()
-game.Run()
+game.run()

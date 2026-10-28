@@ -1,57 +1,57 @@
 {
-  "basit_atolye": {
-    "gerekli_malzemeler": { "demir": 6, "bakir": 2 },
-    "enerji_tuketimi": 10,
-    "yapim_suresi": 60,
-    "aciklama": "İlk kurulan üretim birimi. Temel aletler ve ara parçalar burada üretilir. Karmaşık sistemler için yetersiz kalır."
+  "basic_workshop": {
+    "required_materials": { "iron": 6, "copper": 2 },
+    "energy_consumption": 10,
+    "build_time": 60,
+    "description": "The first production unit established. Basic tools and spare parts are produced here. Insufficient for complex systems."
   },
 
-  "montaj_atolyesi": {
-    "gerekli_malzemeler": { "demir": 8, "bakir": 4, "aluminyum": 3 },
-    "enerji_tuketimi": 25,
-    "yapim_suresi": 180,
-    "aciklama": "Mekanik parçaları bir araya getiren orta seviye atölye. Koruyucu ekipman ve yaşam destek modüllerinin üretim noktası."
+  "assembly_workshop": {
+    "required_materials": { "iron": 8, "copper": 4, "aluminum": 3 },
+    "energy_consumption": 25,
+    "build_time": 180,
+    "description": "A mid-level workshop that assembles mechanical parts. The production point for protective equipment and life support modules."
   },
 
-  "elektronik_atolyesi": {
-    "gerekli_malzemeler": { "bakir": 6, "silisyum": 4, "aluminyum": 2 },
-    "enerji_tuketimi": 30,
-    "yapim_suresi": 240,
-    "aciklama": "Devre kartları, enerji sistemleri ve sensörlerin üretildiği hassas ortam. Toz ve nem kontrolü zorunludur."
+  "electronics_workshop": {
+    "required_materials": { "copper": 6, "silicon": 4, "aluminum": 2 },
+    "energy_consumption": 30,
+    "build_time": 240,
+    "description": "A precision environment where circuit boards, energy systems, and sensors are produced. Dust and humidity control are mandatory."
   },
 
-  "pres_makinesi": {
-    "gerekli_malzemeler": { "demir": 10, "aluminyum": 4, "nikel": 2 },
-    "enerji_tuketimi": 35,
-    "yapim_suresi": 300,
-    "aciklama": "Yüksek basınçla metal şekillendirme yapar. Titanyum plaka ve yapısal bileşenler bu makinede üretilir."
+  "press_machine": {
+    "required_materials": { "iron": 10, "aluminum": 4, "nickel": 2 },
+    "energy_consumption": 35,
+    "build_time": 300,
+    "description": "Shapes metal with high pressure. Titanium plates and structural components are produced on this machine."
   },
 
-  "insaat_atolyesi": {
-    "gerekli_malzemeler": { "demir": 8, "kirectasi": 6, "aluminyum": 3 },
-    "enerji_tuketimi": 20,
-    "yapim_suresi": 240,
-    "aciklama": "Üs genişletme ve yapısal inşaat işlemlerinin merkezi. Yeni hücreler ve altyapı modülleri buradan yönetilir."
+  "construction_workshop": {
+    "required_materials": { "iron": 8, "limestone": 6, "aluminum": 3 },
+    "energy_consumption": 20,
+    "build_time": 240,
+    "description": "The center for base expansion and structural construction operations. New cells and infrastructure modules are managed from here."
   },
 
-  "kimya_masasi": {
-    "gerekli_malzemeler": { "demir": 6, "bakir": 3, "kuvars": 2 },
-    "enerji_tuketimi": 20,
-    "yapim_suresi": 180,
-    "aciklama": "Kimyasal bileşiklerin sentezlendiği kontrollü ortam. Su arıtma, gübre üretimi ve atmosfer sistemleri burada hazırlanır."
+  "chemistry_table": {
+    "required_materials": { "iron": 6, "copper": 3, "quartz": 2 },
+    "energy_consumption": 20,
+    "build_time": 180,
+    "description": "A controlled environment where chemical compounds are synthesized. Water treatment, fertilizer production, and atmosphere systems are prepared here."
   },
 
-  "maden_isleme_firini": {
-    "gerekli_malzemeler": { "demir": 10, "kirectasi": 4, "bakir": 3 },
-    "enerji_tuketimi": 45,
-    "yapim_suresi": 360,
-    "aciklama": "Ham mineralleri işlenmiş ve kullanılabilir forma dönüştürür. Uranyum ve lityum gibi tehlikeli elementlerin güvenli işlenmesi için zırhlı kabin içerir."
+  "ore_processing_furnace": {
+    "required_materials": { "iron": 10, "limestone": 4, "copper": 3 },
+    "energy_consumption": 45,
+    "build_time": 360,
+    "description": "Converts raw minerals into processed and usable forms. Contains an armored cabin for the safe processing of dangerous elements like uranium and lithium."
   },
 
-  "gelismis_atolye": {
-    "gerekli_malzemeler": { "titanyum": 6, "bakir": 6, "silisyum": 4, "nikel": 3 },
-    "enerji_tuketimi": 60,
-    "yapim_suresi": 600,
-    "aciklama": "Koloninin en ileri üretim birimi. Nükleer reaktörler, keşif araçları ve otonom sistemler yalnızca burada üretilebilir. Kurulumu aylar alabilir."
+  "advanced_workshop": {
+    "required_materials": { "titanium": 6, "copper": 6, "silicon": 4, "nickel": 3 },
+    "energy_consumption": 60,
+    "build_time": 600,
+    "description": "The most advanced production unit in the colony. Nuclear reactors, exploration vehicles, and autonomous systems can only be produced here. Installation can take months."
   }
 }

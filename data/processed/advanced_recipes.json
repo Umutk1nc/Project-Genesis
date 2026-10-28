@@ -1,101 +1,101 @@
 {
   "bot": {
-    "maden_botu": {
-      "gerekli_malzemeler": { "titanyum_plaka": 2, "elektronik_devre": 3, "batarya": 2, "kablo": 4, "aluminyum": 2 },
-      "gerekli_istasyon": "gelismis_atolye",
-      "sure": 360,
-      "enerji_tuketimi": 40,
-      "aciklama": "Belirlenen mineral yataklarını otonom olarak kazıp depoya taşır. Uyurken bile koloni büyür. Lazer kazıcıya kıyasla yavaş fakat yorulmaz."
+    "mining_bot": {
+      "required_materials": { "titanium_plate": 2, "electronic_circuit": 3, "battery": 2, "cable": 4, "aluminum": 2 },
+      "required_station": "advanced_workshop",
+      "time": 360,
+      "energy_consumption": 40,
+      "description": "Autonomously mines designated mineral deposits and transports them to storage. The colony grows even while you sleep. Slower than a laser miner but tireless."
     },
-    "tarim_botu": {
-      "gerekli_malzemeler": { "elektronik_devre": 2, "batarya": 2, "kablo": 3, "aluminyum": 4, "demir": 2 },
-      "gerekli_istasyon": "gelismis_atolye",
-      "sure": 300,
-      "enerji_tuketimi": 30,
-      "aciklama": "Tarlaları otomatik sular, gübreler ve hasat eder. İnsan müdahalesi olmadan tarım modülünü tamamen yönetir. Birden fazla tarla için birden fazla bot gereklidir."
+    "farming_bot": {
+      "required_materials": { "electronic_circuit": 2, "battery": 2, "cable": 3, "aluminum": 4, "iron": 2 },
+      "required_station": "advanced_workshop",
+      "time": 300,
+      "energy_consumption": 30,
+      "description": "Automatically waters, fertilizes, and harvests fields. Fully manages the farming module without human intervention. Multiple fields require multiple bots."
     },
-    "kesif_dronu": {
-      "gerekli_malzemeler": { "elektronik_devre": 3, "batarya": 1, "aluminyum": 3, "silisyum": 2, "kablo": 2 },
-      "gerekli_istasyon": "gelismis_atolye",
-      "sure": 240,
-      "enerji_tuketimi": 25,
-      "aciklama": "Hava üzerinden harita açar, mineral yataklarını tespit eder. Keşif aracından daha hızlı fakat kargo taşıyamaz. Radar kulesiyle menzili iki katına çıkar."
+    "exploration_drone": {
+      "required_materials": { "electronic_circuit": 3, "battery": 1, "aluminum": 3, "silicon": 2, "cable": 2 },
+      "required_station": "advanced_workshop",
+      "time": 240,
+      "energy_consumption": 25,
+      "description": "Maps terrain from the air, detects mineral deposits. Faster than an exploration vehicle but cannot carry cargo. Its range is doubled with a radar tower."
     },
-    "robot_sarj_istasyonu": {
-      "gerekli_malzemeler": { "bakir": 6, "elektronik_devre": 2, "aluminyum": 4, "batarya": 2, "kablo": 4 },
-      "gerekli_istasyon": "elektronik_atolyesi",
-      "sure": 180,
-      "enerji_tuketimi": 35,
-      "aciklama": "Botlar ve dronlar görevden döndüğünde otomatik olarak şarj olur. Bu istasyon olmadan tüm otonom sistemler devre dışı kalır."
+    "robot_charging_station": {
+      "required_materials": { "copper": 6, "electronic_circuit": 2, "aluminum": 4, "battery": 2, "cable": 4 },
+      "required_station": "electronics_workshop",
+      "time": 180,
+      "energy_consumption": 35,
+      "description": "Bots and drones automatically recharge when they return from a mission. Without this station, all autonomous systems are disabled."
     }
   },
 
-  "ileri_yasam_destek": {
-    "medikal_pod": {
-      "gerekli_malzemeler": { "aluminyum": 5, "elektronik_devre": 3, "kuvars": 2, "medkit": 3, "kablo": 3 },
-      "gerekli_istasyon": "gelismis_atolye",
-      "sure": 420,
-      "enerji_tuketimi": 45,
-      "aciklama": "Kırık kemik, iç kanama ve radyasyon zehirlenmesi gibi ciddi durumları tedavi eder. Medkit'in yetersiz kaldığı her senaryoda hayat kurtarır."
+  "advanced_life_support": {
+    "medical_pod": {
+      "required_materials": { "aluminum": 5, "electronic_circuit": 3, "quartz": 2, "medkit": 3, "cable": 3 },
+      "required_station": "advanced_workshop",
+      "time": 420,
+      "energy_consumption": 45,
+      "description": "Treats serious conditions such as broken bones, internal bleeding, and radiation poisoning. Saves lives in every scenario where a medkit falls short."
     },
-    "hava_donusturucu": {
-      "gerekli_malzemeler": { "karbon": 4, "bakir": 3, "aluminyum": 3, "elektronik_devre": 2 },
-      "gerekli_istasyon": "kimya_masasi",
-      "sure": 300,
-      "enerji_tuketimi": 30,
-      "aciklama": "CO₂'yi katalitik reaksiyonla O₂'ye çevirir. Oksijen üretecini destekler, kapalı döngü atmosfer sistemi oluşturur. Uzun vadeli koloni hayatta kalmanın temeli."
+    "atmosphere_converter": {
+      "required_materials": { "carbon": 4, "copper": 3, "aluminum": 3, "electronic_circuit": 2 },
+      "required_station": "chemistry_table",
+      "time": 300,
+      "energy_consumption": 30,
+      "description": "Converts CO₂ into O₂ through a catalytic reaction. Supports the oxygen generator, creating a closed-loop atmosphere system. The foundation of long-term colony survival."
     },
-    "su_geri_donusum_unitesi": {
-      "gerekli_malzemeler": { "tank": 2, "su_filtresi": 2, "bakir": 4, "karbon": 3, "aluminyum": 2 },
-      "gerekli_istasyon": "kimya_masasi",
-      "sure": 360,
-      "enerji_tuketimi": 25,
-      "aciklama": "Atık suyu geri dönüştürüp içilebilir hale getirir. Su kaynağına erişimin kesildiği durumlarda koloninin hayatta kalmasını sağlar."
+    "water_recycling_unit": {
+      "required_materials": { "tank": 2, "water_filter": 2, "copper": 4, "carbon": 3, "aluminum": 2 },
+      "required_station": "chemistry_table",
+      "time": 360,
+      "energy_consumption": 25,
+      "description": "Recycles wastewater and makes it drinkable. Ensures the colony's survival when access to a water source is cut off."
     },
-    "uzay_giysisi": {
-      "gerekli_malzemeler": { "titanyum_plaka": 3, "krom": 3, "bakir": 4, "oksijen_tupu": 2, "elektronik_devre": 2 },
-      "gerekli_istasyon": "gelismis_atolye",
-      "sure": 480,
-      "enerji_tuketimi": 35,
-      "aciklama": "Basınç, sıcaklık, radyasyon ve oksijen korumasını tek sistemde birleştirir. Dış ortamda uzun süreli operasyonlar için zorunludur. Radyasyon kıyafetinin üst versiyonu."
+    "space_suit": {
+      "required_materials": { "titanium_plate": 3, "chromium": 3, "copper": 4, "oxygen_tank": 2, "electronic_circuit": 2 },
+      "required_station": "advanced_workshop",
+      "time": 480,
+      "energy_consumption": 35,
+      "description": "Combines pressure, temperature, radiation, and oxygen protection in a single system. Mandatory for long-duration operations in the outside environment. An upgraded version of the radiation suit."
     }
   },
 
-  "ileri_altyapi": {
-    "tarim_hucresi": {
-      "gerekli_malzemeler": { "hucre": 1, "tarla": 2, "isik_paneli": 4, "su_filtresi": 1, "bakir": 4 },
-      "gerekli_istasyon": "insaat_atolyesi",
-      "sure": 600,
-      "enerji_tuketimi": 50,
-      "aciklama": "Tam kontrollü kapalı tarım modülü. Işık, su ve gübre sistemi entegre edilmiştir. Standart tarlanın üç katı verim üretir."
+  "advanced_infrastructure": {
+    "farming_cell": {
+      "required_materials": { "cell": 1, "field": 2, "light_panel": 4, "water_filter": 1, "copper": 4 },
+      "required_station": "construction_workshop",
+      "time": 600,
+      "energy_consumption": 50,
+      "description": "A fully controlled enclosed farming module. Light, water, and fertilizer systems are integrated. Produces three times the yield of a standard field."
     },
-    "enerji_hucresi": {
-      "gerekli_malzemeler": { "hucre": 1, "gunes_paneli": 2, "batarya": 4, "kablo": 6, "elektronik_devre": 2 },
-      "gerekli_istasyon": "elektronik_atolyesi",
-      "sure": 480,
-      "enerji_tuketimi": 15,
-      "aciklama": "Üretim, depolama ve dağıtımı tek modülde yöneten enerji merkezi. Aşırı üretimde fazla enerjiyi depolar, eksiklikte otomatik dağıtır."
+    "energy_cell": {
+      "required_materials": { "cell": 1, "solar_panel": 2, "battery": 4, "cable": 6, "electronic_circuit": 2 },
+      "required_station": "electronics_workshop",
+      "time": 480,
+      "energy_consumption": 15,
+      "description": "An energy center that manages production, storage, and distribution in a single module. Stores excess energy during overproduction, distributes automatically during shortages."
     },
-    "isleme_fabrikasi": {
-      "gerekli_malzemeler": { "titanyum_plaka": 3, "elektronik_devre": 4, "bakir": 6, "demir": 8, "kablo": 5 },
-      "gerekli_istasyon": "gelismis_atolye",
-      "sure": 720,
-      "enerji_tuketimi": 70,
-      "aciklama": "Ham mineralleri otomatik olarak işlenmiş parçalara dönüştürür. Manuel üretim ihtiyacını büyük ölçüde azaltır. Tüm sistemi beslemek için güçlü bir enerji kaynağı şarttır."
+    "processing_factory": {
+      "required_materials": { "titanium_plate": 3, "electronic_circuit": 4, "copper": 6, "iron": 8, "cable": 5 },
+      "required_station": "advanced_workshop",
+      "time": 720,
+      "energy_consumption": 70,
+      "description": "Automatically converts raw minerals into processed parts. Greatly reduces the need for manual production. A powerful energy source is required to feed the entire system."
     },
-    "radar_kulesi": {
-      "gerekli_malzemeler": { "bakir": 5, "silisyum": 4, "aluminyum": 3, "elektronik_devre": 2, "kablo": 4 },
-      "gerekli_istasyon": "elektronik_atolyesi",
-      "sure": 300,
-      "enerji_tuketimi": 30,
-      "aciklama": "Keşif dronu menzilini ve harita çözünürlüğünü artırır. Yaklaşan tehlikeleri ve gizli mineral yataklarını erken tespit eder."
+    "radar_tower": {
+      "required_materials": { "copper": 5, "silicon": 4, "aluminum": 3, "electronic_circuit": 2, "cable": 4 },
+      "required_station": "electronics_workshop",
+      "time": 300,
+      "energy_consumption": 30,
+      "description": "Increases the exploration drone's range and map resolution. Detects approaching dangers and hidden mineral deposits early."
     },
-    "kargo_platformu": {
-      "gerekli_malzemeler": { "titanyum_plaka": 2, "demir": 8, "aluminyum": 5, "kablo": 4, "elektronik_devre": 2 },
-      "gerekli_istasyon": "insaat_atolyesi",
-      "sure": 420,
-      "enerji_tuketimi": 20,
-      "aciklama": "Büyük mineral ve malzeme transferleri için otomasyon platformu. Depo ile üretim istasyonları arasında taşımayı botlara gerek kalmadan yönetir."
+    "cargo_platform": {
+      "required_materials": { "titanium_plate": 2, "iron": 8, "aluminum": 5, "cable": 4, "electronic_circuit": 2 },
+      "required_station": "construction_workshop",
+      "time": 420,
+      "energy_consumption": 20,
+      "description": "An automation platform for large mineral and material transfers. Manages transport between storage and production stations without the need for bots."
     }
   }
 }

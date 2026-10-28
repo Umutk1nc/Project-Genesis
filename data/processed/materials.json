@@ -1,112 +1,112 @@
 {
   "metal": {
-    "demir": {
-      "nadirlik": "yaygin",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "En yaygın yapı metali. Üssün iskeletinden el aletlerine kadar her şeyde kullanılır. Yüzeyde bol miktarda bulunur."
+    "iron": {
+      "rarity": "common",
+      "raw": true,
+      "risks": [],
+      "description": "The most common construction metal. Used in everything from the base's skeleton to hand tools. Abundantly found on the surface."
     },
-    "bakir": {
-      "nadirlik": "yaygin",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "İletkenliği yüksek, işlemesi kolay bir metal. Kablolar ve elektronik sistemlerin temel hammaddesi."
+    "copper": {
+      "rarity": "common",
+      "raw": true,
+      "risks": [],
+      "description": "A highly conductive, easy-to-work metal. The basic raw material for cables and electronic systems."
     },
-    "aluminyum": {
-      "nadirlik": "orta",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Hafif ve dayanıklı. Taşıma sistemleri, tanklar ve gemi gövdelerinde tercih edilir. Orta derinliklerde çıkar."
+    "aluminum": {
+      "rarity": "medium",
+      "raw": true,
+      "risks": [],
+      "description": "Lightweight and durable. Preferred in transport systems, tanks, and ship hulls. Mined at medium depths."
     },
-    "titanyum": {
-      "nadirlik": "nadir",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Olağanüstü mukavemet-ağırlık oranına sahip nadir metal. Basınç kapıları ve ileri teknoloji ekipmanlarda zorunludur. Derin katmanlarda bulunur."
+    "titanium": {
+      "rarity": "rare",
+      "raw": true,
+      "risks": [],
+      "description": "A rare metal with an extraordinary strength-to-weight ratio. Essential for pressure doors and advanced technology equipment. Found in deep layers."
     },
-    "nikel": {
-      "nadirlik": "orta",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Korozyona dirençli alaşım metali. Titanyum ve demirle birleştiğinde dayanıklılığı büyük ölçüde artırır."
+    "nickel": {
+      "rarity": "medium",
+      "raw": true,
+      "risks": [],
+      "description": "A corrosion-resistant alloy metal. Greatly increases durability when combined with titanium and iron."
     },
-    "krom": {
-      "nadirlik": "nadir",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Yüzey kaplama ve korozyon önleme için kullanılır. Radyasyona maruz kalan ekipmanlarda koruyucu katman oluşturur."
+    "chromium": {
+      "rarity": "rare",
+      "raw": true,
+      "risks": [],
+      "description": "Used for surface coating and corrosion prevention. Forms a protective layer on equipment exposed to radiation."
     }
   },
 
-  "enerji_elementi": {
-    "lityum": {
-      "nadirlik": "nadir",
-      "ham": false,
-      "riskler": ["yanicilik"],
-      "aciklama": "Enerji yoğunluğu yüksek element. İşlenmemiş halde kararsızdır; hasar gören lityum hücresi yangın çıkarabilir. Batarya sistemlerinin vazgeçilmezi."
+  "energy_element": {
+    "lithium": {
+      "rarity": "rare",
+      "raw": false,
+      "risks": ["flammability"],
+      "description": "An element with high energy density. Unstable in its raw form; a damaged lithium cell can cause a fire. Indispensable for battery systems."
     },
-    "karbon": {
-      "nadirlik": "orta",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Çok yönlü element. Filtre sistemlerinde safsızlıkları tutar, yakıt olarak kullanılır, kimyasal reaksiyonların katalizörüdür."
+    "carbon": {
+      "rarity": "medium",
+      "raw": true,
+      "risks": [],
+      "description": "A versatile element. Traps impurities in filter systems, is used as fuel, and is a catalyst for chemical reactions."
     },
-    "uranyum": {
-      "nadirlik": "cok_nadir",
-      "ham": false,
-      "riskler": ["radyasyon"],
-      "aciklama": "Son derece yoğun enerji kaynağı. İşlenmemiş halde ölümcül radyasyon yayar. Sadece özel ekipmanla taşınabilir. Nükleer reaktörün çekirdeği."
+    "uranium": {
+      "rarity": "very_rare",
+      "raw": false,
+      "risks": ["radiation"],
+      "description": "An extremely dense energy source. Emits deadly radiation in its raw form. Can only be transported with special equipment. The core of the nuclear reactor."
     },
-    "hidrojen": {
-      "nadirlik": "orta",
-      "ham": false,
-      "riskler": ["patlama"],
-      "aciklama": "Evrenin en hafif elementi. Yakıt hücrelerinde verimli enerji üretir ancak sıkıştırılmış halde patlama riski taşır. Depolama altyapısı zorunludur."
+    "hydrogen": {
+      "rarity": "medium",
+      "raw": false,
+      "risks": ["explosion"],
+      "description": "The lightest element in the universe. Produces efficient energy in fuel cells but carries an explosion risk when compressed. Storage infrastructure is mandatory."
     }
   },
 
-  "yapi_maddesi": {
-    "silisyum": {
-      "nadirlik": "yaygin",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Cam ve güneş panellerinin temel bileşeni. Elektronik devrelerde de kritik rol oynar. Kum ve kayaçlardan kolayca elde edilir."
+  "construction_material": {
+    "silicon": {
+      "rarity": "common",
+      "raw": true,
+      "risks": [],
+      "description": "The basic component of glass and solar panels. Also plays a critical role in electronic circuits. Easily obtained from sand and rocks."
     },
-    "kuvars": {
-      "nadirlik": "orta",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Optik saflıkta cam üretimi için gereklidir. Gözlem modülleri ve lazer sistemlerinde silisyumun yerini tutamaz."
+    "quartz": {
+      "rarity": "medium",
+      "raw": true,
+      "risks": [],
+      "description": "Required for producing optically pure glass. Irreplaceable by silicon in observation modules and laser systems."
     },
-    "kirectasi": {
-      "nadirlik": "yaygin",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Beton ve yapı malzemelerinin hammaddesi. Üs genişletme operasyonlarında büyük miktarda tüketilir. Yüzey katmanlarında bol bulunur."
+    "limestone": {
+      "rarity": "common",
+      "raw": true,
+      "risks": [],
+      "description": "The raw material for concrete and construction materials. Consumed in large quantities during base expansion operations. Abundantly found in surface layers."
     }
   },
 
-  "kimyasal": {
-    "kukurt": {
-      "nadirlik": "orta",
-      "ham": true,
-      "riskler": ["zehirli_gaz"],
-      "aciklama": "Gübre üretiminde ve kimyasal işlemlerde kullanılır. Yanması durumunda zehirli SO₂ gazı açığa çıkar; kapalı alanlarda havalandırma zorunludur."
+  "chemical": {
+    "sulfur": {
+      "rarity": "medium",
+      "raw": true,
+      "risks": ["toxic_gas"],
+      "description": "Used in fertilizer production and chemical processes. Burning it releases toxic SO₂ gas; ventilation is mandatory in enclosed spaces."
     },
-    "fosfor": {
-      "nadirlik": "orta",
-      "ham": true,
-      "riskler": [],
-      "aciklama": "Bitki büyümesi için vazgeçilmez mineral. Kapalı tarım sistemlerinde toprağı besler. Uzun süreli koloniler için stratejik rezerv tutulmalıdır."
+    "phosphorus": {
+      "rarity": "medium",
+      "raw": true,
+      "risks": [],
+      "description": "An indispensable mineral for plant growth. Nourishes the soil in enclosed farming systems. Strategic reserves should be kept for long-term colonies."
     }
   },
 
-  "gaz": {
-    "azot": {
-      "nadirlik": "yaygin",
-      "ham": false,
-      "riskler": ["bogulma"],
-      "aciklama": "Atmosferin büyük çoğunluğunu oluşturan inert gaz. Tarım sistemlerinde gübre olarak kullanılır. Sıkıştırılmış halde oksijen sistemleriyle karıştırılır; saf azot solunduğunda ölümcüldür."
+  "gas": {
+    "nitrogen": {
+      "rarity": "common",
+      "raw": false,
+      "risks": ["suffocation"],
+      "description": "The inert gas that makes up the majority of the atmosphere. Used as fertilizer in farming systems. Mixed with oxygen systems when compressed; pure nitrogen is deadly if inhaled."
     }
   }
 }
