@@ -1,29 +1,29 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Maden Kural Kitabi",
+  "title": "Ore Rulebook",
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "kategori": {
+    "category": {
       "type": "string",
-      "enum": ["metal", "enerji_elementi", "yapi_maddesi", "kimyasal", "gaz"]
+      "enum": ["metal", "energy_element", "construction_material", "chemical", "gas"]
     },
-    "nadirlik": {
+    "rarity": {
       "type": "string",
-      "enum": ["yaygin", "orta", "nadir", "cok_nadir"]
+      "enum": ["common", "medium", "rare", "very_rare"]
     },
-    "ham_mi": {
+    "is_raw": {
       "type": "boolean"
     },
-    "kullanim_alanlari": {
+    "usage_areas": {
       "type": "array",
       "items": { "type": "string" },
       "minItems": 1
     },
-    "risk": {
+    "risks": {
       "type": "array",
       "items": { "type": "string" }
     }
   },
-  "required": ["kategori", "nadirlik", "ham_mi", "kullanim_alanlari", "risk"]
+  "required": ["category", "rarity", "is_raw", "usage_areas", "risks"]
 }

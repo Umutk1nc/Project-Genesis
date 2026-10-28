@@ -1,26 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Uretim Tarifi Kural Kitabi",
+  "title": "Production Recipe Rulebook",
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "gerekli_malzemeler": {
+    "required_materials": {
       "type": "object",
       "patternProperties": {
         "^[a-z_]+$": { "type": "integer", "minimum": 1 }
       }
     },
-    "gerekli_istasyon": {
+    "required_station": {
       "type": "string"
     },
-    "sure": {
+    "time": {
       "type": "integer",
       "minimum": 0
     },
-    "enerji_tuketimi": {
+    "energy_consumption": {
       "type": "integer",
       "minimum": 0
     }
   },
-  "required": ["gerekli_malzemeler", "gerekli_istasyon", "sure", "enerji_tuketimi"]
+  "required": ["required_materials", "required_station", "time", "energy_consumption"]
 }

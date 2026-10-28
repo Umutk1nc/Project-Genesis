@@ -4,7 +4,6 @@ SYSTEMS_PATH = Path(__file__).parent
 PROJECT_PATH = SYSTEMS_PATH.parent.parent
 PROCESSED_PATH = PROJECT_PATH / "data" / "processed"
 FOODS_PATH = PROCESSED_PATH / "foods.json"
-FOODS_SAVE_PATH=PROCESSED_PATH / "foods_save.json"
 SAVE_CLASSOR=PROJECT_PATH/"save"
 SAVE_PATH=SAVE_CLASSOR/"save_system.json"
 

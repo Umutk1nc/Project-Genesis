@@ -1,193 +1,194 @@
 {
+    "save_version": 2,
     "time_system": {
         "time": 8,
         "day_loop": "Morning"
     },
     "player_condition": {
-        "saglik": 50,
-        "oksijen": 50,
-        "tokluk": 50,
-        "enerji": 50,
-        "moral": 50,
-        "su": 50,
-        "konum": "merkez_us",
-        "aktif_efektler": []
+        "health": 50,
+        "oxygen": 50,
+        "satiety": 50,
+        "energy": 50,
+        "morale": 50,
+        "water": 50,
+        "location": "central_base",
+        "active_effects": []
     },
     "equipment": {
         "materials": {
-            "demir": 0,
-            "bakir": 0,
-            "aluminyum": 0,
-            "titanyum": 0,
-            "nikel": 0,
-            "krom": 0,
-            "lityum": 0,
-            "karbon": 0,
-            "uranyum": 0,
-            "hidrojen": 0,
-            "silisyum": 0,
-            "kuvars": 0,
-            "kirectasi": 0,
-            "kukurt": 0,
-            "fosfor": 0,
-            "azot": 0
+            "iron": 0,
+            "copper": 0,
+            "aluminum": 0,
+            "titanium": 0,
+            "nickel": 0,
+            "chromium": 0,
+            "lithium": 0,
+            "carbon": 0,
+            "uranium": 0,
+            "hydrogen": 0,
+            "silicon": 0,
+            "quartz": 0,
+            "limestone": 0,
+            "sulfur": 0,
+            "phosphorus": 0,
+            "nitrogen": 0
         },
         "refining": {
-            "demir_levha": 0,
-            "bakir_tel": 0,
-            "aluminyum_profil": 0,
-            "titanyum_bar": 0,
-            "silisyum_kristal": 0,
-            "karbon_fiber": 0,
-            "krom_kaplama": 0
+            "iron_plate": 0,
+            "copper_wire": 0,
+            "aluminum_profile": 0,
+            "titanium_bar": 0,
+            "silicon_crystal": 0,
+            "carbon_fiber": 0,
+            "chromium_coating": 0
         },
         "recipes": {
-            "kazma": 0,
-            "el_feneri": 0,
-            "lazer_kazici": 0,
-            "kablo": 0,
-            "titanyum_plaka": 0,
-            "elektronik_devre": 0,
-            "batarya": 0,
-            "gunes_paneli": 0,
-            "nukleer_reaktor": 0,
-            "oksijen_ureteci": 0,
+            "pickaxe": 0,
+            "flashlight": 0,
+            "laser_miner": 0,
+            "cable": 0,
+            "titanium_plate": 0,
+            "electronic_circuit": 0,
+            "battery": 0,
+            "solar_panel": 0,
+            "nuclear_reactor": 0,
+            "oxygen_generator": 0,
             "medkit": 0,
-            "radyasyon_kiyafeti": 0,
-            "oksijen_tupu": 0,
+            "radiation_suit": 0,
+            "oxygen_tank": 0,
             "tank": 0,
-            "su_filtresi": 0,
-            "sicaklik_dengeleyici": 0,
-            "basinc_dengeleyici": 0,
-            "hava_kilidi": 0,
-            "depo": 0,
-            "isik_paneli": 0,
-            "hucre": 0,
-            "tarla": 0,
-            "kesif_araci": 0
+            "water_filter": 0,
+            "temperature_stabilizer": 0,
+            "pressure_stabilizer": 0,
+            "airlock": 0,
+            "storage": 0,
+            "light_panel": 0,
+            "cell": 0,
+            "field": 0,
+            "exploration_vehicle": 0
         },
         "advanced_recipes": {
-            "maden_botu": 0,
-            "tarim_botu": 0,
-            "kesif_dronu": 0,
-            "robot_sarj_istasyonu": 0,
-            "medikal_pod": 0,
-            "hava_donusturucu": 0,
-            "su_geri_donusum_unitesi": 0,
-            "uzay_giysisi": 0,
-            "tarim_hucresi": 0,
-            "enerji_hucresi": 0,
-            "isleme_fabrikasi": 0,
-            "radar_kulesi": 0,
-            "kargo_platformu": 0
+            "mining_bot": 0,
+            "farming_bot": 0,
+            "exploration_drone": 0,
+            "robot_charging_station": 0,
+            "medical_pod": 0,
+            "atmosphere_converter": 0,
+            "water_recycling_unit": 0,
+            "space_suit": 0,
+            "farming_cell": 0,
+            "energy_cell": 0,
+            "processing_factory": 0,
+            "radar_tower": 0,
+            "cargo_platform": 0
         }
     },
     "foods": {
-        "roka": { "miktar": 5 },
-        "tere": { "miktar": 5 },
-        "marul": { "miktar": 5 },
-        "ispanak": { "miktar": 5 },
-        "yesil_sogan": { "miktar": 5 },
-        "domates": { "miktar": 5 },
-        "salatalik": { "miktar": 5 },
-        "biber": { "miktar": 5 },
-        "patates": { "miktar": 5 },
-        "sogan": { "miktar": 5 },
-        "misir": { "miktar": 5 },
-        "bugday": { "miktar": 5 },
-        "pirinc": { "miktar": 5 },
-        "mercimek": { "miktar": 5 },
-        "nohut": { "miktar": 5 },
-        "fasulye": { "miktar": 5 },
-        "bezelye": { "miktar": 5 },
-        "aycicegi": { "miktar": 5 }
+        "arugula": { "amount": 5 },
+        "cress": { "amount": 5 },
+        "lettuce": { "amount": 5 },
+        "spinach": { "amount": 5 },
+        "green_onion": { "amount": 5 },
+        "tomato": { "amount": 5 },
+        "cucumber": { "amount": 5 },
+        "pepper": { "amount": 5 },
+        "potato": { "amount": 5 },
+        "onion": { "amount": 5 },
+        "corn": { "amount": 5 },
+        "wheat": { "amount": 5 },
+        "rice": { "amount": 5 },
+        "lentil": { "amount": 5 },
+        "chickpea": { "amount": 5 },
+        "bean": { "amount": 5 },
+        "pea": { "amount": 5 },
+        "sunflower": { "amount": 5 }
     },
-    "us_durumu": {
-        "sicaklik": 25,
-        "ana_batarya": {
-            "kapasite": 500,
-            "mevcut": 250
+    "base_status": {
+        "temperature": 25,
+        "main_battery": {
+            "capacity": 500,
+            "current": 250
         },
-        "enerji_tuketimi": 10,
-        "oksijen": {
-            "kapasite": 500,
-            "mevcut": 250
+        "energy_consumption": 10,
+        "oxygen": {
+            "capacity": 500,
+            "current": 250
         },
-        "oksijen_tuketimi": 20,
-        "basinc": 1,
-        "basinc_durumu": -0.1,
-        "su": {
-            "kapasite": 500,
-            "mevcut": 250
+        "oxygen_consumption": 20,
+        "pressure": 1,
+        "pressure_status": -0.1,
+        "water": {
+            "capacity": 500,
+            "current": 250
         },
-        "temiz_su": {
-            "kapasite": 100,
-            "mevcut": 50
+        "clean_water": {
+            "capacity": 100,
+            "current": 50
         },
         "stations": {
-            "basit_atolye": {
+            "basic_workshop": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 1
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 1
             },
-            "montaj_atolyesi": {
+            "assembly_workshop": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 1
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 1
             },
-            "elektronik_atolyesi": {
+            "electronics_workshop": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 1
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 1
             },
-            "pres_makinesi": {
+            "press_machine": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 1
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 1
             },
-            "insaat_atolyesi": {
+            "construction_workshop": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 1
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 1
             },
-            "kimya_masasi": {
+            "chemistry_table": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 2
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 2
             },
-            "maden_isleme_firini": {
+            "ore_processing_furnace": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 1
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 1
             },
-            "gelismis_atolye": {
+            "advanced_workshop": {
                 "unlock": "True",
                 "running": [0],
                 "to_complete_time": [0],
-                "seviye": 1,
-                "kalan_kullanim": [1, 0, 0, 0],
-                "miktar": 1
+                "level": 1,
+                "remaining_usage": [1, 0, 0, 0],
+                "amount": 1
             }
         }
     },
@@ -201,7 +202,7 @@
             "temperature": 22,
             "crops": [
                 {
-                    "food": "mercimek",
+                    "food": "lentil",
                     "amount": 10,
                     "plant_time": 110,
                     "elapsed_days": 30,
@@ -209,7 +210,7 @@
                     "hp": 100
                 },
                 {
-                    "food": "patates",
+                    "food": "potato",
                     "amount": 5,
                     "plant_time": 90,
                     "elapsed_days": 20,
@@ -217,7 +218,7 @@
                     "hp": 100
                 },
                 {
-                    "food": "ispanak",
+                    "food": "spinach",
                     "amount": 5,
                     "plant_time": 35,
                     "elapsed_days": 10,
@@ -233,7 +234,7 @@
             "temperature": 22,
             "crops": [
                 {
-                    "food": "sogan",
+                    "food": "onion",
                     "amount": 6,
                     "plant_time": 85,
                     "elapsed_days": 40,
@@ -241,7 +242,7 @@
                     "hp": 100
                 },
                 {
-                    "food": "nohut",
+                    "food": "chickpea",
                     "amount": 4,
                     "plant_time": 120,
                     "elapsed_days": 60,
@@ -249,7 +250,7 @@
                     "hp": 100
                 },
                 {
-                    "food": "pirinc",
+                    "food": "rice",
                     "amount": 2,
                     "plant_time": 150,
                     "elapsed_days": 15,
