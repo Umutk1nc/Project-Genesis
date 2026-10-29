@@ -575,6 +575,14 @@ class WaterManager:
         water_cost=self.calculate_field_water_need(field,foods_file)*config.IRRIGATION_CONSTANT
         energy=save_file["player_condition"]["energy"]
         current_speed=self.calculate_irrigation_speed(energy)
+        need_hour=self.calculate_irrigation_time(save_file,water_cost)
+        for i in range (need_hour):
+            time_system.TimeManager().pass_hour(save_file)
+            self.save_manager.save_file(config.SAVE_PATH,save_file)
+            #Energy and other values decrease
+            #update water and other values
+            #energy changes time to time
+
         
     
     #CONTROLLER   
@@ -695,7 +703,6 @@ class AgricultureController:
                 
         
         
-        
-game=AgricultureController()
-game.run()
-
+if __name__ == "__main__":
+    game = AgricultureController()
+    game.run()        

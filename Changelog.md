@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-
+- `main.py` entry point with a main menu (agriculture and eating systems)
 ## [0.2.0-alpha.2] - 2026-10-28
 ### Changed
 - Code, data files, JSON keys, schemas and in-game texts translated to English (PEP 8 naming)
