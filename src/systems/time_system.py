@@ -3,7 +3,7 @@ import helpers
 import config
 systems = Path(__file__).parent
 project = systems.parent.parent
-save = helpers.read_file(config.SAVE_PATH)
+save = helpers.SaveManager().read_file(config.SAVE_PATH)
 
 
 class TimeManager:

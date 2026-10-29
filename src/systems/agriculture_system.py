@@ -695,7 +695,6 @@ class AgricultureController:
                 
         
         
-        
-game=AgricultureController()
-game.run()
-
+if __name__ == "__main__":
+    game = AgricultureController()
+    game.run()        

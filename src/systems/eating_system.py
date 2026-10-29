@@ -104,5 +104,6 @@ class EatingController:
                 else:
                     break    
 #When showing the table, only owned items can be displayed.
-game = EatingController()
-game.run()
+if __name__=="__main__":
+    game = EatingController()
+    game.run()
