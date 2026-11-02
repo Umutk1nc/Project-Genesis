@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Removed legacy procedural code block from `time_system.py`
 - `main.py` entry point with a main menu (agriculture and eating systems)
 ## [0.2.0-alpha.2] - 2026-10-28
 ### Changed
