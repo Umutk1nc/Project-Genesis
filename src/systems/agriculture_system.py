@@ -443,24 +443,35 @@ class IrrigationManager:
                 status="💧 Irrigable"
             table_data.append([f"Field {index}",moisture,required_water,irrigation_time,status])
         total_required_water=sum(self.required_water_for_field(field, foods_file) for field in fields)
-        total_irrigation_time=self.get_irrigation_time(total_required_water, save_file["player_condition"]["energy"])
+        total_irrigation_time=self.get_irrigation_time(total_required_water, speed=self.get_irrigation_speed(save_file["player_condition"]["energy"]))
         table_data.append(["All Fields","-",total_required_water,total_irrigation_time,"-"])
-        self.show_field_irrigation_info()
         return table_data,title
 
-    def show_field_irrigation_info(self,field, save_file, foods_file):
-        
+    def show_field_irrigation_info(self,field, save_file, foods_file,is_all_fields):
         energy = save_file["player_condition"]["energy"]
         speed = self.get_irrigation_speed(energy)
-        required_water = self.required_water_for_field(field, foods_file)
         clean_water = save_file["base_status"]["clean_water"]["current"]
-        irrigation_time = self.get_irrigation_time(required_water, speed)
-        print("================ Irrigation Summary  ================")
-        print(f"Clean Water Tank     : {clean_water} L")
-        print(f"Required Water       : {required_water} L")
-        print(f"Moisture             : %{field['water']}")
-        
-        if field["water"]==100:
+        if is_all_fields:
+            irrigable_fields = [field for field in save_file["fields"] if field["water"] < 100]
+            required_water=sum(self.required_water_for_field(field, foods_file) for field in irrigable_fields)
+            irrigation_time = self.get_irrigation_time(required_water, speed)
+            print("================ Irrigation Summary  ================")
+            print(f"Clean Water Tank     : {clean_water} L")
+            print(f"Total Required Water : {required_water} L")
+            is_fully_watered = len(irrigable_fields) == 0
+            return self.calculate_irrigation_feasibility(is_fully_watered, required_water, clean_water, irrigation_time)
+        else:
+            required_water = self.required_water_for_field(field, foods_file)
+            irrigation_time = self.get_irrigation_time(required_water, speed)
+            print("================ Irrigation Summary  ================")
+            print(f"Clean Water Tank     : {clean_water} L")
+            print(f"Required Water       : {required_water} L")
+            print(f"Moisture             : %{field['water']}")
+            is_fully_watered = field["water"] == 100
+            return self.calculate_irrigation_feasibility(is_fully_watered, required_water, clean_water, irrigation_time)
+
+    def calculate_irrigation_feasibility(self, is_fully_watered, required_water, clean_water, irrigation_time):
+        if is_fully_watered:
             result="💧 No Irrigation Needed"
         elif clean_water<required_water:
             print(f"Water Shortage     : {required_water-clean_water} L")
@@ -472,7 +483,6 @@ class IrrigationManager:
 
         print(f"Status               : {result}     ")
         print("===============================================")
-        
         return result
 
     def show_crops_water_info(self,field,foods_file):
@@ -496,18 +506,22 @@ class IrrigationManager:
 
 
     def water_controller(self,save_file, foods_file, field_index):
-        self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file)
+        self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,False)
         select=self.commands.choose(0,1,f"0 - Continue from Field {field_index}\n1 - Change Field\nCommand:")
-        if select==0:
+        if select==0:#Same Field
             self.show_crops_water_info(save_file["fields"][field_index], foods_file)
-        else:
+            field=save_file["fields"][field_index]
+            result=self.show_field_irrigation_info(field, save_file, foods_file,False)
+        else:#Change Field
             show_all_fields, title=self.show_all_fields_overview(save_file, foods_file)
             self.table.show_table(show_all_fields,title)
-            choose=self.commands.choose(0,len(save_file["fields"])-1,f"Select a Field to Irrigate:\nTo Irrigate All Fields, Select {len(save_file['fields'])}\nCommand:")
-            if choose == len(save_file['fields']):
-                for field_index in range(len(save_file["fields"])):
-                    self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file)
-                    self.show_crops_water_info(save_file["fields"][field_index], foods_file)
+            choose=self.commands.choose(0,len(save_file["fields"]),f"Select a Field to Irrigate:\nTo Irrigate All Fields, Select {len(save_file['fields'])}\nCommand:")
+            if choose == len(save_file['fields']):#Irrigate All Fields
+                result=self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
+            else:#Irrigate Selected Field
+                field=save_file["fields"][choose]
+                result=self.show_field_irrigation_info(save_file["fields"][choose], save_file, foods_file,False)
+
         
         
         
