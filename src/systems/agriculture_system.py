@@ -1,4 +1,6 @@
 import math
+
+from attrs import field
 import config
 import helpers
 import time_system
@@ -417,7 +419,7 @@ class IrrigationManager:
         return (100-field["water"])*total_water_need/100
 
     def get_irrigation_speed(self,energy):
-        return energy * config.IRRIGATION_SPEED_CONSTANT
+        return (energy/100) * config.IRRIGATION_SPEED_CONSTANT
 
     def get_irrigation_time(self,required_water, speed):
         return math.ceil(required_water / speed)
@@ -503,6 +505,46 @@ class IrrigationManager:
                 result="🔴 Needs A Lot of Water"
             table_data.append([name,amount,total_water_need,result])
         self.table.show_table(table_data,title)
+
+
+    def irigate_field(self,field,save_file,foods_file):
+        required_water = self.required_water_for_field(field, foods_file)
+        total_water_need = self.get_total_water_need(field, foods_file)
+        while required_water > 0:
+            current_energy = save_file["player_condition"]["energy"]
+            if save_file["player_condition"]["energy"]<config.IRRIGATION_ENERGY_THRESHOLD:#Energy Check whether the player has enough energy to irrigate
+                print("Player is too exhausted to irrigate!")
+                #Ask where to go
+                break
+            elif save_file["base_status"]["clean_water"]["current"]<=0:#Water Check whether the player has enough water to irrigate
+                print("Not enough clean water to irrigate!")
+                #Ask where to go
+                break
+            else:#Irrigation Process
+                irrigation_speed = self.get_irrigation_speed(current_energy)
+                available_water = save_file["base_status"]["clean_water"]["current"]
+                applied_water = min(irrigation_speed, required_water, available_water)
+
+
+                print(f"Irrigating Field {save_file['fields'].index(field)}...")
+                save_file["player_condition"]["energy"]-=config.IRRIGATION_ENERGY_COST
+                field["water"]+=(applied_water/total_water_need)*100
+                if field["water"]>=100:
+                    field["water"]=100
+                    #Unused energy should be returned to the player
+                    save_file["player_condition"]["energy"]+=math.floor((1 - (applied_water / irrigation_speed)) * config.IRRIGATION_ENERGY_COST)
+
+                
+                save_file["base_status"]["clean_water"]["current"]-=applied_water
+                required_water-=applied_water
+                self.time_manager.pass_hour(save_file)
+        self.save_manager.save_file(config.SAVE_PATH,save_file)
+        #return self.after_irrigation_menu(save_file, foods_file, field)
+
+
+
+                
+
 
 
     def water_controller(self,save_file, foods_file, field_index):
