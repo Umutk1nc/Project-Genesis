@@ -1,14 +1,14 @@
 {
     "save_version": 2,
     "time_system": {
-        "time": 29,
-        "day_loop": "Night"
+        "time": 33,
+        "day_loop": "Morning"
     },
     "player_condition": {
         "health": 100,
         "oxygen": 100,
         "satiety": 75,
-        "energy": 55,
+        "energy": 15,
         "morale": 38,
         "water": 20,
         "location": "central_base",
@@ -162,7 +162,7 @@
         },
         "clean_water": {
             "capacity": 100,
-            "current": 50
+            "current": 18.0
         },
         "stations": {
             "basic_workshop": {
@@ -308,7 +308,7 @@
     "fields": [
         {
             "capacity": 30,
-            "water": 10,
+            "water": 74.0,
             "fertility": 50,
             "temperature": 22,
             "crops": [

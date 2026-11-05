@@ -510,6 +510,7 @@ class IrrigationManager:
     def irigate_field(self,field,save_file,foods_file):
         required_water = self.required_water_for_field(field, foods_file)
         total_water_need = self.get_total_water_need(field, foods_file)
+        is_done=True
         while required_water > 0:
             current_energy = save_file["player_condition"]["energy"]
             if save_file["player_condition"]["energy"]<config.IRRIGATION_ENERGY_THRESHOLD:#Energy Check whether the player has enough energy to irrigate
@@ -540,8 +541,8 @@ class IrrigationManager:
                 save_file["base_status"]["clean_water"]["current"]-=applied_water
                 required_water-=applied_water
                 self.time_manager.pass_hour(save_file)
-        is_done=True
         self.save_manager.save_file(config.SAVE_PATH,save_file)
+        is_done = (field["water"] >= 100)
         return is_done
 
 
@@ -580,16 +581,29 @@ class IrrigationManager:
         if select==0:#Same Field
             self.show_crops_water_info(save_file["fields"][field_index], foods_file)
             field=save_file["fields"][field_index]
-            result=self.show_field_irrigation_info(field, save_file, foods_file,False)
+            status=self.show_field_irrigation_info(field, save_file, foods_file,False)
+            if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                return self.after_irrigation_menu(save_file,foods_file,False,field,False)
+            is_done=self.irigate_field(field,save_file,foods_file)
+            return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
         else:#Change Field
             show_all_fields, title=self.show_all_fields_overview(save_file, foods_file)
             self.table.show_table(show_all_fields,title)
             choose=self.commands.choose(0,len(save_file["fields"]),f"Select a Field to Irrigate:\nTo Irrigate All Fields, Select {len(save_file['fields'])}\nCommand:")
             if choose == len(save_file['fields']):#Irrigate All Fields
-                result=self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
+                self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
+                for field in save_file["fields"]:
+                    if field["water"]<100:
+                        is_done=self.irigate_field(field,save_file,foods_file)
+                return self.after_irrigation_menu(save_file,foods_file,is_done,field,True)
             else:#Irrigate Selected Field
                 field=save_file["fields"][choose]
-                result=self.show_field_irrigation_info(save_file["fields"][choose], save_file, foods_file,False)
+                self.show_crops_water_info(save_file["fields"][field_index], foods_file)
+                status=self.show_field_irrigation_info(field, save_file, foods_file,False)
+                if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                    return self.after_irrigation_menu(save_file,foods_file,False,field,False)
+                is_done=self.irigate_field(field,save_file,foods_file)
+                return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
 
         
         
