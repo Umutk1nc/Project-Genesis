@@ -515,10 +515,12 @@ class IrrigationManager:
             if save_file["player_condition"]["energy"]<config.IRRIGATION_ENERGY_THRESHOLD:#Energy Check whether the player has enough energy to irrigate
                 print("Player is too exhausted to irrigate!")
                 #Ask where to go
+                is_done=False
                 break
             elif save_file["base_status"]["clean_water"]["current"]<=0:#Water Check whether the player has enough water to irrigate
                 print("Not enough clean water to irrigate!")
                 #Ask where to go
+                is_done=False
                 break
             else:#Irrigation Process
                 irrigation_speed = self.get_irrigation_speed(current_energy)
@@ -538,14 +540,39 @@ class IrrigationManager:
                 save_file["base_status"]["clean_water"]["current"]-=applied_water
                 required_water-=applied_water
                 self.time_manager.pass_hour(save_file)
+        is_done=True
         self.save_manager.save_file(config.SAVE_PATH,save_file)
-        #return self.after_irrigation_menu(save_file, foods_file, field)
+        return is_done
 
 
 
                 
-
-
+    def after_irrigation_menu(self,save_file,foods_file,is_done,field,is_all_fields):
+        print("================ Irrigation Summary  ================")
+        if is_all_fields:
+            if is_done:
+                print("All Fields Irrigated Successfully.")
+            else:
+                print("Irrigation Stopped Due to Insufficient Resources.")
+            for index, field in enumerate(save_file["fields"]):
+                print(f"Field {index} Moisture: {field['water']}%")
+        else:
+            if is_done:
+                print(f"Field {save_file['fields'].index(field)} Irrigated Successfully.")
+            else:
+                print("Irrigation Stopped Due to Insufficient Resources.")
+            print(f"Field {save_file['fields'].index(field)} Moisture: {field['water']}%")
+        if is_all_fields:    
+            choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
+            return "another_field" if choose == 0 else "main_menu"
+        else:
+            choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Field Menu\n2 - Main Menu\nCommand:")
+            if choose==0:
+                return "another_field"
+            elif choose==1:
+                return "field_menu"
+            else:
+                return "main_menu"
 
     def water_controller(self,save_file, foods_file, field_index):
         self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,False)
