@@ -1,6 +1,7 @@
 import math
 
 from attrs import field
+from streamlit import success
 import config
 import helpers
 import time_system
@@ -583,30 +584,67 @@ class IrrigationManager:
             field=save_file["fields"][field_index]
             status=self.show_field_irrigation_info(field, save_file, foods_file,False)
             if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                #Ask what do you want to do next don't show menu
                 return self.after_irrigation_menu(save_file,foods_file,False,field,False)
-            is_done=self.irigate_field(field,save_file,foods_file)
-            return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
+            confirm=self.confirm_irrigation()
+            if confirm=="irrigation_process":
+                is_done=self.irigate_field(field,save_file,foods_file)
+                return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
+
+            else:
+                return confirm
+
+            
         else:#Change Field
             show_all_fields, title=self.show_all_fields_overview(save_file, foods_file)
             self.table.show_table(show_all_fields,title)
             choose=self.commands.choose(0,len(save_file["fields"]),f"Select a Field to Irrigate:\nTo Irrigate All Fields, Select {len(save_file['fields'])}\nCommand:")
+            
+            
+            
             if choose == len(save_file['fields']):#Irrigate All Fields
-                self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
-                for field in save_file["fields"]:
-                    if field["water"]<100:
-                        is_done=self.irigate_field(field,save_file,foods_file)
-                return self.after_irrigation_menu(save_file,foods_file,is_done,field,True)
+                status=self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
+                if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                    #Ask what do you want to do next don't show menu
+                    return self.after_irrigation_menu(save_file,foods_file,False,None,True)
+                confirm=self.confirm_irrigation()
+                if confirm=="irrigation_process":
+                    all_done = True
+                    for field in save_file["fields"]:
+                        if field["water"] < 100:
+                            is_success = self.irigate_field(field, save_file, foods_file)
+                            if not is_success:
+                                all_done = False
+                                break
+                    return self.after_irrigation_menu(save_file, foods_file, all_done, field, True)
+                else:
+                    return confirm
+            
+            
             else:#Irrigate Selected Field
                 field=save_file["fields"][choose]
-                self.show_crops_water_info(save_file["fields"][field_index], foods_file)
+                self.show_crops_water_info(save_file["fields"][choose], foods_file)
                 status=self.show_field_irrigation_info(field, save_file, foods_file,False)
                 if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                    #Ask what do you want to do next don't show menu
                     return self.after_irrigation_menu(save_file,foods_file,False,field,False)
-                is_done=self.irigate_field(field,save_file,foods_file)
-                return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
+                
+                confirm=self.confirm_irrigation()
+                if confirm=="irrigation_process":
+                    is_done=self.irigate_field(field,save_file,foods_file)
+                    return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
+                else:
+                    return confirm
 
-        
-        
+    def confirm_irrigation(self):
+        confirm=self.commands.choose(0,1,"0 - Start Irrigation\n1 - Cancel\nCommand:")
+        if confirm == 1:
+            what_menu=self.commands.choose(0,1,"0 - Field Menu\n1 - Main Menu\nCommand:")
+            what_menu="field_menu" if what_menu==0 else "main_menu"
+            return what_menu            
+        else:
+            return "irrigation_process"
+       
         
     
 class AgricultureController:
