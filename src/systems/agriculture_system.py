@@ -616,7 +616,7 @@ class IrrigationManager:
                             if not is_success:
                                 all_done = False
                                 break
-                    return self.after_irrigation_menu(save_file, foods_file, all_done, field, True)
+                    return self.after_irrigation_menu(save_file, foods_file, all_done, None, True)
                 else:
                     return confirm
             
