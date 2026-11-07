@@ -1,5 +1,5 @@
 import math
-
+import time
 from attrs import field
 from streamlit import success
 import config
@@ -512,8 +512,10 @@ class IrrigationManager:
         required_water = self.required_water_for_field(field, foods_file)
         total_water_need = self.get_total_water_need(field, foods_file)
         is_done=True
+        is_start_new=True
         while required_water > 0:
             current_energy = save_file["player_condition"]["energy"]
+            moisture_change =0
             if save_file["player_condition"]["energy"]<config.IRRIGATION_ENERGY_THRESHOLD:#Energy Check whether the player has enough energy to irrigate
                 print("Player is too exhausted to irrigate!")
                 #Ask where to go
@@ -529,19 +531,23 @@ class IrrigationManager:
                 available_water = save_file["base_status"]["clean_water"]["current"]
                 applied_water = min(irrigation_speed, required_water, available_water)
 
-
-                print(f"Irrigating Field {save_file['fields'].index(field)}...")
-                save_file["player_condition"]["energy"]-=config.IRRIGATION_ENERGY_COST
+                using_energy = config.IRRIGATION_ENERGY_COST
+                save_file["player_condition"]["energy"]-=using_energy
+                moisture_change = (applied_water/total_water_need)*100
                 field["water"]+=(applied_water/total_water_need)*100
                 if field["water"]>=100:
                     field["water"]=100
                     #Unused energy should be returned to the player
-                    save_file["player_condition"]["energy"]+=math.floor((1 - (applied_water / irrigation_speed)) * config.IRRIGATION_ENERGY_COST)
-
+                    unused_energy = math.floor((1 - (applied_water / irrigation_speed)) * config.IRRIGATION_ENERGY_COST)
+                    save_file["player_condition"]["energy"]+=unused_energy
+                    using_energy -= unused_energy
                 
                 save_file["base_status"]["clean_water"]["current"]-=applied_water
                 required_water-=applied_water
                 self.time_manager.pass_hour(save_file)
+                self.irrigation_simulation(field,save_file,applied_water,using_energy,moisture_change,is_start_new)
+                is_start_new=False
+        print("--------------------------------------------------------------------------------------------------")
         self.save_manager.save_file(config.SAVE_PATH,save_file)
         is_done = (field["water"] >= 100)
         return is_done
@@ -656,6 +662,21 @@ class IrrigationManager:
                 return "field_menu"
             else:
                 return "main_menu"
+    def irrigation_simulation(self,field,save_file,applied_water,using_energy,moisture_change,is_start_new):
+        now_time = save_file["time_system"]["time"]
+        moisture=field["water"]
+        clean_water=save_file["base_status"]["clean_water"]["current"]
+        energy=save_file["player_condition"]["energy"]
+        filled = int(field["water"] / 10)
+        bar = "█" * filled + "░" * (10 - filled)
+        field_index=save_file["fields"].index(field)
+        if is_start_new:
+            print(f">>> Starting Irrigation for Field {field_index}...")
+            print("--------------------------------------------------------------------------------------------------")
+        time.sleep(0.5)
+        print(f"[Clock: {now_time:02d}:00] [{bar}] Moisture: %{moisture:.1f} (+{moisture_change:.1f}%) | Water: -{applied_water:.1f}L | Tank: {clean_water:.1f}L | Energy: {energy} (-{using_energy})")
+        
+       
         
     
 class AgricultureController:
