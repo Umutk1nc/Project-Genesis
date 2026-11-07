@@ -584,8 +584,8 @@ class IrrigationManager:
             field=save_file["fields"][field_index]
             status=self.show_field_irrigation_info(field, save_file, foods_file,False)
             if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
-                #Ask what do you want to do next don't show menu
-                return self.after_irrigation_menu(save_file,foods_file,False,field,False)
+                return self.cannot_irrigate_menu(status,False)
+            
             confirm=self.confirm_irrigation()
             if confirm=="irrigation_process":
                 is_done=self.irigate_field(field,save_file,foods_file)
@@ -605,8 +605,8 @@ class IrrigationManager:
             if choose == len(save_file['fields']):#Irrigate All Fields
                 status=self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
                 if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
-                    #Ask what do you want to do next don't show menu
-                    return self.after_irrigation_menu(save_file,foods_file,False,None,True)
+                    return self.cannot_irrigate_menu(status,True)
+                    
                 confirm=self.confirm_irrigation()
                 if confirm=="irrigation_process":
                     all_done = True
@@ -626,8 +626,7 @@ class IrrigationManager:
                 self.show_crops_water_info(save_file["fields"][choose], foods_file)
                 status=self.show_field_irrigation_info(field, save_file, foods_file,False)
                 if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
-                    #Ask what do you want to do next don't show menu
-                    return self.after_irrigation_menu(save_file,foods_file,False,field,False)
+                    return self.cannot_irrigate_menu(status,False)
                 
                 confirm=self.confirm_irrigation()
                 if confirm=="irrigation_process":
@@ -644,7 +643,19 @@ class IrrigationManager:
             return what_menu            
         else:
             return "irrigation_process"
-       
+    def cannot_irrigate_menu(self,reason,is_all_fields):
+        print("The field cannot be irrigated due to the following reason:",reason)
+        if is_all_fields:
+            choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
+            return "another_field" if choose == 0 else "main_menu"
+        else:
+            choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Field Menu\n2 - Main Menu\nCommand:")
+            if choose==0:
+                return "another_field"
+            elif choose==1:
+                return "field_menu"
+            else:
+                return "main_menu"
         
     
 class AgricultureController:
