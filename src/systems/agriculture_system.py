@@ -563,13 +563,13 @@ class IrrigationManager:
             else:
                 print("Irrigation Stopped Due to Insufficient Resources.")
             for index, field in enumerate(save_file["fields"]):
-                print(f"Field {index} Moisture: {field['water']}%")
+                print(f"Field {index} Moisture: {(field['water']):.1f}%")
         else:
             if is_done:
                 print(f"Field {save_file['fields'].index(field)} Irrigated Successfully.")
             else:
                 print("Irrigation Stopped Due to Insufficient Resources.")
-            print(f"Field {save_file['fields'].index(field)} Moisture: {field['water']}%")
+            print(f"Field {save_file['fields'].index(field)} Moisture: {(field['water']):.1f}%")
         if is_all_fields:    
             choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
             return "another_field" if choose == 0 else "main_menu"
