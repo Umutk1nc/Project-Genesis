@@ -1,8 +1,15 @@
 # Changelog
 
-## [Unreleased]
-- Removed legacy procedural code block from `time_system.py`
-- `main.py` entry point with a main menu (agriculture and eating systems)
+## [0.2.0] - 2026-11-09
+### Added
+- `main.py` entry point with a main menu to start agriculture and eating systems
+- Hourly irrigation simulation with progress bar, energy and clean water consumption
+- Option to irrigate all fields in a single flow
+
+### Changed
+- Refactored `WaterManager`: simplified water need calculation to `amount * water_need` and removed `IRRIGATION_CONSTANT`
+- Cleaned up `time_system.py`: removed legacy procedural code and unused imports
+
 ## [0.2.0-alpha.2] - 2026-10-28
 ### Changed
 - Code, data files, JSON keys, schemas and in-game texts translated to English (PEP 8 naming)
