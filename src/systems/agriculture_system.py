@@ -1,4 +1,7 @@
 import math
+import time
+from attrs import field
+from streamlit import success
 import config
 import helpers
 import time_system
@@ -394,235 +397,286 @@ class HarvestManager:
             else: 
                 return "main_menu"  
 
-    
-class WaterManager:
+class IrrigationManager:
     def __init__(self):
         self.general=helpers.General()
         self.table=helpers.Table()
         self.commands=helpers.Commands()
         self.time_manager=time_system.TimeManager()
         self.save_manager=helpers.SaveManager()
-    #GET AND CALCULATE
-    
-    def get_clean_water(self,save_file):
-        return save_file["base_status"]["clean_water"]["current"]
-    
-   
-   
-    def calculate_hourly_water_need(self,amount,water_need_coefficient):
-       return water_need_coefficient*amount/config.IRRIGATION_CONSTANT
-   
-    
-       
-    def calculate_crops_water_need(self,crops,foods_file):
-        hourly_water_need_array=[]
+
+    def get_total_water_need(self,field, foods_file):
+        total_water_need=0
+        crops=field["crops"]
         for crop in crops:
             key=crop["food"]
             amount=crop["amount"]
-            water_need_coefficient=foods_file[key]["water_need"]                  
-            hourly_water_need=self.calculate_hourly_water_need(amount,water_need_coefficient)
-            hourly_water_need_array.append(hourly_water_need)
-        return hourly_water_need_array
-   
-   
-            
-    def calculate_field_water_need(self,field,foods_file):
-        crops=field["crops"]
-        hourly_water_need_array=self.calculate_crops_water_need(crops,foods_file)
-        return sum(hourly_water_need_array)
+            water_need_coefficient=foods_file[key]["water_need"]
+            total_water_need+=water_need_coefficient*amount
+        return total_water_need
+
+    def required_water_for_field(self,field, foods_file):
+        total_water_need=self.get_total_water_need(field, foods_file)
+        return (100-field["water"])*total_water_need/100
+
+    def get_irrigation_speed(self,energy):
+        return (energy/100) * config.IRRIGATION_SPEED_CONSTANT
+
+    def get_irrigation_time(self,required_water, speed):
+        return math.ceil(required_water / speed)
+
+
     
-    def calculate_all_fields_water_need(self,save_file, foods_file):
+
+    #Show
+
+    def show_all_fields_overview(self,save_file, foods_file):
         fields=save_file["fields"]
-        return sum(self.calculate_field_water_need(field,foods_file) for field in fields)
-    
-    
-    def calculate_irrigation_speed(self,energy):
-        other_speed_factors=1
-        return energy*config.IRRIGATION_SPEED_CONSTANT*other_speed_factors/100
-        
-    
-    def calculate_irrigation_time(self,save_file,current_water_need):
-        energy=save_file["player_condition"]["energy"]
-        current_speed=self.calculate_irrigation_speed(energy)
-        return math.ceil(current_water_need/current_speed)
-    
-    def calculate_current_water_need(self,field,foods_file):
-        hourly_need=self.calculate_field_water_need(field,foods_file)
-        return (100-field["water"])*hourly_need*config.IRRIGATION_CONSTANT/100
-    
-            
-    #CREATE AND SHOW
-    def create_field_water_table(self,field, foods_file,save_file):
-        crops=field["crops"]
         table_data=[]
-        amount=sum(crop["amount"] for crop in crops)
-        capacity=field["capacity"]
-        fertility=field["fertility"]
-        water=field["water"]
-        current_water_need=self.calculate_current_water_need(field,foods_file)
-        time_need=self.calculate_irrigation_time(save_file,current_water_need)
-        title=["Moisture","Water Need","Irrigation Time","Fertility","Occupancy"]
-        table_data.append([f"%{water}",current_water_need,time_need,fertility,f"{amount}/{capacity}"])
+        title=["Field","Moisture","Irrigation Cost","Estimated Time","Status"]
+        for index,field in enumerate(fields):
+            required_water=self.required_water_for_field(field, foods_file)
+            energy=save_file["player_condition"]["energy"]
+            irrigation_speed=self.get_irrigation_speed(energy)
+            irrigation_time=self.get_irrigation_time(required_water, irrigation_speed)
+            moisture=field["water"]
+            if moisture==100:
+                status="❌ Cannot Irrigate"
+            else:
+                status="💧 Irrigable"
+            table_data.append([f"Field {index}",moisture,required_water,irrigation_time,status])
+        total_required_water=sum(self.required_water_for_field(field, foods_file) for field in fields)
+        total_irrigation_time=self.get_irrigation_time(total_required_water, speed=self.get_irrigation_speed(save_file["player_condition"]["energy"]))
+        table_data.append(["All Fields","-",total_required_water,total_irrigation_time,"-"])
         return table_data,title
-    
-    def create_crops_water_table(self,field,foods_file):
+
+    def show_field_irrigation_info(self,field, save_file, foods_file,is_all_fields):
+        energy = save_file["player_condition"]["energy"]
+        speed = self.get_irrigation_speed(energy)
+        clean_water = save_file["base_status"]["clean_water"]["current"]
+        if is_all_fields:
+            irrigable_fields = [field for field in save_file["fields"] if field["water"] < 100]
+            required_water=sum(self.required_water_for_field(field, foods_file) for field in irrigable_fields)
+            irrigation_time = self.get_irrigation_time(required_water, speed)
+            print("================ Irrigation Summary  ================")
+            print(f"Clean Water Tank     : {clean_water} L")
+            print(f"Total Required Water : {required_water} L")
+            is_fully_watered = len(irrigable_fields) == 0
+            return self.calculate_irrigation_feasibility(is_fully_watered, required_water, clean_water, irrigation_time)
+        else:
+            required_water = self.required_water_for_field(field, foods_file)
+            irrigation_time = self.get_irrigation_time(required_water, speed)
+            print("================ Irrigation Summary  ================")
+            print(f"Clean Water Tank     : {clean_water} L")
+            print(f"Required Water       : {required_water} L")
+            print(f"Moisture             : %{field['water']}")
+            is_fully_watered = field["water"] == 100
+            return self.calculate_irrigation_feasibility(is_fully_watered, required_water, clean_water, irrigation_time)
+
+    def calculate_irrigation_feasibility(self, is_fully_watered, required_water, clean_water, irrigation_time):
+        if is_fully_watered:
+            result="💧 No Irrigation Needed"
+        elif clean_water<required_water:
+            print(f"Water Shortage     : {required_water-clean_water} L")
+            print(f"Irrigation Time      : {irrigation_time} hours")
+            result="❌ Insufficient Water Amount"
+        else:
+            print(f"Irrigation Time      : {irrigation_time} hours")
+            result="✅ Irrigable"
+
+        print(f"Status               : {result}     ")
+        print("===============================================")
+        return result
+
+    def show_crops_water_info(self,field,foods_file):
         crops=field["crops"]
         table_data=[]
         title=["Plant","Amount","Water Need","Status"]
-        total_water_need_array=self.calculate_crops_water_need(crops,foods_file)
-        
-        for index,crop in enumerate(crops):
-            amount=crop["amount"]
+        for crop in crops:
             key=crop["food"]
+            amount=crop["amount"]
             name=self.general.food_finder(key,"name",foods_file)
             water_need=self.general.food_finder(key,"water_need",foods_file)
+            total_water_need = water_need * amount * (100 - field["water"]) / 100
             if water_need<2:
                 result="🟢 Needs Little Water"
             elif water_need==2:
                 result="🟡 Normal"
             else:
                 result="🔴 Needs A Lot of Water"
-            table_data.append([name,amount,total_water_need_array[index],result])
+            table_data.append([name,amount,total_water_need,result])
         self.table.show_table(table_data,title)
-        return table_data,title
-    
-    def is_field_fully_watered(self,field):
-        return field["water"]==100
-        
-        
-    
-    def show_irrigation_info(self,field,save_file,foods_file):
-        clean_water=save_file["base_status"]["clean_water"]["current"]
-        current_water_need=self.calculate_current_water_need(field,foods_file)
-        water_time=self.calculate_irrigation_time(save_file,current_water_need)
-        
+
+
+    def irigate_field(self,field,save_file,foods_file):
+        required_water = self.required_water_for_field(field, foods_file)
+        total_water_need = self.get_total_water_need(field, foods_file)
+        is_done=True
+        is_start_new=True
+        while required_water > 0:
+            current_energy = save_file["player_condition"]["energy"]
+            moisture_change =0
+            if save_file["player_condition"]["energy"]<config.IRRIGATION_ENERGY_THRESHOLD:#Energy Check whether the player has enough energy to irrigate
+                print("Player is too exhausted to irrigate!")
+                #Ask where to go
+                is_done=False
+                break
+            elif save_file["base_status"]["clean_water"]["current"]<=0:#Water Check whether the player has enough water to irrigate
+                print("Not enough clean water to irrigate!")
+                #Ask where to go
+                is_done=False
+                break
+            else:#Irrigation Process
+                irrigation_speed = self.get_irrigation_speed(current_energy)
+                available_water = save_file["base_status"]["clean_water"]["current"]
+                applied_water = min(irrigation_speed, required_water, available_water)
+
+                using_energy = config.IRRIGATION_ENERGY_COST
+                save_file["player_condition"]["energy"]-=using_energy
+                moisture_change = (applied_water/total_water_need)*100
+                field["water"]+=(applied_water/total_water_need)*100
+                if field["water"]>=100:
+                    field["water"]=100
+                    #Unused energy should be returned to the player
+                    unused_energy = math.floor((1 - (applied_water / irrigation_speed)) * config.IRRIGATION_ENERGY_COST)
+                    save_file["player_condition"]["energy"]+=unused_energy
+                    using_energy -= unused_energy
+                
+                save_file["base_status"]["clean_water"]["current"]-=applied_water
+                required_water-=applied_water
+                self.time_manager.pass_hour(save_file)
+                self.irrigation_simulation(field,save_file,applied_water,using_energy,moisture_change,is_start_new)
+                is_start_new=False
+        print("--------------------------------------------------------------------------------------------------")
+        self.save_manager.save_file(config.SAVE_PATH,save_file)
+        is_done = (field["water"] >= 100)
+        return is_done
+
+
+
+                
+    def after_irrigation_menu(self,save_file,foods_file,is_done,field,is_all_fields):
         print("================ Irrigation Summary  ================")
-        print(f"Clean Water Tank     : {clean_water} L")
-        print(f"Required Water       : {current_water_need} L")
-        print(f"Moisture             : %{field["water"]}")
-        
-        if self.is_field_fully_watered(field):
-            result="💧 No Irrigation Needed"
-        elif clean_water<current_water_need:
-            print(f"Water Shortage     : {current_water_need-clean_water} L")
-            print(f"Irrigation Time      : {water_time} hours")
-            result="❌ Insufficient Water Amount"
-        else:
-            print(f"Irrigation Time      : {water_time} hours")
-            result="✅ Irrigable"
-
-        print(f"Status               : {result}     ")
-        print("===============================================")
-        
-        return result
-    
-    def show_field_water_cost(self,field,foods_file):
-        return self.calculate_field_water_need(field,foods_file)*config.IRRIGATION_CONSTANT
-    
-    def show_all_fields_water_cost(self,save_file,foods_file):
-        return self.calculate_all_fields_water_need(save_file,foods_file)*config.IRRIGATION_CONSTANT
-    
-    def create_costs(self,save_file,foods_file):
-        table_data=[]
-        fields=field=save_file["fields"]
-        
-        title=["Field","Moisture","Irrigation Cost","Estimated Time","Status"]
-        for index,field in enumerate(fields):
-            real_water_need=self.calculate_current_water_need(field,foods_file)
-            field_time_need=self.calculate_irrigation_time(save_file,real_water_need)
-            humidity=field["water"]
-            real_water_need=self.calculate_current_water_need(field,foods_file)
-            if humidity==100:
-                condition="❌ Cannot Irrigate"
+        if is_all_fields:
+            if is_done:
+                print("All Fields Irrigated Successfully.")
             else:
-                condition="💧 Irrigable"
-            table_data.append([f"Field {index}",humidity,real_water_need,field_time_need,condition])
-        
-        total_water_need=sum(self.calculate_current_water_need(field,foods_file) for field in fields)
-        total_time_need=self.calculate_irrigation_time(save_file,total_water_need)
-        
-        table_data.append(["All Fields","-",total_water_need,total_time_need,"-"])
-        return table_data,title
-    
-    
-    def show_costs(self,save_file,foods_file):
-        table_data,title=self.create_costs(save_file,foods_file)
-        self.table.show_table(table_data,title)
-    #OPTIONS
-    
-    def select_water_mode(self,field_index):
-        choose=self.commands.choose(0,1,f"0 - Continue from Field {field_index}\n1 - Change Field\nCommand:")
-        return choose
-    
-    
-    def confirm_watering(self):
-        choose=self.commands.choose(0,1,"0 - Start Irrigation\n1 - Cancel\nCommand:") 
-        if choose==1:
-            return "field_menu"
-        
-        
-    def after_water_menu(self):
-        choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Do Another Action\n2 - Main Menu\nCommand:") 
-        if choose==0:
-            return "another_field"
-        elif choose==1:
-            return "field_menu"
+                print("Irrigation Stopped Due to Insufficient Resources.")
+            for index, field in enumerate(save_file["fields"]):
+                print(f"Field {index} Moisture: {(field['water']):.1f}%")
         else:
-            return "main_menu"
-    
-    #IRRIGATION 
-    def water_field(self,field,foods_file,save_file):
-        water_cost=self.calculate_field_water_need(field,foods_file)*config.IRRIGATION_CONSTANT
-        energy=save_file["player_condition"]["energy"]
-        current_speed=self.calculate_irrigation_speed(energy)
-        need_hour=self.calculate_irrigation_time(save_file,water_cost)
-        for i in range (need_hour):
-            time_system.TimeManager().pass_hour(save_file)
-            self.save_manager.save_file(config.SAVE_PATH,save_file)
-            #Energy and other values decrease
-            #update water and other values
-            #energy changes time to time
-
-        
-    
-    #CONTROLLER   
-    def water_controller(self,save_file,foods_file,field_index):
-        field=save_file["fields"][field_index]
-        #print(f"\n=============== Field {field_index} ===============")
-        clean_water=self.get_clean_water(save_file)
-        self.show_costs(save_file,foods_file)
-        choose=self.select_water_mode(field_index)
-        
-        if choose==1:
-            field_choose=self.commands.choose(0,len(save_file["fields"]),f"Select Field\nFor One Field -> [0,{len(save_file["fields"])-1}]\nFor All Fields -> {len(save_file["fields"])}\nCommand:")
-            if field_choose==len(save_file["fields"]):
-                ...
+            if is_done:
+                print(f"Field {save_file['fields'].index(field)} Irrigated Successfully.")
             else:
-                field=save_file["fields"][field_choose]
-                
-                
-        table_data,title=self.create_field_water_table(field,foods_file,save_file)
-        self.table.show_table(table_data,title)          
-        self.create_crops_water_table(field,foods_file)
-        irrigation_result=self.show_irrigation_info(field,save_file,foods_file)
-        if irrigation_result=="✅ Irrigable":
-            result=self.confirm_watering()
+                print("Irrigation Stopped Due to Insufficient Resources.")
+            print(f"Field {save_file['fields'].index(field)} Moisture: {(field['water']):.1f}%")
+        if is_all_fields:    
+            choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
+            return "another_field" if choose == 0 else "main_menu"
         else:
-            command=self.commands.choose(0,2,"0 - Select Another Field\n1 - Do Another Action\n2 - Main Menu\nCommand:")
-            if command==0:
+            choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Field Menu\n2 - Main Menu\nCommand:")
+            if choose==0:
                 return "another_field"
-            elif command==1:
+            elif choose==1:
                 return "field_menu"
             else:
                 return "main_menu"
-        
-        if result=="field_menu":
-            return "field_menu"
-        self.water_field(field,foods_file,save_file) 
+
+    def water_controller(self,save_file, foods_file, field_index):
+        self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,False)
+        select=self.commands.choose(0,1,f"0 - Continue from Field {field_index}\n1 - Change Field\nCommand:")
+        if select==0:#Same Field
+            self.show_crops_water_info(save_file["fields"][field_index], foods_file)
+            field=save_file["fields"][field_index]
+            status=self.show_field_irrigation_info(field, save_file, foods_file,False)
+            if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                return self.cannot_irrigate_menu(status,False)
+            
+            confirm=self.confirm_irrigation()
+            if confirm=="irrigation_process":
+                is_done=self.irigate_field(field,save_file,foods_file)
+                return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
+
+            else:
+                return confirm
+
+            
+        else:#Change Field
+            show_all_fields, title=self.show_all_fields_overview(save_file, foods_file)
+            self.table.show_table(show_all_fields,title)
+            choose=self.commands.choose(0,len(save_file["fields"]),f"Select a Field to Irrigate:\nTo Irrigate All Fields, Select {len(save_file['fields'])}\nCommand:")
             
             
+            
+            if choose == len(save_file['fields']):#Irrigate All Fields
+                status=self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
+                if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                    return self.cannot_irrigate_menu(status,True)
+                    
+                confirm=self.confirm_irrigation()
+                if confirm=="irrigation_process":
+                    all_done = True
+                    for field in save_file["fields"]:
+                        if field["water"] < 100:
+                            is_success = self.irigate_field(field, save_file, foods_file)
+                            if not is_success:
+                                all_done = False
+                                break
+                    return self.after_irrigation_menu(save_file, foods_file, all_done, None, True)
+                else:
+                    return confirm
+            
+            
+            else:#Irrigate Selected Field
+                field=save_file["fields"][choose]
+                self.show_crops_water_info(save_file["fields"][choose], foods_file)
+                status=self.show_field_irrigation_info(field, save_file, foods_file,False)
+                if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
+                    return self.cannot_irrigate_menu(status,False)
+                
+                confirm=self.confirm_irrigation()
+                if confirm=="irrigation_process":
+                    is_done=self.irigate_field(field,save_file,foods_file)
+                    return self.after_irrigation_menu(save_file,foods_file,is_done,field,False)
+                else:
+                    return confirm
+
+    def confirm_irrigation(self):
+        confirm=self.commands.choose(0,1,"0 - Start Irrigation\n1 - Cancel\nCommand:")
+        if confirm == 1:
+            what_menu=self.commands.choose(0,1,"0 - Field Menu\n1 - Main Menu\nCommand:")
+            what_menu="field_menu" if what_menu==0 else "main_menu"
+            return what_menu            
+        else:
+            return "irrigation_process"
+    def cannot_irrigate_menu(self,reason,is_all_fields):
+        print("The field cannot be irrigated due to the following reason:",reason)
+        if is_all_fields:
+            choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
+            return "another_field" if choose == 0 else "main_menu"
+        else:
+            choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Field Menu\n2 - Main Menu\nCommand:")
+            if choose==0:
+                return "another_field"
+            elif choose==1:
+                return "field_menu"
+            else:
+                return "main_menu"
+    def irrigation_simulation(self,field,save_file,applied_water,using_energy,moisture_change,is_start_new):
+        now_time = save_file["time_system"]["time"]
+        moisture=field["water"]
+        clean_water=save_file["base_status"]["clean_water"]["current"]
+        energy=save_file["player_condition"]["energy"]
+        filled = int(field["water"] / 10)
+        bar = "█" * filled + "░" * (10 - filled)
+        field_index=save_file["fields"].index(field)
+        if is_start_new:
+            print(f">>> Starting Irrigation for Field {field_index}...")
+            print("--------------------------------------------------------------------------------------------------")
+        time.sleep(0.5)
+        print(f"[Clock: {now_time:02d}:00] [{bar}] Moisture: %{moisture:.1f} (+{moisture_change:.1f}%) | Water: -{applied_water:.1f}L | Tank: {clean_water:.1f}L | Energy: {energy} (-{using_energy})")
         
-        
+       
         
     
 class AgricultureController:
@@ -634,7 +688,7 @@ class AgricultureController:
         self.menu_data=MenuData()
         self.plant_manager = PlantManager(self.field_manager)
         self.harvest_manager=HarvestManager()
-        self.water_manager=WaterManager()
+        self.irrigation_manager=IrrigationManager()
         self.save_file = None
         self.foods_file = None
         self.current_field = None
@@ -668,7 +722,7 @@ class AgricultureController:
                 else:
                     return result       
             elif field_menu_choose==2:
-                result=self.water_manager.water_controller(self.save_file,self.foods_file,self.current_field_index)
+                result=self.irrigation_manager.water_controller(self.save_file,self.foods_file,self.current_field_index)
                 if result=="another_field":
                     break
                 elif result=="main_menu":

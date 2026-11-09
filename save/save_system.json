@@ -1,14 +1,14 @@
 {
     "save_version": 2,
     "time_system": {
-        "time": 29,
-        "day_loop": "Night"
+        "time": 44,
+        "day_loop": "Evening"
     },
     "player_condition": {
         "health": 100,
         "oxygen": 100,
         "satiety": 75,
-        "energy": 55,
+        "energy": 36,
         "morale": 38,
         "water": 20,
         "location": "central_base",
@@ -162,7 +162,7 @@
         },
         "clean_water": {
             "capacity": 100,
-            "current": 50
+            "current": 16.00000000000001
         },
         "stations": {
             "basic_workshop": {
@@ -308,30 +308,38 @@
     "fields": [
         {
             "capacity": 30,
-            "water": 10,
+            "water": 100,
             "fertility": 50,
             "temperature": 22,
             "crops": [
                 {
+                    "food": "potato",
+                    "amount": 10,
+                    "plant_time": 90,
+                    "elapsed_days": 0,
+                    "ready": 0,
+                    "hp": 100
+                },
+                {
                     "food": "lentil",
-                    "amount": 20,
+                    "amount": 10,
                     "plant_time": 110,
                     "elapsed_days": 0,
                     "ready": 0,
                     "hp": 100
-                },
+                }
+            ]
+        },
+        {
+            "capacity": 30,
+            "water": 100,
+            "fertility": 60,
+            "temperature": 24,
+            "crops": [
                 {
-                    "food": "potato",
+                    "food": "rice",
                     "amount": 5,
-                    "plant_time": 90,
-                    "elapsed_days": 0,
-                    "ready": 0,
-                    "hp": 100
-                },
-                {
-                    "food": "potato",
-                    "amount": 5,
-                    "plant_time": 90,
+                    "plant_time": 150,
                     "elapsed_days": 0,
                     "ready": 0,
                     "hp": 100
@@ -348,38 +356,6 @@
                     "food": "onion",
                     "amount": 10,
                     "plant_time": 85,
-                    "elapsed_days": 0,
-                    "ready": 0,
-                    "hp": 100
-                },
-                {
-                    "food": "spinach",
-                    "amount": 5,
-                    "plant_time": 35,
-                    "elapsed_days": 0,
-                    "ready": 0,
-                    "hp": 100
-                },
-                {
-                    "food": "chickpea",
-                    "amount": 2,
-                    "plant_time": 120,
-                    "elapsed_days": 0,
-                    "ready": 0,
-                    "hp": 100
-                },
-                {
-                    "food": "rice",
-                    "amount": 1,
-                    "plant_time": 150,
-                    "elapsed_days": 0,
-                    "ready": 0,
-                    "hp": 100
-                },
-                {
-                    "food": "arugula",
-                    "amount": 2,
-                    "plant_time": 20,
                     "elapsed_days": 0,
                     "ready": 0,
                     "hp": 100
