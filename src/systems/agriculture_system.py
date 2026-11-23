@@ -621,9 +621,15 @@ class WaterManager:
         self.water_field(field,foods_file,save_file) 
             
             
-        
-        
-        
+class FertilizeManager:     
+
+    def __init__(self):
+        ...
+
+    def get_fertilizer_amount(self, save_file):
+        return save_file["base_status"]["fertilizer"]["current"]
+    
+    
     
 class AgricultureController:
     def __init__(self):
