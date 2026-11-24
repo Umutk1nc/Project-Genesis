@@ -8,7 +8,7 @@ import time_system
 
 class MenuData:
     def __init__(self):
-        
+
         self.field_menu_title="Field"
         self.field_menu_chooses=["Plant","Harvest","Irrigate","Fertilize","Select Another Field","Main Menu"]
    
@@ -541,7 +541,7 @@ class IrrigationManager:
                     unused_energy = math.floor((1 - (applied_water / irrigation_speed)) * config.IRRIGATION_ENERGY_COST)
                     save_file["player_condition"]["energy"]+=unused_energy
                     using_energy -= unused_energy
-                
+
                 save_file["base_status"]["clean_water"]["current"]-=applied_water
                 required_water-=applied_water
                 self.time_manager.pass_hour(save_file)
@@ -554,7 +554,6 @@ class IrrigationManager:
 
 
 
-                
     def after_irrigation_menu(self,save_file,foods_file,is_done,field,is_all_fields):
         print("================ Irrigation Summary  ================")
         if is_all_fields:
@@ -570,7 +569,7 @@ class IrrigationManager:
             else:
                 print("Irrigation Stopped Due to Insufficient Resources.")
             print(f"Field {save_file['fields'].index(field)} Moisture: {(field['water']):.1f}%")
-        if is_all_fields:    
+        if is_all_fields:
             choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
             return "another_field" if choose == 0 else "main_menu"
         else:
@@ -591,7 +590,7 @@ class IrrigationManager:
             status=self.show_field_irrigation_info(field, save_file, foods_file,False)
             if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
                 return self.cannot_irrigate_menu(status,False)
-            
+
             confirm=self.confirm_irrigation()
             if confirm=="irrigation_process":
                 is_done=self.irigate_field(field,save_file,foods_file)
@@ -600,19 +599,19 @@ class IrrigationManager:
             else:
                 return confirm
 
-            
+
         else:#Change Field
             show_all_fields, title=self.show_all_fields_overview(save_file, foods_file)
             self.table.show_table(show_all_fields,title)
             choose=self.commands.choose(0,len(save_file["fields"]),f"Select a Field to Irrigate:\nTo Irrigate All Fields, Select {len(save_file['fields'])}\nCommand:")
-            
-            
-            
+
+
+
             if choose == len(save_file['fields']):#Irrigate All Fields
                 status=self.show_field_irrigation_info(save_file["fields"][field_index], save_file, foods_file,True)
                 if status=="❌ Insufficient Water Amount" or status=="💧 No Irrigation Needed":
                     return self.cannot_irrigate_menu(status,True)
-                    
+
                 confirm=self.confirm_irrigation()
                 if confirm=="irrigation_process":
                     all_done = True
@@ -625,8 +624,8 @@ class IrrigationManager:
                     return self.after_irrigation_menu(save_file, foods_file, all_done, None, True)
                 else:
                     return confirm
-            
-            
+
+
             else:#Irrigate Selected Field
                 field=save_file["fields"][choose]
                 self.show_crops_water_info(save_file["fields"][choose], foods_file)
@@ -646,7 +645,7 @@ class IrrigationManager:
         if confirm == 1:
             what_menu=self.commands.choose(0,1,"0 - Field Menu\n1 - Main Menu\nCommand:")
             what_menu="field_menu" if what_menu==0 else "main_menu"
-            return what_menu            
+            return what_menu
         else:
             return "irrigation_process"
     def cannot_irrigate_menu(self,reason,is_all_fields):
@@ -675,6 +674,8 @@ class IrrigationManager:
             print("--------------------------------------------------------------------------------------------------")
         time.sleep(0.5)
         print(f"[Clock: {now_time:02d}:00] [{bar}] Moisture: %{moisture:.1f} (+{moisture_change:.1f}%) | Water: -{applied_water:.1f}L | Tank: {clean_water:.1f}L | Energy: {energy} (-{using_energy})")
+
+
         
 
 class FertilizeManager:     

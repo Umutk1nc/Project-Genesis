@@ -2,7 +2,7 @@ class TimeManager:
     def __init__(self):
         pass
 
-    
+
     def time_loop(self,save_file):
         time=save_file["time_system"]["time"]
         if time%24<6:
