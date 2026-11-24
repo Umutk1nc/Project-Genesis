@@ -626,10 +626,47 @@ class FertilizeManager:
     def __init__(self):
         ...
 
+    #GET AND CALCULATE
     def get_fertilizer_amount(self, save_file):
         return save_file["base_status"]["fertilizer"]["current"]
     
+    def calculate_fertilizer_needed(self, crops, foods_file):
+        # total_fertilizer_needed = Number of crops *  fertilizer requirement per crop
+        #return total_fertilizer_needed
+        ...
+
+    def calculate_field_total_fertilizer_need(self, field, foods_file):
+        ...
+
+    def calculate_all_fields_total_fertilizer_need(self, save_file, foods_file):
+        ...
+    def calculate_required_fertilizer (self, field, foods_file):
+        ...
+
+    #SHOW AND CREATE
+    def show_field_fertilizer_info(self, field, save_file, foods_file):
+        ...
+
+    def show_crops_fertilizer_table(self, field, foods_file):
+        ...
+
+    def show_allfields_fertilizer_overview(self, save_file, foods_file):
+        ...
+
+    #ACTIONS AND OPTIONS
+
+    def apply_fertilizer(self, field, foods_file, save_file):
+        ...
+
+    def after_fertilize_menu(self,is_fertilized):
+        ...
+
+    def cannot_fertilize_menu(self,reason):
+        ...
     
+    #CONTROLLER
+    def fertilize_controller(self, save_file, foods_file, field_index):
+        ...    
     
 class AgricultureController:
     def __init__(self):
