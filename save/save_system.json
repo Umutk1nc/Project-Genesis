@@ -167,7 +167,7 @@
         "fertilizer": {
             "capacity": 100,
             "current": 30
-        },
+        },        
         "stations": {
             "basic_workshop": {
                 "unlock": true,

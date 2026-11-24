@@ -723,7 +723,8 @@ class FertilizeManager:
     
     #CONTROLLER
     def fertilize_controller(self, save_file, foods_file, field_index):
-        ...    
+        ...         
+        
     
 class AgricultureController:
     def __init__(self):
