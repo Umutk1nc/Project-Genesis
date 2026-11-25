@@ -8,7 +8,7 @@
         "health": 100,
         "oxygen": 100,
         "satiety": 75,
-        "energy": 11,
+        "energy": 51,
         "morale": 38,
         "water": 20,
         "location": "central_base",
@@ -337,12 +337,12 @@
         {
             "capacity": 30,
             "water": 50,
-            "fertility": 60,
+            "fertility": 0,
             "temperature": 24,
             "crops": [
                 {
                     "food": "rice",
-                    "amount": 5,
+                    "amount": 30,
                     "plant_time": 150,
                     "elapsed_days": 0,
                     "ready": 0,
@@ -353,7 +353,7 @@
         {
             "capacity": 20,
             "water": 100,
-            "fertility": 75,
+            "fertility": 0,
             "temperature": 22,
             "crops": [
                 {

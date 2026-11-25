@@ -686,19 +686,55 @@ class FertilizeManager:
     #GET AND CALCULATE
     def get_fertilizer_amount(self, save_file):
         return save_file["base_status"]["fertilizer"]["current"]
+
     
-    def calculate_fertilizer_needed(self, crops, foods_file):
-        # total_fertilizer_needed = Number of crops *  fertilizer requirement per crop
-        #return total_fertilizer_needed
-        ...
+    def calculate_fertilizer_needed(self, crop, foods_file):
+        key=crop["food"]
+        amount=crop["amount"]
+        fertilizer_need_coefficient=foods_file[key]["fertilizer_need"]
+        return fertilizer_need_coefficient*amount
+        
+
 
     def calculate_field_total_fertilizer_need(self, field, foods_file):
-        ...
+        field_total_fertilizer_need = 0
+        for crop in field["crops"]:
+           field_total_fertilizer_need += self.calculate_fertilizer_needed(crop, foods_file)
+        
+        return field_total_fertilizer_need
+
 
     def calculate_all_fields_total_fertilizer_need(self, save_file, foods_file):
-        ...
+        all_fields_total_fertilizer_need = 0
+        for field in save_file["fields"]:
+            all_fields_total_fertilizer_need += self.calculate_field_total_fertilizer_need(field, foods_file)
+        
+        return all_fields_total_fertilizer_need
+    
+    
+    
     def calculate_required_fertilizer (self, field, foods_file):
-        ...
+        field_total_fertilizer_need = self.calculate_field_total_fertilizer_need(field, foods_file)
+        return field_total_fertilizer_need*(100-field["fertility"])/100
+    
+    def calculate_required_fertilizer_all_fields(self, save_file, foods_file):
+        all_fields_total_fertilizer_need = 0
+        for field in save_file["fields"]:
+            all_fields_total_fertilizer_need += self.calculate_required_fertilizer(field, foods_file)
+        return all_fields_total_fertilizer_need
+
+    def calculate_fertilization_speed(self, energy):
+        return (energy/100) * config.FERTILIZATION_SPEED_CONSTANT
+    
+    def calculate_time(self,required_fertilizer, energy):
+        time_needed = 0
+        while energy > 0 and required_fertilizer > 0:
+            speed = self.calculate_fertilization_speed(energy)
+            energy -= config.FERTILIZATION_ENERGY_COST
+            required_fertilizer -= speed
+            time_needed+=1
+
+        return time_needed         
 
     #SHOW AND CREATE
     def show_field_fertilizer_info(self, field, save_file, foods_file):
@@ -723,7 +759,11 @@ class FertilizeManager:
     
     #CONTROLLER
     def fertilize_controller(self, save_file, foods_file, field_index):
-        ...         
+        calculated_required_fertilizer = self.calculate_required_fertilizer(save_file["fields"][field_index], foods_file)
+        time_needed = self.calculate_time(calculated_required_fertilizer, save_file["player_condition"]["energy"])
+        print(f"Estimated Time Needed: {time_needed} hours")
+        return "field_menu"  # Later, I update this to return the appropriate menu based on user input and actions taken.
+                 
         
     
 class AgricultureController:
@@ -736,6 +776,7 @@ class AgricultureController:
         self.plant_manager = PlantManager(self.field_manager)
         self.harvest_manager=HarvestManager()
         self.irrigation_manager=IrrigationManager()
+        self.fertilize_manager=FertilizeManager()
         self.save_file = None
         self.foods_file = None
         self.current_field = None
@@ -776,8 +817,13 @@ class AgricultureController:
                     return "main_menu"
                 
             elif field_menu_choose==3:
-                #Fertilize
-                ...
+                result=self.fertilize_manager.fertilize_controller(self.save_file,self.foods_file,self.current_field_index)
+                if result=="another_field":
+                    break
+                elif result=="field_menu":
+                    continue
+                else:
+                    return result
             elif field_menu_choose==4:
                 return "another_field"        
             else:
