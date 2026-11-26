@@ -681,7 +681,7 @@ class IrrigationManager:
 class FertilizeManager:     
 
     def __init__(self):
-        ...
+        self.table = helpers.Table()
 
     #GET AND CALCULATE
     def get_fertilizer_amount(self, save_file):
@@ -720,7 +720,8 @@ class FertilizeManager:
     def calculate_required_fertilizer_all_fields(self, save_file, foods_file):
         all_fields_total_fertilizer_need = 0
         for field in save_file["fields"]:
-            all_fields_total_fertilizer_need += self.calculate_required_fertilizer(field, foods_file)
+            if field["fertility"] < 100:
+                all_fields_total_fertilizer_need += self.calculate_required_fertilizer(field, foods_file)
         return all_fields_total_fertilizer_need
 
     def calculate_fertilization_speed(self, energy):
@@ -734,17 +735,76 @@ class FertilizeManager:
             required_fertilizer -= speed
             time_needed+=1
 
-        return time_needed         
+        return time_needed       
+
+    def calculate_fertilization_feasibility(self, required_fertilizer, fertilizer_amount, energy):
+        if required_fertilizer == 0:
+            return "💧 No Fertilization Needed"
+        elif fertilizer_amount < required_fertilizer:
+            return "❌ Insufficient Fertilizer Amount"
+        elif energy < config.FERTILIZATION_ENERGY_THRESHOLD:
+            return "❌ Insufficient Energy"
+        else:
+            return "✅ Fertilizable"      
 
     #SHOW AND CREATE
-    def show_field_fertilizer_info(self, field, save_file, foods_file):
-        ...
+    def show_field_fertilizer_info(self, field, save_file, foods_file,is_all_fields):
+        fertilizer_stock = self.get_fertilizer_amount(save_file)
+        energy = save_file["player_condition"]["energy"]
+        if is_all_fields:
+            # Show information for all fields
+            total_required_fertilizer = self.calculate_required_fertilizer_all_fields(save_file, foods_file)
+            total_time_needed = self.calculate_time(total_required_fertilizer, energy)
+            fertilization_status=self.calculate_fertilization_feasibility(total_required_fertilizer, fertilizer_stock, energy)
+        else:
+            # Show information for a single field
+            total_required_fertilizer = self.calculate_required_fertilizer(field, foods_file)
+            total_time_needed = self.calculate_time(total_required_fertilizer, energy)
+            fertilization_status=self.calculate_fertilization_feasibility(total_required_fertilizer, fertilizer_stock, energy)
+        
+        print("================ Fertilization Summary  ================")
+        print(f"Fertilizer Stock     : {fertilizer_stock} units")
+        print(f"Required Fertilizer  : {total_required_fertilizer} units")
+        print(f"Estimated Time Needed: {total_time_needed} hours")
+        print(f"Fertilization Status : {fertilization_status}")
+        print("==================================================")
+            
+        return fertilization_status
 
     def show_crops_fertilizer_table(self, field, foods_file):
-        ...
+        field_crops = field["crops"]
+        table_data = []
+        title = ["Plant", "Amount", "Fertilizer Need", "Status"]
+        for crop in field_crops:
+            key = crop["food"]
+            amount = crop["amount"]
+            name = self.general.food_finder(key, "name", foods_file)
+            fertilizer_need = self.general.food_finder(key, "fertilizer_need", foods_file)
+            total_fertilizer_need = fertilizer_need * amount * (100 - field["fertility"]) / 100
+            if fertilizer_need < 2:
+                result = "🟢 Needs Little Fertilizer"
+            elif fertilizer_need == 2:
+                result = "🟡 Normal"
+            else:
+                result = "🔴 Needs A Lot of Fertilizer"
+            table_data.append([name, amount, total_fertilizer_need, result])
+        self.table.show_table(table_data, title)
 
-    def show_allfields_fertilizer_overview(self, save_file, foods_file):
-        ...
+    def show_all_fields_fertilizer_overview(self, save_file, foods_file):
+        fields = save_file["fields"]
+        table_data = []
+        energy = save_file["player_condition"]["energy"]
+        title = ["Field", "Fertility", "Fertilizer Cost", "Estimated Time", "Status"]
+        for index, field in enumerate(fields):
+            required_fertilizer = self.calculate_required_fertilizer(field, foods_file)
+            time_needed = self.calculate_time(required_fertilizer, energy)
+            fertility = field["fertility"]
+            if fertility == 100:
+                status = "❌ Cannot Fertilize"
+            else:
+                status = "🌱 Fertilizable"
+            table_data.append([f"Field {index}", fertility, required_fertilizer, time_needed, status])
+        self.table.show_table(table_data, title)
 
     #ACTIONS AND OPTIONS
 
