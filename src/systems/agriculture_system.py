@@ -682,6 +682,8 @@ class FertilizeManager:
 
     def __init__(self):
         self.table = helpers.Table()
+        self.save_manager = helpers.SaveManager()
+        self.time_manager = time_system.TimeManager()
 
     #GET AND CALCULATE
     def get_fertilizer_amount(self, save_file):
@@ -808,8 +810,51 @@ class FertilizeManager:
 
     #ACTIONS AND OPTIONS
 
+    def fertilizing_simulation(self, field, save_file, applied_fertilizer, using_energy, fertility_change, is_start_new):
+        now_time = save_file["time_system"]["time"]
+        fertility = field["fertility"]
+        filled = int(fertility / 10)
+        bar = "█" * filled + "░" * (10 - filled)
+        field_index = save_file["fields"].index(field)
+        if is_start_new:
+            print(f">>> Starting Fertilization for Field {field_index}...")
+            print("--------------------------------------------------------------------------------------------------")
+        time.sleep(0.5)
+        print(f"[Clock: {now_time:02d}:00] [{bar}] Fertility: %{fertility:.1f} (+{fertility_change:.1f}%) | Fertilizer: -{applied_fertilizer:.1f} units | Energy: {save_file['player_condition']['energy']} (-{using_energy})")
+    
     def apply_fertilizer(self, field, foods_file, save_file):
-        ...
+        total_fertilizer_need= self.calculate_field_total_fertilizer_need(field, foods_file)
+        required_fertilizer = self.calculate_required_fertilizer(field, foods_file)
+        available_fertilizer = self.get_fertilizer_amount(save_file)
+        is_start_new = True
+        while required_fertilizer > 0:
+            speed = self.calculate_fertilization_speed(save_file["player_condition"]["energy"])
+            using_energy = config.FERTILIZATION_ENERGY_COST
+            if save_file["player_condition"]["energy"] < config.FERTILIZATION_ENERGY_THRESHOLD:
+                print("Player is too exhausted to fertilize!")
+                break
+            elif available_fertilizer <= 0:
+                print("Not enough fertilizer to fertilize!")
+                break
+            applied_fertilizer = min(speed, required_fertilizer, available_fertilizer)# Apply the fertilizer
+            required_fertilizer -= applied_fertilizer# Reduce the required fertilizer
+            available_fertilizer -= applied_fertilizer# Reduce the available fertilizer
+            field["fertility"] += (applied_fertilizer / total_fertilizer_need) * 100# Increase the fertility of the field
+            save_file["player_condition"]["energy"] -= using_energy
+            if field["fertility"] >= 100:
+                field["fertility"] = 100
+                # Unused energy should be returned to the player
+                unused_energy = math.floor((1 - (applied_fertilizer / speed)) * config.FERTILIZATION_ENERGY_COST)
+                save_file["player_condition"]["energy"] += unused_energy
+                using_energy -= unused_energy
+            self.time_manager.pass_hour(save_file)# Pass an hour in the game
+            save_file["base_status"]["fertilizer"]["current"]= available_fertilizer# Update the fertilizer stock
+            fertility_change = (applied_fertilizer / total_fertilizer_need) * 100
+            self.fertilizing_simulation(field, save_file, applied_fertilizer, using_energy, fertility_change, is_start_new)
+            is_start_new = False
+        self.save_manager.save_file(config.SAVE_PATH, save_file)
+        print("--------------------------------------------------------------------------------------------------")
+        return field["fertility"] >= 100
 
     def after_fertilize_menu(self,is_fertilized):
         ...
