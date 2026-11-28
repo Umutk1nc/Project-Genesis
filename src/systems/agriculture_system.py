@@ -685,6 +685,8 @@ class FertilizeManager:
         self.save_manager = helpers.SaveManager()
         self.time_manager = time_system.TimeManager()
         self.commands = helpers.Commands()
+        self.general=helpers.General()
+
 
     #GET AND CALCULATE
     def get_fertilizer_amount(self, save_file):
@@ -916,9 +918,55 @@ class FertilizeManager:
          
     #CONTROLLER
     def fertilize_controller(self, save_file, foods_file, field_index):
-       ...
-        
-    
+        status=self.show_field_fertilizer_info(save_file["fields"][field_index], save_file, foods_file,False)
+        select=self.commands.choose(0,1,f"0 - Continue from Field {field_index}\n1 - Change Field\nCommand:")
+        if select==0:#Same Field
+            self.show_crops_fertilizer_table(save_file["fields"][field_index], foods_file)
+            field=save_file["fields"][field_index]
+            status=self.show_field_fertilizer_info(field, save_file, foods_file,False)
+            if status!="✅ Fertilizable":
+                return self.cannot_fertilize_menu(status,False,field_index)
+
+            confirm=self.confirm_fertilization()
+            if confirm=="fertilization_process":
+                is_fertilized=self.apply_fertilizer(field,foods_file,save_file)
+                return self.after_fertilize_menu(save_file,is_fertilized,field,False)
+
+            else:
+                return confirm
+        else:#Change Field
+            self.show_all_fields_fertilizer_overview(save_file, foods_file)
+            choose=self.commands.choose(0,len(save_file["fields"]),f"Select a Field to Fertilize:\nTo Fertilize All Fields, Select {len(save_file['fields'])}\nCommand:")
+            if choose == len(save_file['fields']):#Fertilize All Fields
+                status=self.show_field_fertilizer_info(save_file["fields"][field_index], save_file, foods_file,True)
+                if status!="✅ Fertilizable":
+                    return self.cannot_fertilize_menu(status,True)
+
+                confirm=self.confirm_fertilization()
+                if confirm=="fertilization_process":
+                    all_done = True
+                    for field in save_file["fields"]:
+                        if field["fertility"] < 100:
+                            is_success = self.apply_fertilizer(field, foods_file, save_file)
+                            if not is_success:
+                                all_done = False
+                                break
+                    return self.after_fertilize_menu(save_file, all_done, None, True)
+                else:
+                    return confirm
+            else:#Fertilize Selected Field
+                field=save_file["fields"][choose]
+                self.show_crops_fertilizer_table(save_file["fields"][choose], foods_file)
+                status=self.show_field_fertilizer_info(field, save_file, foods_file,False)
+                if status!="✅ Fertilizable":
+                    return self.cannot_fertilize_menu(status,False,choose)
+                
+                confirm=self.confirm_fertilization()
+                if confirm=="fertilization_process":
+                    is_fertilized=self.apply_fertilizer(field,foods_file,save_file)
+                    return self.after_fertilize_menu(save_file,is_fertilized,field,False)
+                else:
+                    return confirm
 class AgricultureController:
     def __init__(self):
         self.save_manager = helpers.SaveManager()
