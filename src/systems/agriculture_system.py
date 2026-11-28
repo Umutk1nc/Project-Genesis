@@ -734,7 +734,7 @@ class FertilizeManager:
     
     def calculate_time(self,required_fertilizer, energy):
         time_needed = 0
-        while energy > 0 and required_fertilizer > 0:
+        while energy > config.FERTILIZATION_ENERGY_THRESHOLD and required_fertilizer > 0:
             speed = self.calculate_fertilization_speed(energy)
             energy -= config.FERTILIZATION_ENERGY_COST
             required_fertilizer -= speed
@@ -744,7 +744,7 @@ class FertilizeManager:
 
     def calculate_fertilization_feasibility(self, required_fertilizer, fertilizer_amount, energy):
         if required_fertilizer == 0:
-            return "💧 No Fertilization Needed"
+            return "🌱 No Fertilization Needed"
         elif fertilizer_amount < required_fertilizer:
             return "❌ Insufficient Fertilizer Amount"
         elif energy < config.FERTILIZATION_ENERGY_THRESHOLD:
@@ -770,6 +770,8 @@ class FertilizeManager:
         print("================ Fertilization Summary  ================")
         print(f"Fertilizer Stock     : {fertilizer_stock} units")
         print(f"Required Fertilizer  : {total_required_fertilizer} units")
+        if total_required_fertilizer > fertilizer_stock:
+            print(f"Fertilizer Shortage     : {max(0, total_required_fertilizer - fertilizer_stock)} units")
         print(f"Estimated Time Needed: {total_time_needed} hours")
         print(f"Fertilization Status : {fertilization_status}")
         print("==================================================")
