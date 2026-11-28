@@ -1,7 +1,5 @@
 import math
 import time
-from attrs import field
-from streamlit import success
 import config
 import helpers
 import time_system
@@ -1016,6 +1014,8 @@ class AgricultureController:
                 result=self.irrigation_manager.water_controller(self.save_file,self.foods_file,self.current_field_index)
                 if result=="another_field":
                     break
+                elif result=="field_menu":
+                    continue
                 elif result=="main_menu":
                     return "main_menu"
                 
