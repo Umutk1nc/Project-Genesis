@@ -684,6 +684,7 @@ class FertilizeManager:
         self.table = helpers.Table()
         self.save_manager = helpers.SaveManager()
         self.time_manager = time_system.TimeManager()
+        self.commands = helpers.Commands()
 
     #GET AND CALCULATE
     def get_fertilizer_amount(self, save_file):
@@ -808,7 +809,7 @@ class FertilizeManager:
             table_data.append([f"Field {index}", fertility, required_fertilizer, time_needed, status])
         self.table.show_table(table_data, title)
 
-    #ACTIONS AND OPTIONS
+    #ACTIONS
 
     def fertilizing_simulation(self, field, save_file, applied_fertilizer, using_energy, fertility_change, is_start_new):
         now_time = save_file["time_system"]["time"]
@@ -855,20 +856,67 @@ class FertilizeManager:
         self.save_manager.save_file(config.SAVE_PATH, save_file)
         print("--------------------------------------------------------------------------------------------------")
         return field["fertility"] >= 100
+    #MENU ASSISTANTS
 
-    def after_fertilize_menu(self,is_fertilized):
-        ...
+    def confirm_fertilization(self):
+        confirm=self.commands.choose(0,1,"0 - Start Fertilization\n1 - Cancel\nCommand:")
+        if confirm == 1:
+            what_menu=self.commands.choose(0,1,"0 - Field Menu\n1 - Main Menu\nCommand:")
+            what_menu="field_menu" if what_menu==0 else "main_menu"
+            return what_menu
+        else:
+            return "fertilization_process"
 
-    def cannot_fertilize_menu(self,reason):
-        ...
-    
+
+
+    def after_fertilize_menu(self,save_file,is_fertilized,field,is_all_fields):
+        print("================ Fertilization Summary  ================")
+        if is_all_fields:
+            if is_fertilized:
+                print("All Fields Fertilized Successfully.")
+            else:
+                print("Fertilization Stopped Due to Insufficient Resources.")
+            for index, field in enumerate(save_file["fields"]):
+                print(f"Field {index} Fertility: {(field['fertility']):.1f}%")
+        else:
+            if is_fertilized:
+                print(f"Field {save_file['fields'].index(field)} Fertilized Successfully.")
+            else:
+                print("Fertilization Stopped Due to Insufficient Resources.")
+            print(f"Field {save_file['fields'].index(field)} Fertility: {(field['fertility']):.1f}%")
+        
+        if is_all_fields:
+            choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
+            return "another_field" if choose == 0 else "main_menu"
+        else:
+            choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Field Menu\n2 - Main Menu\nCommand:")
+            if choose==0:
+                return "another_field"
+            elif choose==1:
+                return "field_menu"
+            else:
+                return "main_menu"
+
+        
+
+    def cannot_fertilize_menu(self,reason,is_all_fields,field_index=None):   
+        if is_all_fields:
+            print("The fields cannot be fertilized due to the following reason:",reason)
+            choose=self.commands.choose(0,1,"0 - Select Another Field\n1 - Main Menu\nCommand:")
+            return "another_field" if choose == 0 else "main_menu"
+        else:
+            print(f"Field {field_index} cannot be fertilized due to the following reason:",reason)
+            choose=self.commands.choose(0,2,"0 - Select Another Field\n1 - Field Menu\n2 - Main Menu\nCommand:")
+            if choose==0:
+                return "another_field"
+            elif choose==1:
+                return "field_menu"
+            else:
+                return "main_menu"
+         
     #CONTROLLER
     def fertilize_controller(self, save_file, foods_file, field_index):
-        calculated_required_fertilizer = self.calculate_required_fertilizer(save_file["fields"][field_index], foods_file)
-        time_needed = self.calculate_time(calculated_required_fertilizer, save_file["player_condition"]["energy"])
-        print(f"Estimated Time Needed: {time_needed} hours")
-        return "field_menu"  # Later, I update this to return the appropriate menu based on user input and actions taken.
-                 
+       ...
         
     
 class AgricultureController:
