@@ -1,14 +1,14 @@
 {
     "save_version": 2,
     "time_system": {
-        "time": 47,
-        "day_loop": "Evening"
+        "time": 76,
+        "day_loop": "Night"
     },
     "player_condition": {
         "health": 100,
         "oxygen": 100,
         "satiety": 75,
-        "energy": 11,
+        "energy": 95,
         "morale": 38,
         "water": 20,
         "location": "central_base",
@@ -165,9 +165,9 @@
             "current": 44
         },
         "fertilizer": {
-            "capacity": 100,
-            "current": 30
-        },        
+            "capacity": 1000,
+            "current": 3
+        },
         "stations": {
             "basic_workshop": {
                 "unlock": true,
@@ -313,7 +313,7 @@
         {
             "capacity": 30,
             "water": 100,
-            "fertility": 50,
+            "fertility": 100,
             "temperature": 22,
             "crops": [
                 {
@@ -337,12 +337,12 @@
         {
             "capacity": 30,
             "water": 50,
-            "fertility": 60,
+            "fertility": 100,
             "temperature": 24,
             "crops": [
                 {
                     "food": "rice",
-                    "amount": 5,
+                    "amount": 30,
                     "plant_time": 150,
                     "elapsed_days": 0,
                     "ready": 0,
@@ -353,7 +353,7 @@
         {
             "capacity": 20,
             "water": 100,
-            "fertility": 75,
+            "fertility": 0,
             "temperature": 22,
             "crops": [
                 {
